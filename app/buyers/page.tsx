@@ -19,6 +19,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import type { Metadata } from "next";
+import { realScoutConfig } from "@/lib/integrations";
 
 export const metadata: Metadata = {
   title: "Home Buying Guide Las Vegas",
@@ -118,6 +119,22 @@ export default function BuyersPage() {
               <span className="flex items-center"><CheckCircle className="h-4 w-4 text-green-500 mr-1" /> Full MLS Access</span>
               <span className="flex items-center"><CheckCircle className="h-4 w-4 text-green-500 mr-1" /> Expert Negotiation</span>
             </div>
+            <p className="text-sm text-slate-600 max-w-2xl mx-auto mt-6 leading-relaxed">
+              Shopping the large west valley? Start with the{" "}
+              <Link href="/neighborhoods/spring-valley" className="text-blue-600 hover:underline font-medium">
+                Spring Valley, NV neighborhood guide
+              </Link>{" "}
+              or{" "}
+              <a
+                href={realScoutConfig.springValleyCityMapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline font-medium"
+              >
+                open the city-filtered MLS map for Spring Valley
+              </a>{" "}
+              on the listing portal (new tab)—then refine by price, beds, and baths with Dr. Jan.
+            </p>
           </div>
 
           {/* Value Prop */}

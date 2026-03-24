@@ -26,6 +26,7 @@ export default function Navbar() {
 
   const mainNavLinks = [
     { href: "/", label: "Home", external: false },
+    // Portal root keeps valley-wide search; Spring Valley map deep link lives on /neighborhoods/spring-valley
     { href: `${realScoutConfig.portalUrl}/`, label: "Properties", external: true },
     { href: "/neighborhoods", label: "Neighborhoods", external: false },
     { href: "/about", label: "About", external: false },

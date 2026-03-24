@@ -6,6 +6,10 @@
 /** Default RealScout agent (Dr. Jan Duffy) — override with NEXT_PUBLIC_REALSCOUT_AGENT_ID in Vercel. */
 const DEFAULT_REALSCOUT_AGENT_ID = "QWdlbnQtMjI1MDUw";
 
+/** City-scoped map search on the agent portal (Spring Valley / west valley focus). */
+const DEFAULT_REALSCOUT_SPRING_VALLEY_MAP_URL =
+  "https://drjanduffy.realscout.com/homesearch/map?geo_type=city&geo_id=3268585";
+
 export const realScoutConfig = {
   /** Base URL for “View all properties” / MLS portal (HTTPS). */
   portalUrl: (
@@ -20,7 +24,14 @@ export const realScoutConfig = {
    * Not a committed MLS query—users still pick a place from omnisearch results.
    */
   simpleSearchPlaceholder:
-    process.env.NEXT_PUBLIC_REALSCOUT_SIMPLE_SEARCH_PLACEHOLDER ?? "Spring Valley",
+    process.env.NEXT_PUBLIC_REALSCOUT_SIMPLE_SEARCH_PLACEHOLDER ?? "Spring Valley, NV",
+  /**
+   * RealScout MLS portal map with city geo filter (Spring Valley). Used for CTAs and FAQ deep links.
+   * Override if RealScout updates geo_id for this market area.
+   */
+  springValleyCityMapUrl:
+    process.env.NEXT_PUBLIC_REALSCOUT_SPRING_VALLEY_MAP_URL?.trim() ||
+    DEFAULT_REALSCOUT_SPRING_VALLEY_MAP_URL,
 } as const;
 
 /** Homebot iframe URL from your Homebot dashboard (embed / widget URL). Optional. */

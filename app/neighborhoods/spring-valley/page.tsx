@@ -19,8 +19,11 @@ import {
   siteConfig,
 } from "@/lib/site-config";
 import { metaDescriptionWithKeyword, seoPrimaryKeyword } from "@/lib/seo";
+import { realScoutConfig } from "@/lib/integrations";
 
 const propertyTaxGuideUrl = `${siteConfig.url}/neighborhoods/spring-valley/property-taxes`;
+
+const springValleyCityMapUrl = realScoutConfig.springValleyCityMapUrl;
 
 export const metadata: Metadata = {
   title: "Spring Valley NV Homes & West Valley Guide",
@@ -63,8 +66,7 @@ const springValleyFaqs = [
   },
   {
     question: "How do I search Spring Valley Nevada homes for sale?",
-    answer:
-      "Start with a live MLS search and filter by price, beds, baths, and map boundaries. Inventory for Spring Valley Nevada homes for sale changes daily, so save searches and act quickly on well-priced listings. Dr. Jan Duffy can coordinate showings and offer strategy for the specific Spring Valley pocket you prefer.",
+    answer: `Start with the live MLS map search filtered to Spring Valley city boundaries on our portal—open ${springValleyCityMapUrl} to pan, zoom, and scan inventory on the map, then refine by price, beds, baths, and area. Inventory for Spring Valley Nevada homes for sale changes daily, so save your search and act quickly on well-priced listings. Dr. Jan Duffy can coordinate showings and offer strategy for the specific Spring Valley pocket you prefer.`,
   },
   {
     question: "What are Spring Valley Las Vegas homes like?",
@@ -136,6 +138,34 @@ const pageSchemas = combineSchemas(
   generateFAQSchema(springValleyFaqs),
 );
 
+/** Renders FAQ answer text; wraps the portal map URL in a descriptive link when present (matches JSON-LD text). */
+function SpringValleyFaqAnswerBody({
+  text,
+  mapUrl,
+}: {
+  text: string;
+  mapUrl: string;
+}) {
+  if (!text.includes(mapUrl)) {
+    return <>{text}</>;
+  }
+  const parts = text.split(mapUrl);
+  return (
+    <>
+      {parts[0]}
+      <a
+        href={mapUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 hover:underline font-medium"
+      >
+        Spring Valley homes for sale—live map search
+      </a>
+      {parts[1] ?? ""}
+    </>
+  );
+}
+
 export default function SpringValleyPage() {
   return (
     <>
@@ -171,6 +201,20 @@ export default function SpringValleyPage() {
               employment corridors. Use this guide to orient your search, then explore live listings
               or talk with Dr. Jan Duffy about timing, offers, and pricing.
             </p>
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-2xl mx-auto">
+              <a
+                href={springValleyCityMapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-sm"
+              >
+                Spring Valley homes for sale—live map search
+              </a>
+              <p className="text-sm text-slate-500 text-center sm:text-left max-w-xs">
+                Opens the MLS portal map with a Spring Valley city filter—refine by price, beds, and
+                baths on the same search Dr. Jan uses with buyers.
+              </p>
+            </div>
           </header>
 
           <section className="max-w-4xl mx-auto mb-14 prose prose-slate">
@@ -253,12 +297,20 @@ export default function SpringValleyPage() {
               serious about <strong>Spring Valley Nevada homes for sale</strong>, we narrow by
               subdivision, HOA, and recent comps—not just the zip code.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/listings"
+            <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
+              <a
+                href={springValleyCityMapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
               >
-                Search MLS listings
+                Open Spring Valley map search
+              </a>
+              <Link
+                href="/listings"
+                className="inline-flex items-center justify-center bg-white border border-blue-200 text-blue-800 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50"
+              >
+                Search MLS listings on this site
               </Link>
               <a
                 href={agentInfo.phoneTel}
@@ -392,6 +444,16 @@ export default function SpringValleyPage() {
                 <h3 className="font-semibold text-slate-900 mb-3">Search &amp; market</h3>
                 <ul className="space-y-2">
                   <li>
+                    <a
+                      href={springValleyCityMapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Spring Valley homes for sale—live map search
+                    </a>
+                  </li>
+                  <li>
                     <Link href="/listings" className="text-blue-600 hover:underline">
                       Spring Valley Nevada homes for sale (MLS)
                     </Link>
@@ -520,7 +582,9 @@ export default function SpringValleyPage() {
                   className="border border-slate-200 rounded-lg p-5 bg-white"
                 >
                   <h3 className="font-semibold text-slate-900 mb-2">{faq.question}</h3>
-                  <p className="text-slate-700 text-sm leading-relaxed">{faq.answer}</p>
+                  <p className="text-slate-700 text-sm leading-relaxed">
+                    <SpringValleyFaqAnswerBody text={faq.answer} mapUrl={springValleyCityMapUrl} />
+                  </p>
                 </div>
               ))}
             </div>
