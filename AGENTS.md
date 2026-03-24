@@ -4,11 +4,25 @@ Stack: **Next.js 14+ App Router**, **TypeScript**, **Tailwind**, **pnpm** (`pack
 
 ## Hosting & DNS (March 2026)
 
+Canonical production URL is **`https://www.springvalleylasvegashomes.com`** (see `lib/site-config.ts` `siteConfig.url`). Apex should redirect to `www` (Vercel handles this once both hostnames are added in the project).
+
 | Layer | Role |
 |--------|------|
 | **Vercel** | Primary production for `www.springvalleylasvegashomes.com` — use `vercel build` / `vercel deploy --prebuilt` for parity checks. Set `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` in the Vercel project to enable the interactive map on `/las-vegas-zip-code-map` (zip directory works without it). |
-| **Cloudflare** | Optional: **DNS-only (gray cloud)** when pointing at Vercel to avoid double-proxy SSL issues. Cloudflare Pages / Workers workflows exist for alternate deploys — align project names in GitHub env vars. |
+| **Cloudflare** | **DNS provider** for the zone. For the **web** hostnames that point at Vercel (`A` apex and `www` **CNAME** to `*.vercel-dns-*`), keep **DNS only (gray cloud)** — do **not** enable orange-cloud proxying for those records. Proxying in front of Vercel commonly causes SSL/certificate edge cases; gray cloud matches Vercel + Cloudflare DNS-only setup. You still use Cloudflare for email (MX/TXT), verification TXT, DKIM, and products like **Cloudflare Images** (`imagedelivery.net`) — those are unrelated to HTTP proxy status. |
 | **Git** | `main` is deploy branch. See `CONTRIBUTING.md` for pnpm, branches, and PR checklist. |
+
+### DNS checklist (Cloudflare dashboard)
+
+1. **A** record for `springvalleylasvegashomes.com` and **CNAME** `www` → Vercel target: **Proxied: DNS only** (gray cloud).
+2. **MX** / **TXT** (SPF, DKIM, domain verification): leave **DNS only** (typical for mail).
+3. Optional email hygiene: use Cloudflare’s **DMARC** wizard if you send mail from this domain (does not change the website).
+
+### Vercel domain checklist
+
+In **Vercel → Project → Settings → Domains**: both `www.springvalleylasvegashomes.com` and `springvalleylasvegashomes.com` are added, SSL shows **Valid**, and redirect behavior matches **www** as primary (apex → www).
+
+**Smoke test:** `curl -sI https://springvalleylasvegashomes.com` should show a redirect to `https://www.springvalleylasvegashomes.com/`; `curl -sI https://www.springvalleylasvegashomes.com` should return **200** with `Server: Vercel`.
 
 ## Cursor AI
 
