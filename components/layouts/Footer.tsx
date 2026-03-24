@@ -80,6 +80,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/las-vegas-zip-code-map"
+                  className="text-slate-300 hover:text-white transition-colors text-sm"
+                >
+                  Las Vegas zip code map
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/why-berkshire-hathaway"
                   className="text-slate-300 hover:text-white transition-colors text-sm"
                 >

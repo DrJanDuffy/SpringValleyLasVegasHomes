@@ -50,7 +50,23 @@ const contactSchema = {
   },
 };
 
-export default function ContactPage() {
+function parseZipParam(raw: string | string[] | undefined): string | null {
+  const v = Array.isArray(raw) ? raw[0] : raw;
+  return typeof v === "string" && /^\d{5}$/.test(v) ? v : null;
+}
+
+type ContactPageProps = {
+  searchParams?: Record<string, string | string[] | undefined>;
+};
+
+export default function ContactPage({ searchParams }: ContactPageProps) {
+  const zipFromQuery = parseZipParam(searchParams?.zip);
+  const mailtoZip =
+    zipFromQuery &&
+    `mailto:${agentInfo.email}?subject=${encodeURIComponent(`Homes near zip ${zipFromQuery}`)}&body=${encodeURIComponent(
+      `I'm interested in homes near zip ${zipFromQuery}. Please contact me.`,
+    )}`;
+
   return (
     <>
       <script
@@ -60,6 +76,25 @@ export default function ContactPage() {
       <Navbar />
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
+          {zipFromQuery && (
+            <div
+              className="mb-8 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-950 md:flex md:items-center md:justify-between md:gap-4"
+              role="status"
+            >
+              <p className="text-sm font-medium">
+                You arrived from a zip search: <strong>{zipFromQuery}</strong>. Mention this zip when
+                you call or email so we can tailor listings.
+              </p>
+              {mailtoZip && (
+                <a
+                  href={mailtoZip}
+                  className="mt-3 inline-block shrink-0 text-sm font-semibold text-emerald-800 underline hover:text-emerald-900 md:mt-0"
+                >
+                  Email with zip prefilled
+                </a>
+              )}
+            </div>
+          )}
           {/* Hero */}
           <div className="text-center mb-12">
             <div className="inline-block bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-6">

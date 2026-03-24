@@ -147,6 +147,13 @@ export default function NeighborhoodsPage() {
               guide, Summerlin, Henderson, and more—with Dr. Jan Duffy, your{" "}
               <strong>Berkshire Hathaway HomeServices</strong> neighborhood expert
             </p>
+            <p className="mt-4 text-lg text-slate-600">
+              Prefer to browse by postal code? Use the{" "}
+              <Link href="/las-vegas-zip-code-map" className="text-blue-600 font-semibold hover:underline">
+                Las Vegas zip code map
+              </Link>{" "}
+              to explore the valley, then search MLS or contact the team.
+            </p>
           </div>
 
           {/* Neighborhood Grid */}
