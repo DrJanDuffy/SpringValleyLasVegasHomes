@@ -23,6 +23,9 @@ export const seoKeywordVariations = [
   "Spring Valley Las Vegas map",
   "Spring Valley Nevada homes",
   "Spring Valley Nevada homes for sale",
+  "Spring Valley NV",
+  "Enterprise Las Vegas homes",
+  "west Sahara Las Vegas",
 ] as const;
 
 /** Homepage hero — one H1 topic cluster; visible copy matches metadata intent */

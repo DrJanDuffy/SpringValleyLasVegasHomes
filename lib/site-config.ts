@@ -229,6 +229,20 @@ export const neighborhoods = [
     medianPrice: "$475,000",
     highlights: ["Mountain views", "Parks", "Growing area", "Affordable luxury"],
   },
+  {
+    name: "Enterprise",
+    slug: "enterprise",
+    description: "Southwest valley CDP—Rhodes Ranch and guard-gated golf",
+    medianPrice: "Varies",
+    highlights: ["Rhodes Ranch", "215 access", "Southwest valley", "Golf communities"],
+  },
+  {
+    name: "Paradise",
+    slug: "paradise",
+    description: "Strip corridor and UNLV—central Las Vegas Valley access",
+    medianPrice: "Varies",
+    highlights: ["Strip corridor", "Airport access", "UNLV", "Hospitality jobs"],
+  },
 ];
 
 // Services offered

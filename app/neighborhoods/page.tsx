@@ -34,6 +34,25 @@ const neighborhoods = [
     bestFor: "Spring Valley Las Vegas homes buyers, move-up buyers, commuters",
   },
   {
+    name: "Enterprise",
+    slug: "enterprise",
+    medianPrice: "Varies",
+    priceChange: "+4.2%",
+    description:
+      "Southwest valley—Rhodes Ranch, guard-gated golf, and communities buyers compare with Spring Valley",
+    highlights: ["Rhodes Ranch", "215 Beltway", "Southwest Valley", "Golf Communities"],
+    bestFor: "Southwest buyers, golf communities, relocators",
+  },
+  {
+    name: "Paradise",
+    slug: "paradise",
+    medianPrice: "Varies",
+    priceChange: "+4.2%",
+    description: "Strip corridor & UNLV area—central access to airport and hospitality employment",
+    highlights: ["Strip Corridor", "Airport Access", "UNLV", "Central Valley"],
+    bestFor: "Hospitality workers, frequent flyers, UNLV-area buyers",
+  },
+  {
     name: "Summerlin",
     slug: "summerlin",
     medianPrice: "$625,000",

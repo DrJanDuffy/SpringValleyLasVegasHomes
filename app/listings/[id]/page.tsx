@@ -4,12 +4,25 @@ import Image from "next/image";
 import { Bed, Bath, Square, MapPin, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
+import { siteConfig } from "@/lib/site-config";
 
-export const metadata: Metadata = {
-  title: "Property Listing Details",
-  description:
-    "View this Las Vegas or Henderson property listing. Spring Valley Las Vegas homes and valley-wide MLS search with Dr. Jan Duffy, Berkshire Hathaway HomeServices. Call (702) 664-8424.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const property = await getProperty(id);
+  return {
+    title: `${property.name} | Las Vegas Listing`,
+    description:
+      "View this Las Vegas or Henderson property listing. Spring Valley Las Vegas homes and valley-wide MLS search with Dr. Jan Duffy, Berkshire Hathaway HomeServices. Call (702) 664-8424.",
+    alternates: {
+      canonical: `${siteConfig.url}/listings/${encodeURIComponent(id)}`,
+    },
+    robots: { index: true, follow: true },
+  };
+}
 
 // This would typically fetch from RealScout API
 async function getProperty(id: string) {

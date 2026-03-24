@@ -18,11 +18,16 @@ import {
   ArrowRight,
 } from "lucide-react";
 import type { Metadata } from "next";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "MLS Search & Listings",
   description:
     "Search Spring Valley Las Vegas homes for sale plus Las Vegas and Henderson MLS listings. Filter by price, beds, baths, and neighborhood. Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties. Call (702) 664-8424.",
+  alternates: {
+    canonical: `${siteConfig.url}/listings`,
+  },
+  robots: { index: true, follow: true },
   keywords: [
     "Spring Valley Las Vegas homes for sale",
     "Spring Valley NV homes",

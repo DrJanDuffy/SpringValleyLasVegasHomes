@@ -1,5 +1,7 @@
 import Navbar from "@/components/layouts/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
+import BuyerEngagementStrip from "@/components/sections/BuyerEngagementStrip";
+import ServiceAreaMapSection from "@/components/sections/ServiceAreaMapSection";
 import RealScoutListings from "@/components/realscout/RealScoutListings";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import ReviewsSection from "@/components/sections/ReviewsSection";
@@ -41,6 +43,12 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
+
+        <BuyerEngagementStrip />
+
+        <RealScoutListings />
+
+        <ServiceAreaMapSection />
 
         {/* Berkshire Hathaway Value Proposition Section */}
         <section className="py-16 md:py-20 bg-white">
@@ -151,8 +159,6 @@ export default function Home() {
           </div>
         </section>
 
-        <RealScoutListings />
-
         {/* Neighborhoods Section */}
         <section className="py-16 md:py-20 bg-white">
           <div className="container mx-auto px-4">
@@ -172,6 +178,8 @@ export default function Home() {
                     detail: "Spring Valley Las Vegas homes",
                     href: "/neighborhoods/spring-valley",
                   },
+                  { name: "Enterprise", detail: "Rhodes Ranch area", slug: "enterprise" },
+                  { name: "Paradise", detail: "Strip & UNLV area", slug: "paradise" },
                   { name: "Summerlin", detail: "From $625K", slug: "summerlin" },
                   { name: "Henderson", detail: "From $485K", slug: "henderson" },
                   { name: "Green Valley", detail: "From $520K", slug: "green-valley" },

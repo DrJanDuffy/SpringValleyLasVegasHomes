@@ -5,15 +5,15 @@ import { Button } from "@/components/ui/button";
 
 export default function RealScoutListings() {
   return (
-    <section className="py-16 md:py-24 bg-slate-50">
+    <section id="featured-properties" className="py-16 md:py-24 bg-slate-50 scroll-mt-20">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center mb-12">
           <div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
-              Featured Properties
+              Homes for sale — Las Vegas & Henderson
             </h2>
             <p className="text-slate-600 text-lg">
-              Discover exceptional homes in Las Vegas and Henderson
+              Browse current listings, then explore the map below to see how neighborhoods fit your lifestyle.
             </p>
           </div>
           <Button asChild variant="outline" className="mt-4 md:mt-0">
