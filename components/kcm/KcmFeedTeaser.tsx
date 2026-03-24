@@ -13,7 +13,7 @@ export async function KcmFeedTeaser() {
           href="/market-insights/kcm-blog"
           className="inline-flex items-center justify-center rounded-lg border border-purple-200 bg-purple-50 px-4 py-2 text-sm font-semibold text-purple-900 hover:bg-purple-100"
         >
-          Full KCM feed + embedded reader (Spanish)
+          Full KCM feed + embedded reader
         </Link>
       </p>
     </div>

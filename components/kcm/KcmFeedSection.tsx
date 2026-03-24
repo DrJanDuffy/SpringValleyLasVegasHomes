@@ -8,7 +8,7 @@ type KcmFeedSectionProps = {
   items: KcmFeedItem[];
   /** Larger heading + bridge copy for the full hub page */
   variant?: "full" | "compact";
-  /** English wrapper for `/market-insights`; Spanish copy for `/market-insights/kcm-blog` */
+  /** Default `en` for Las Vegas buyers; use `es` only if RSS/embed are Spanish. */
   locale?: "en" | "es";
 };
 
@@ -48,7 +48,7 @@ function CardImage({ src, title }: { src: string; title: string }) {
 export function KcmFeedSection({
   items,
   variant = "full",
-  locale = "es",
+  locale = "en",
 }: KcmFeedSectionProps) {
   if (items.length === 0) {
     return (
@@ -77,7 +77,7 @@ export function KcmFeedSection({
 
   const intro =
     locale === "en"
-      ? "These summaries come from your personalized Keeping Current Matters feed (Spanish). Open an article to read it on KCM—we only show the headline and a short excerpt here."
+      ? "These summaries come from your personalized Keeping Current Matters feed. Open an article to read it on KCM—we only show the headline and a short excerpt here."
       : "Estos resúmenes provienen de su feed personalizado de Keeping Current Matters (español). Abra un artículo para leerlo en el sitio de KCM; aquí solo mostramos el titular y un extracto.";
 
   const bridge =
@@ -147,7 +147,7 @@ export function KcmFeedSection({
                   </div>
                 ) : (
                   <div className="flex h-44 items-center justify-center bg-slate-100 text-slate-400 text-sm">
-                    Sin imagen
+                    {locale === "en" ? "No image" : "Sin imagen"}
                   </div>
                 )}
                 <div className="flex flex-1 flex-col p-4">

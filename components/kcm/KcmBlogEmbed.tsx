@@ -7,11 +7,11 @@ type KcmBlogEmbedProps = {
 };
 
 /**
- * Keeping Current Matters “Simplifying the Market” personalized blog (Spanish iframe).
+ * Keeping Current Matters “Simplifying the Market” personalized blog (iframe).
  * CSP must allow `https://www.simplifyingthemarket.com` in `frame-src`.
  */
 export function KcmBlogEmbed({
-  title = "Artículos de mercado — Simplifying the Market (español)",
+  title = "Market articles — Simplifying the Market (Keeping Current Matters)",
   className,
 }: KcmBlogEmbedProps) {
   return (
@@ -23,7 +23,7 @@ export function KcmBlogEmbed({
     >
       <iframe
         title={title}
-        src={kcmConfig.spanishBlogEmbedUrl}
+        src={kcmConfig.blogEmbedUrl}
         className="block h-[min(800px,85vh)] w-full md:h-[800px]"
         loading="lazy"
         allowFullScreen

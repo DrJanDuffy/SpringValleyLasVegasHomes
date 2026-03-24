@@ -79,11 +79,11 @@ function excerptFromItem(item: KcmParserItem): string {
 }
 
 /**
- * Fetches and parses the configured KCM Spanish RSS feed.
+ * Fetches and parses the configured KCM RSS feed (English by default — see `kcmConfig.rssFeedUrl`).
  * Returns an empty array on network/parse failure so pages still render.
  */
 export async function getKcmFeedItems(limit = 9): Promise<KcmFeedItem[]> {
-  const url = kcmConfig.spanishRssFeedUrl;
+  const url = kcmConfig.rssFeedUrl;
   try {
     const res = await fetch(url, {
       next: { revalidate: KCM_FEED_REVALIDATE_SECONDS },
@@ -142,7 +142,7 @@ export function buildKcmWebPageJsonLd(pageUrl: string) {
     "@type": "WebPage",
     "@id": `${pageUrl}#webpage`,
     url: pageUrl,
-    name: "Artículos de mercado (español) | KCM",
+    name: "Market articles | Keeping Current Matters",
     mainEntity: { "@id": `${pageUrl}#kcm-itemlist` },
   };
 }

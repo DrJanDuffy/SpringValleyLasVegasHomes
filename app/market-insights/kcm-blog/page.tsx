@@ -10,9 +10,9 @@ import { generateLocalBusinessSchema } from "@/lib/gbp-schema";
 import { buildKcmFeedJsonLdGraph, getKcmFeedItems } from "@/lib/kcm-rss";
 
 export const metadata: Metadata = {
-  title: "Artículos de mercado (español) | KCM — Spring Valley Las Vegas",
+  title: "Market articles (KCM) | Spring Valley Las Vegas — Dr. Jan Duffy",
   description:
-    "Artículos de bienes raíces de Keeping Current Matters (Simplifying the Market) en español. Para comprar o vender en Spring Valley y el valle oeste, llame a Dr. Jan Duffy al (702) 664-8424.",
+    "Keeping Current Matters (Simplifying the Market) articles for home buyers and sellers—national context for Las Vegas and Spring Valley. Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties. Call (702) 664-8424.",
   alternates: {
     canonical: `${siteConfig.url}/market-insights/kcm-blog`,
   },
@@ -26,19 +26,19 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "¿Qué es el contenido de esta página?",
+      name: "What is on this page?",
       acceptedAnswer: {
         "@type": "Answer",
         text:
-          "Incluye tarjetas generadas desde su feed RSS de Keeping Current Matters (resúmenes con enlace al artículo en KCM) y un visor incrustado del blog. Los artículos son educación general del mercado; no sustituyen asesoría local sobre su casa o vecindario en Las Vegas.",
+          "Article cards built from the Keeping Current Matters RSS feed (headline, excerpt, and link to read on KCM) plus an embedded blog viewer. Content is general U.S. housing education—not legal, tax, or investment advice, and not a substitute for local guidance on your neighborhood or property in Las Vegas.",
       },
     },
     {
       "@type": "Question",
-      name: "¿Puedo obtener ayuda local sobre Spring Valley o Las Vegas?",
+      name: "Can I get local help with Spring Valley or Las Vegas?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: `Sí. ${agentInfo.name}, ${agentInfo.title}, con ${agentInfo.brokerage}, ayuda a compradores y vendedores en Spring Valley y el valle oeste. Oficina: ${officeInfo.address.full}. Teléfono: ${agentInfo.phone}.`,
+        text: `Yes. ${agentInfo.name}, ${agentInfo.title}, with ${agentInfo.brokerage}, helps buyers and sellers in Spring Valley and the Las Vegas Valley. Office: ${officeInfo.address.full}. Phone: ${agentInfo.phone}.`,
       },
     },
   ],
@@ -79,41 +79,40 @@ export default async function KcmBlogPage() {
                 Market Insights
               </Link>
               {" / "}
-              <span className="text-slate-900">KCM (español)</span>
+              <span className="text-slate-900">KCM articles</span>
             </nav>
           </div>
 
           <div className="max-w-4xl mx-auto text-center mb-10">
             <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              Artículos de mercado (español)
+              Market articles (Keeping Current Matters)
             </h1>
             <p className="text-lg text-slate-600">
-              Contenido educativo de{" "}
-              <span className="font-medium">Keeping Current Matters</span> — Simplifying the
-              Market. Abajo: resúmenes desde su feed RSS y el visor completo del blog (fuente
-              externa).
+              Educational content from{" "}
+              <span className="font-medium">Keeping Current Matters</span> — Simplifying the Market.
+              Below: RSS-powered cards and the full embedded KCM blog (third-party source).
             </p>
             <p className="mt-4 text-slate-700">
-              Para comprar o vender en{" "}
-              <Link href="/neighborhoods/spring-valley" className="text-blue-600 hover:underline">
+              Buying or selling in{" "}
+              <Link href="/neighborhoods/spring-valley" className="text-blue-600 hover:underline font-medium">
                 Spring Valley
               </Link>{" "}
-              o el oeste del valle,{" "}
+              or the west valley?{" "}
               <a href={agentInfo.phoneTel} className="font-medium text-blue-600 hover:underline">
-                llame a {agentInfo.name}
+                Call {agentInfo.name}
               </a>{" "}
-              al {agentInfo.phone}. {officeInfo.name}, {officeInfo.address.full}.
+              at {agentInfo.phone}. {officeInfo.name}, {officeInfo.address.full}.
             </p>
           </div>
 
-          <KcmFeedSection items={items} variant="full" locale="es" />
+          <KcmFeedSection items={items} variant="full" locale="en" />
 
           <div className="max-w-4xl mx-auto mb-6">
             <h2 className="text-xl font-bold text-slate-900 text-center mb-2">
-              Visor completo del blog (KCM)
+              Full KCM blog (embedded)
             </h2>
             <p className="text-center text-sm text-slate-600 mb-4">
-              Desplácese dentro del marco para ver todos los artículos como en el sitio de KCM.
+              Scroll inside the frame to browse articles as on the KCM site.
             </p>
           </div>
 
@@ -124,30 +123,27 @@ export default async function KcmBlogPage() {
             aria-labelledby="faq-kcm-heading"
           >
             <h2 id="faq-kcm-heading" className="text-xl font-bold text-slate-900">
-              Preguntas frecuentes
+              Frequently asked questions
             </h2>
-            <h3 className="text-lg font-semibold text-slate-800 mt-6">
-              ¿Qué es el contenido de esta página?
-            </h3>
+            <h3 className="text-lg font-semibold text-slate-800 mt-6">What is this page?</h3>
             <p>
-              Tarjetas del feed RSS (resumen + enlace) y un visor incrustado del blog. Los temas son
-              nacionales o generales; úselos como contexto, no como pronóstico del precio de su casa
-              en Spring Valley.
+              RSS article cards (summary + link) and an embedded blog viewer. Topics are national or
+              general—use them as context, not as a forecast for your specific home in Spring Valley.
             </p>
             <h3 className="text-lg font-semibold text-slate-800 mt-6">
-              ¿Cómo uso el feed RSS en mi correo o CRM?
+              How do I use the RSS URL in email or my CRM?
             </h3>
             <p>
-              KCM proporciona un enlace RSS para plataformas como email marketing o automatización.
-              La URL de su feed en español (para configuración en su CRM) es:{" "}
+              KCM provides an RSS link for tools like email marketing or automation. Your feed URL (for
+              CRM setup) is:{" "}
               <a
-                href={kcmConfig.spanishRssFeedUrl}
+                href={kcmConfig.rssFeedUrl}
                 className="text-blue-600 break-all hover:underline"
                 rel="noopener noreferrer"
               >
-                {kcmConfig.spanishRssFeedUrl}
+                {kcmConfig.rssFeedUrl}
               </a>
-              . Esta página también muestra esos artículos como tarjetas y el visor iframe.
+              . This page shows those articles as cards plus the iframe viewer.
             </p>
           </section>
 
@@ -156,7 +152,7 @@ export default async function KcmBlogPage() {
               href="/market-insights"
               className="inline-flex items-center text-blue-600 font-medium hover:underline"
             >
-              ← Volver a Market Insights
+              ← Back to Market Insights
             </Link>
           </div>
         </div>

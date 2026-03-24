@@ -40,7 +40,7 @@ export default function BuyerEngagementStrip({
     {
       href: "/market-insights/kcm-blog",
       label: "Market articles",
-      sub: "KCM feed (Spanish)",
+      sub: "KCM weekly feed",
       icon: Newspaper,
     },
   ] as const;
