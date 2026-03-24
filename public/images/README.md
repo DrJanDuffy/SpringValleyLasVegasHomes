@@ -9,8 +9,14 @@ images/
 ├── properties/     # Listing photos
 ├── neighborhoods/  # Area/community photos
 ├── testimonials/   # Client headshots
-└── logos/          # Brand assets
+├── logos/          # Brand assets (BHHS, site marks, partners)
+├── og/             # Open Graph / social share images (e.g. 1200×630)
+├── icons/          # Favicon sources, app icons, UI icons (PNG/SVG)
+├── photos/         # General marketing & lifestyle photography
+└── graphics/       # Illustrations, badges, decorative assets
 ```
+
+**Legacy path:** some components still use `/Image/...` (capital I). See `public/Image/README.md`. Prefer new assets under `images/` and update imports when convenient.
 
 ## Recommended Specifications
 
@@ -22,6 +28,10 @@ images/
 | neighborhoods/ | 1200x800+ | WebP, JPG | Scenic community shots |
 | testimonials/ | 200x200 | WebP, JPG | Square, optional |
 | logos/ | Various | PNG, SVG | Transparent background |
+| og/ | 1200×630 | PNG, JPG | Social previews; match `metadata.openGraph` |
+| icons/ | 32–512px | PNG, ICO, SVG | Favicon / PWA sources |
+| photos/ | Flexible | WebP, JPG | Site sections, marketing |
+| graphics/ | Flexible | SVG, PNG | Icons, badges, non-photo art |
 
 ## Naming Conventions
 
