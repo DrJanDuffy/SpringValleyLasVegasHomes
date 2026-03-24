@@ -1,22 +1,26 @@
 // Google Business Profile Schema Data
 // Supports GBP ranking factors: Relevance, Distance, Prominence
 
+import { agentInfo, officeInfo, siteConfig } from "./site-config";
+
+const siteHostname = new URL(siteConfig.url).hostname;
+
 export const businessInfo = {
   // NAP - Must match GBP exactly
   name: "Dr. Jan Duffy - Berkshire Hathaway HomeServices Nevada Properties",
   address: {
-    streetAddress: "9406 W Lake Mead Blvd, Suite 100",
+    streetAddress: "6787 W Tropicana Ave, 2nd Floor",
     addressLocality: "Las Vegas",
     addressRegion: "NV",
-    postalCode: "89134",
+    postalCode: "89103",
     addressCountry: "US",
   },
   phone: {
     display: "(702) 500-1942",
     tel: "+17025001942",
   },
-  email: "homes@heyberkshire.com",
-  url: "https://heyberkshire.com",
+  email: agentInfo.email,
+  url: siteConfig.url,
 
   // Business Details
   license: "S.0197614.LLC",
@@ -33,10 +37,10 @@ export const businessInfo = {
     sunday: "By Appointment",
   },
 
-  // Geo coordinates for distance ranking
+  // Geo coordinates — align with office address (officeInfo.coordinates)
   geo: {
-    latitude: 36.1941,
-    longitude: -115.2678,
+    latitude: officeInfo.coordinates.lat,
+    longitude: officeInfo.coordinates.lng,
   },
 
   // Service areas - Start focused, expand with prominence
@@ -161,7 +165,7 @@ Dr. Jan's approach is simple: treat every client like family, know the market in
 
 55+ active adult community specialization covers Sun City Summerlin (Nevada's largest 55+ community), Sun City Anthem in Henderson, Del Webb Lake Las Vegas, and Solera at Anthem. Investment property expertise spans single-family rentals, multi-family opportunities, and short-term rental analysis across the Las Vegas metro area.
 
-Office located at 9406 W Lake Mead Blvd, Suite 100, Las Vegas, NV 89134. Available Monday through Friday 9am-6pm, Saturday 10am-4pm, and Sunday by appointment. Call (702) 500-1942 for a free consultation or visit heyberkshire.com to start your Las Vegas real estate journey today.`,
+Office located at 6787 W Tropicana Ave, 2nd Floor, Las Vegas, NV 89103. Available Monday through Friday 9am-6pm, Saturday 10am-4pm, and Sunday by appointment. Call (702) 500-1942 for a free consultation or visit ${siteHostname} to start your Las Vegas real estate journey today.`,
 };
 
 // FAQ Schema for GBP Q&A section
@@ -200,7 +204,7 @@ export const gbpFAQs = [
   },
   {
     question: "How do I schedule a consultation with Dr. Jan Duffy?",
-    answer: "Call or text (702) 500-1942 for immediate assistance, or email homes@heyberkshire.com. Office visits available at 9406 W Lake Mead Blvd, Suite 100, Las Vegas, NV 89134. Monday-Friday 9am-6pm, Saturday 10am-4pm, Sunday by appointment.",
+    answer: `Call or text (702) 500-1942 for immediate assistance, or email ${agentInfo.email}. Office visits available at 6787 W Tropicana Ave, 2nd Floor, Las Vegas, NV 89103. Monday-Friday 9am-6pm, Saturday 10am-4pm, Sunday by appointment.`,
   },
   {
     question: "Does Dr. Jan help with investment properties in Las Vegas?",
@@ -213,9 +217,9 @@ export function generateLocalBusinessSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
-    "@id": "https://heyberkshire.com/#organization",
+    "@id": `${siteConfig.url}/#organization`,
     name: businessInfo.name,
-    image: "https://heyberkshire.com/images/dr-jan-duffy.jpg",
+    image: `${siteConfig.url}/images/dr-jan-duffy.jpg`,
     url: businessInfo.url,
     telephone: businessInfo.phone.tel,
     email: businessInfo.email,

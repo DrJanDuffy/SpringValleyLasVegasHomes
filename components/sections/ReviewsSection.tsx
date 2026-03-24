@@ -2,6 +2,7 @@
 
 import { Star, Quote } from "lucide-react";
 import Image from "next/image";
+import { googleBusinessReviewUrl } from "@/lib/site-config";
 
 export interface Review {
   id: number;
@@ -69,7 +70,7 @@ export default function ReviewsSection({
   reviews = defaultReviews,
   title = "What Our Clients Say",
   subtitle = "Real testimonials from satisfied clients across Las Vegas and Henderson",
-  googleReviewsUrl = "https://g.page/r/heyberkshire/review",
+  googleReviewsUrl = googleBusinessReviewUrl,
   className = "",
 }: ReviewsSectionProps) {
   return (

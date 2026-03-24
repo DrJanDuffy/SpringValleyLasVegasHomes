@@ -20,10 +20,13 @@ import {
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Las Vegas Homes for Sale | MLS Property Search | Berkshire Hathaway HomeServices",
+  title:
+    "Spring Valley Las Vegas Homes for Sale | MLS Search | Berkshire Hathaway HomeServices",
   description:
-    "Browse all Las Vegas and Henderson homes for sale with live MLS listings. Search by neighborhood, price, and features. Dr. Jan Duffy, Berkshire Hathaway HomeServices. Call (702) 500-1942.",
+    "Search Spring Valley Las Vegas homes for sale plus Las Vegas and Henderson MLS listings. Filter by price, beds, baths, and neighborhood. Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties. Call (702) 500-1942.",
   keywords: [
+    "Spring Valley Las Vegas homes for sale",
+    "Spring Valley NV homes",
     "Las Vegas homes for sale",
     "Henderson real estate",
     "MLS listings Las Vegas",

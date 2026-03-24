@@ -3,8 +3,19 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { heroSeo } from "@/lib/seo";
 
-export default function HeroSection() {
+type HeroSectionProps = {
+  headlinePrimary?: string;
+  headlineSecondary?: string;
+  intro?: string;
+};
+
+export default function HeroSection({
+  headlinePrimary = heroSeo.headlinePrimary,
+  headlineSecondary = heroSeo.headlineSecondary,
+  intro = heroSeo.intro,
+}: HeroSectionProps) {
   const [currentImage, setCurrentImage] = useState(0);
   const prefersReducedMotion = useReducedMotion();
   
@@ -41,7 +52,7 @@ export default function HeroSection() {
           >
             <Image
               src={src}
-              alt={`Hero image ${index + 1}`}
+              alt={`Spring Valley Las Vegas homes and Las Vegas Valley real estate — hero ${index + 1}`}
               fill
               className="object-cover"
               priority={index === 0}
@@ -54,14 +65,10 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-20 flex flex-col items-center justify-center h-full px-4 text-center">
         <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-          Find Your Dream Home in
-          <br />
-          <span className="text-blue-400">Las Vegas & Henderson</span>
+          <span className="block">{headlinePrimary}</span>
+          <span className="block text-blue-400 mt-1">{headlineSecondary}</span>
         </h1>
-        <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl">
-          Expert real estate services with personalized attention. Your trusted partner for buying,
-          selling, and investing in Southern Nevada.
-        </p>
+        <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl">{intro}</p>
 
         {/* RealScout Search Widget */}
         <div className="realscout-wrapper mb-4">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
+import { agentInfo, officeInfo, siteConfig, teamInfo } from "@/lib/site-config";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -168,32 +169,58 @@ export default function Footer() {
 
           {/* Contact Info - NAP (Name, Address, Phone) */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Contact Dr. Jan Duffy</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <MapPin className="h-5 w-5 mr-3 text-blue-400 flex-shrink-0 mt-0.5" />
+            <h3 className="font-bold text-lg mb-4">{siteConfig.name}</h3>
+            <div className="flex items-start mb-3">
+              <MapPin className="h-5 w-5 mr-3 text-blue-400 flex-shrink-0 mt-0.5" />
                 <span className="text-slate-300 text-sm">
-                  9406 W Lake Mead Blvd, Suite 100
-                  <br />
-                  Las Vegas, NV 89134
-                </span>
-              </li>
+                {officeInfo.address.street}
+                <br />
+                {officeInfo.address.city}, {officeInfo.address.state} {officeInfo.address.zip}
+              </span>
+            </div>
+            <p className="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-2">
+              {teamInfo.teamLeader.role}
+            </p>
+            <ul className="space-y-2 mb-4">
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-3 text-blue-400 flex-shrink-0" />
                 <Link
-                  href="tel:+17025001942"
+                  href={agentInfo.phoneTel}
                   className="text-slate-300 hover:text-white transition-colors text-sm"
                 >
-                  (702) 500-1942
+                  {agentInfo.phone}
                 </Link>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 mr-3 text-blue-400 flex-shrink-0" />
                 <Link
-                  href="mailto:homes@heyberkshire.com"
+                  href={`mailto:${teamInfo.teamLeader.email}`}
+                  className="text-slate-300 hover:text-white transition-colors text-sm break-all"
+                >
+                  {teamInfo.teamLeader.email}
+                </Link>
+              </li>
+            </ul>
+            <p className="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-2">
+              {teamInfo.buyerAgent.role}
+            </p>
+            <ul className="space-y-2">
+              <li className="flex items-center">
+                <Phone className="h-5 w-5 mr-3 text-blue-400 flex-shrink-0" />
+                <Link
+                  href={teamInfo.buyerAgent.phoneTel}
                   className="text-slate-300 hover:text-white transition-colors text-sm"
                 >
-                  Homes@HeyBerkshire.com
+                  {teamInfo.buyerAgent.phone}
+                </Link>
+              </li>
+              <li className="flex items-center">
+                <Mail className="h-5 w-5 mr-3 text-blue-400 flex-shrink-0" />
+                <Link
+                  href={`mailto:${teamInfo.buyerAgent.email}`}
+                  className="text-slate-300 hover:text-white transition-colors text-sm break-all"
+                >
+                  {teamInfo.buyerAgent.email}
                 </Link>
               </li>
             </ul>

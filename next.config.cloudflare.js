@@ -24,7 +24,7 @@ const nextConfig = {
     CLOUDFLARE_ENV: process.env.CLOUDFLARE_ENV || 'production',
   },
 
-  // Redirect non-www to www (handled by Worker)
+  // Canonical host: www (matches siteConfig.url)
   async redirects() {
     return [
       {
@@ -32,10 +32,10 @@ const nextConfig = {
         has: [
           {
             type: 'host',
-            value: 'heyberkshire.com',
+            value: 'springvalleylasvegashomes.com',
           },
         ],
-        destination: 'https://www.heyberkshire.com/:path*',
+        destination: 'https://www.springvalleylasvegashomes.com/:path*',
         permanent: true,
       },
     ]

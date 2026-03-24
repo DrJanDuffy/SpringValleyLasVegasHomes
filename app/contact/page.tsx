@@ -5,11 +5,25 @@ import { Phone, Mail, MapPin, Clock, Calendar, CheckCircle, Star, Users, Shield 
 import CalendlyWidget from "@/components/calendly/CalendlyWidget";
 import Link from "next/link";
 import type { Metadata } from "next";
+import {
+  agentInfo,
+  googleMyMapEmbedUrl,
+  googleMyMapViewerUrl,
+  officeInfo,
+  siteConfig,
+  teamInfo,
+} from "@/lib/site-config";
+
+const officeMapQuery = encodeURIComponent(
+  `${officeInfo.address.street}, ${officeInfo.address.city}, ${officeInfo.address.state} ${officeInfo.address.zip}`,
+);
 
 export const metadata: Metadata = {
-  title: "Contact Dr. Jan Duffy | Berkshire Hathaway HomeServices Las Vegas",
+  title: {
+    absolute: `Contact Us | ${siteConfig.name}`,
+  },
   description:
-    "Contact Dr. Jan Duffy at Berkshire Hathaway HomeServices Nevada Properties. Schedule an appointment, get directions, or call (702) 500-1942. Las Vegas, Henderson, Summerlin real estate expert.",
+    "Contact Dr. Jan Duffy's team at Berkshire Hathaway HomeServices Nevada Properties. Team Leader and Buyer Agent contacts, office map, and Calendly. Call (702) 500-1942 or reach our buyer specialist at (702) 664-8424.",
   keywords: [
     "contact real estate agent Las Vegas",
     "Berkshire Hathaway contact",
@@ -26,13 +40,13 @@ const contactSchema = {
     "@type": "RealEstateAgent",
     name: "Dr. Jan Duffy - Berkshire Hathaway HomeServices Nevada Properties",
     telephone: "+17025001942",
-    email: "homes@heyberkshire.com",
+    email: agentInfo.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "9406 W Lake Mead Blvd, Suite 100",
-      addressLocality: "Las Vegas",
-      addressRegion: "NV",
-      postalCode: "89134",
+      streetAddress: officeInfo.address.street,
+      addressLocality: officeInfo.address.city,
+      addressRegion: officeInfo.address.state,
+      postalCode: officeInfo.address.zip,
       addressCountry: "US",
     },
   },
@@ -54,12 +68,13 @@ export default function ContactPage() {
               Berkshire Hathaway HomeServices Nevada Properties
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
-              Contact Dr. Jan Duffy
+              Contact {siteConfig.name}
             </h1>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Questions about Las Vegas real estate? Your{" "}
-              <strong>Berkshire Hathaway HomeServices</strong> expert is here to help. 
-              Schedule an appointment or reach out directly.
+              Questions about Las Vegas real estate? Reach our{" "}
+              <strong>Berkshire Hathaway HomeServices</strong> team—{teamInfo.teamLeader.role}{" "}
+              Dr. Jan Duffy and {teamInfo.buyerAgent.role} {teamInfo.buyerAgent.name}. Schedule an
+              appointment or get in touch below.
             </p>
           </div>
 
@@ -69,25 +84,63 @@ export default function ContactPage() {
               <h2 className="text-2xl font-bold text-slate-900 mb-6">Get In Touch</h2>
               <p className="text-slate-700 mb-8">
                 Whether you're buying your first home, selling a luxury property, or exploring
-                investment opportunities, I'm here to provide expert guidance backed by the trusted{" "}
-                <strong>Berkshire Hathaway HomeServices</strong> brand. Serving Las Vegas since 2008 
+                investment opportunities, our team provides expert guidance backed by the trusted{" "}
+                <strong>Berkshire Hathaway HomeServices</strong> brand. Serving Las Vegas since 2008
                 with $127M+ in closed transactions.
               </p>
+
+              {/* Team */}
+              <div className="grid sm:grid-cols-2 gap-4 mb-8">
+                <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-1">
+                    {teamInfo.teamLeader.role}
+                  </p>
+                  <p className="font-bold text-slate-900">{teamInfo.teamLeader.name}</p>
+                  <a
+                    href={`mailto:${teamInfo.teamLeader.email}`}
+                    className="text-blue-600 hover:text-blue-700 text-sm break-all"
+                  >
+                    {teamInfo.teamLeader.email}
+                  </a>
+                  <p className="mt-2 text-sm text-slate-600">
+                    <a href={agentInfo.phoneTel} className="font-medium text-blue-600">
+                      {agentInfo.phone}
+                    </a>
+                  </p>
+                </div>
+                <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-1">
+                    {teamInfo.buyerAgent.role}
+                  </p>
+                  <p className="font-bold text-slate-900">{teamInfo.buyerAgent.name}</p>
+                  <a
+                    href={`mailto:${teamInfo.buyerAgent.email}`}
+                    className="text-blue-600 hover:text-blue-700 text-sm break-all"
+                  >
+                    {teamInfo.buyerAgent.email}
+                  </a>
+                  <p className="mt-2 text-sm text-slate-600">
+                    <a href={teamInfo.buyerAgent.phoneTel} className="font-medium text-blue-600">
+                      {teamInfo.buyerAgent.phone}
+                    </a>
+                  </p>
+                </div>
+              </div>
 
               {/* NAP Information */}
               <div className="space-y-4 mb-8">
                 <div className="flex items-start bg-slate-50 rounded-lg p-4">
                   <Phone className="h-6 w-6 text-blue-600 mr-4 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="font-semibold text-slate-900 mb-1">Phone (Call or Text)</h3>
+                    <h3 className="font-semibold text-slate-900 mb-1">Main line (Call or Text)</h3>
                     <a
-                      href="tel:+17025001942"
+                      href={agentInfo.phoneTel}
                       className="text-2xl font-bold text-blue-600 hover:text-blue-700"
                     >
-                      (702) 500-1942
+                      {agentInfo.phone}
                     </a>
                     <p className="text-sm text-slate-500 mt-1">
-                      Available 7 days a week, 9am-6pm
+                      Team Leader — available 7 days a week, 9am-6pm
                     </p>
                   </div>
                 </div>
@@ -95,12 +148,12 @@ export default function ContactPage() {
                 <div className="flex items-start bg-slate-50 rounded-lg p-4">
                   <Mail className="h-6 w-6 text-blue-600 mr-4 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="font-semibold text-slate-900 mb-1">Email</h3>
+                    <h3 className="font-semibold text-slate-900 mb-1">Team Leader email</h3>
                     <a
-                      href="mailto:homes@heyberkshire.com"
-                      className="text-blue-600 hover:text-blue-700 font-medium"
+                      href={`mailto:${teamInfo.teamLeader.email}`}
+                      className="text-blue-600 hover:text-blue-700 font-medium break-all"
                     >
-                      Homes@HeyBerkshire.com
+                      {teamInfo.teamLeader.email}
                     </a>
                     <p className="text-sm text-slate-500 mt-1">
                       Typically respond within 2 hours
@@ -113,10 +166,11 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-slate-900 mb-1">Office Address</h3>
                     <address className="not-italic text-slate-700">
-                      Berkshire Hathaway HomeServices<br />
-                      Nevada Properties<br />
-                      9406 W Lake Mead Blvd, Suite 100<br />
-                      Las Vegas, NV 89134
+                      {officeInfo.name}
+                      <br />
+                      {officeInfo.address.street}
+                      <br />
+                      {officeInfo.address.city}, {officeInfo.address.state} {officeInfo.address.zip}
                     </address>
                   </div>
                 </div>
@@ -136,25 +190,24 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Google Map Embed */}
-              <div className="rounded-xl overflow-hidden shadow-md mb-4">
+              {/* Google My Maps embed (service area / custom layer) */}
+              <div className="rounded-xl overflow-hidden shadow-md mb-4 bg-slate-100">
                 <iframe
-                  src="https://maps.google.com/maps?q=9406+W+Lake+Mead+Blvd+Suite+100,+Las+Vegas,+NV+89134&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                  width="100%"
-                  height="300"
-                  style={{ border: 0 }}
+                  src={googleMyMapEmbedUrl}
+                  width={640}
+                  height={480}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Berkshire Hathaway HomeServices Nevada Properties - Office Location"
-                  className="w-full"
+                  title="Spring Valley Las Vegas area map — Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties"
+                  className="w-full border-0 aspect-[4/3] max-h-[min(480px,70vh)]"
                 />
               </div>
               
               {/* Map Action Buttons */}
               <div className="flex gap-3 mb-8">
                 <a
-                  href="https://www.google.com/maps/dir//9406+W+Lake+Mead+Blvd+Suite+100,+Las+Vegas,+NV+89134"
+                  href={`https://www.google.com/maps/dir//${officeMapQuery}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-medium transition-colors"
@@ -163,12 +216,12 @@ export default function ContactPage() {
                   Get Directions
                 </a>
                 <a
-                  href="https://maps.google.com/?q=Berkshire+Hathaway+HomeServices+Nevada+Properties+9406+W+Lake+Mead+Blvd+Las+Vegas+NV"
+                  href={googleMyMapViewerUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 inline-flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-3 rounded-lg font-medium transition-colors"
                 >
-                  View on Google Maps
+                  View map in Google Maps
                 </a>
               </div>
 
@@ -262,23 +315,23 @@ export default function ContactPage() {
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               <a
-                href="tel:+17025001942"
+                href={agentInfo.phoneTel}
                 className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white p-6 rounded-xl transition-colors"
               >
                 <Phone className="h-8 w-8 mr-4" />
                 <div className="text-left">
-                  <div className="font-bold text-lg">Call Now</div>
-                  <div className="text-blue-100">(702) 500-1942</div>
+                  <div className="font-bold text-lg">Call Team Leader</div>
+                  <div className="text-blue-100">{agentInfo.phone}</div>
                 </div>
               </a>
               <a
-                href="mailto:homes@heyberkshire.com"
+                href={`mailto:${teamInfo.teamLeader.email}`}
                 className="flex items-center justify-center bg-slate-700 hover:bg-slate-800 text-white p-6 rounded-xl transition-colors"
               >
                 <Mail className="h-8 w-8 mr-4" />
                 <div className="text-left">
-                  <div className="font-bold text-lg">Send Email</div>
-                  <div className="text-slate-300">Homes@HeyBerkshire.com</div>
+                  <div className="font-bold text-lg">Email Team Leader</div>
+                  <div className="text-slate-300 break-all text-sm">{teamInfo.teamLeader.email}</div>
                 </div>
               </a>
             </div>

@@ -1,8 +1,16 @@
-// Site Configuration - HeyBerkshire.com
+// Site Configuration - SpringValleyLasVegasHomes.com
 // Berkshire Hathaway HomeServices Nevada Properties
+//
+// NAP (Name, Address, Phone) — single source of truth for this site:
+// - Business: Berkshire Hathaway HomeServices Nevada Properties (officeInfo.name)
+// - Team Leader: agentInfo + teamInfo.teamLeader (email)
+// - Buyer Agent: teamInfo.buyerAgent
+// - Office: officeInfo.address + officeInfo.coordinates
+// Import from this file in pages; avoid hardcoding phones/emails/street addresses elsewhere.
 
 export const siteConfig = {
-  name: "HeyBerkshire",
+  /** Public site / marketing brand (titles, footer, JSON-LD alternateName) */
+  name: "Spring Valley Las Vegas | Homes By Dr. Jan Duffy",
   fullName: "Berkshire Hathaway HomeServices Nevada Properties",
   tagline: "Private Client Real Estate Advisory",
   /** Full brand line for titles and OG: Berkshire Hathaway HomeServices Nevada Properties | Private Client Real Estate Advisory */
@@ -10,9 +18,10 @@ export const siteConfig = {
     "Berkshire Hathaway HomeServices Nevada Properties | Private Client Real Estate Advisory",
   brandName: "Berkshire Hathaway HomeServices",
   shortName: "BHHS",
-  url: "https://heyberkshire.com",
+  /** Canonical production URL (www). Apex should 301 to this host. */
+  url: "https://www.springvalleylasvegashomes.com",
   description:
-    "Expert real estate services in Las Vegas and Henderson, NV. Buy, sell, or invest with Dr. Jan Duffy, your trusted Berkshire Hathaway HomeServices Nevada Properties agent.",
+    "Spring Valley Las Vegas homes and west valley real estate with Dr. Jan Duffy, REALTOR® at Berkshire Hathaway HomeServices Nevada Properties. Homes for sale, buyer and seller representation, and local expertise for Spring Valley, Las Vegas, and Henderson—call (702) 500-1942.",
 };
 
 export const agentInfo = {
@@ -21,27 +30,66 @@ export const agentInfo = {
   license: "S.0197614.LLC",
   phone: "(702) 500-1942",
   phoneFormatted: "(702) 500-1942",
+  /** tel: link */
   phoneTel: "tel:+17025001942",
-  email: "homes@heyberkshire.com",
+  /** E.164 for JSON-LD / structured data (no dashes) */
+  phoneE164: "+17025001942",
+  email: "DrDuffy@SpringValleyLasVegasHomes.com",
   brokerage: "Berkshire Hathaway HomeServices Nevada Properties",
 };
+
+/** Team contacts (visible NAP-style listings) */
+export const teamInfo = {
+  teamLeader: {
+    role: "Team Leader",
+    name: "Dr. Jan Duffy",
+    email: "DrDuffy@SpringValleyLasVegasHomes.com",
+  },
+  buyerAgent: {
+    role: "Buyer Agent",
+    name: "Chance Fuller",
+    email: "Chance.Fuller@SpringValleyLasVegasHomes.com",
+    phone: "(702) 664-8424",
+    phoneTel: "tel:+17026648424",
+  },
+} as const;
 
 export const officeInfo = {
   name: "Berkshire Hathaway HomeServices Nevada Properties",
   address: {
-    street: "9406 W Lake Mead Blvd, Suite 100",
+    street: "6787 W Tropicana Ave, 2nd Floor",
     city: "Las Vegas",
     state: "NV",
-    zip: "89134",
-    full: "9406 W Lake Mead Blvd, Suite 100, Las Vegas, NV 89134",
+    zip: "89103",
+    country: "US",
+    full: "6787 W Tropicana Ave, 2nd Floor, Las Vegas, NV 89103, USA",
   },
   coordinates: {
-    lat: 36.1893,
-    lng: -115.2821,
+    lat: 36.0997,
+    lng: -115.2474,
   },
   phone: "(702) 500-1942",
   phoneTel: "tel:+17025001942",
 };
+
+/**
+ * Google My Maps — embedded layer (service area / pins). Replace `mid` if you publish a new map.
+ * @see https://www.google.com/maps/d/
+ */
+export const googleMyMapEmbedUrl =
+  "https://www.google.com/maps/d/embed?mid=1E2An-P2R2r6mQiXP1O-APmk4CAMXTuM&hl=en&ehbc=2E312F" as const;
+
+/** Open the same My Map full-screen in Google Maps (for “View on Google Maps”). */
+export const googleMyMapViewerUrl =
+  "https://www.google.com/maps/d/viewer?mid=1E2An-P2R2r6mQiXP1O-APmk4CAMXTuM&hl=en" as const;
+
+/**
+ * Google "Write a review" / review CTA. Replace with your GBP short link
+ * (Google Business Profile → Ask for reviews) when available.
+ * Maps search helps users find the correct listing if no short link is set yet.
+ */
+export const googleBusinessReviewUrl =
+  "https://www.google.com/maps/search/?api=1&query=6787+W+Tropicana+Ave+2nd+Floor+Las+Vegas+NV+89103+Berkshire+Hathaway+HomeServices";
 
 // Market Statistics (Updated January 2026)
 export const marketStats = {

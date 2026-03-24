@@ -1,5 +1,5 @@
 /**
- * Schema.org Structured Data Generators for heyberkshire.com
+ * Schema.org Structured Data Generators for SpringValleyLasVegasHomes.com
  * Following Google's 2025 Structured Data Guidelines
  *
  * @see https://schema.org
@@ -63,13 +63,13 @@ export interface SeniorCommunityData {
 
 const BASE_URL = siteConfig.url;
 
-// Social media profiles (to be updated with actual URLs)
+// Social media profiles — align with gbp-schema / GBP (sameAs)
 export const socialProfiles = {
-  facebook: "https://www.facebook.com/heyberkshire",
-  instagram: "https://www.instagram.com/heyberkshire",
+  facebook: "https://www.facebook.com/drjanduffy",
+  instagram: "https://www.instagram.com/drjanduffy",
   linkedin: "https://www.linkedin.com/in/drjanduffy",
-  tiktok: "https://www.tiktok.com/@heyberkshire",
-  youtube: "https://www.youtube.com/@heyberkshire",
+  youtube: "https://www.youtube.com/@drjanduffy",
+  twitter: "https://twitter.com/drjanduffy",
 };
 
 // ============================================================================
@@ -87,7 +87,7 @@ export function generateRealEstateAgentSchema() {
     "@id": `${BASE_URL}#organization`,
     name: "Dr. Jan Duffy - Berkshire Hathaway HomeServices Nevada Properties",
     alternateName: [
-      "HeyBerkshire",
+      siteConfig.name,
       "BHHS Nevada Properties",
       "Berkshire Hathaway HomeServices",
     ],
@@ -95,7 +95,7 @@ export function generateRealEstateAgentSchema() {
     logo: `${BASE_URL}/images/dr-jan-duffy.jpg`,
     image: `${BASE_URL}/images/dr-jan-duffy.jpg`,
     description: siteConfig.description,
-    telephone: "+1-702-500-1942",
+    telephone: agentInfo.phoneE164,
     email: agentInfo.email,
     priceRange: "$385K - $10M+",
     address: {
@@ -116,6 +116,10 @@ export function generateRealEstateAgentSchema() {
         "@type": "City",
         name: "Las Vegas",
         sameAs: "https://en.wikipedia.org/wiki/Las_Vegas",
+      },
+      {
+        "@type": "Place",
+        name: "Spring Valley, Nevada",
       },
       {
         "@type": "City",
@@ -177,6 +181,10 @@ export function generateRealEstateAgentSchema() {
       worstRating: "1",
     },
     knowsAbout: [
+      "Spring Valley Las Vegas homes",
+      "Spring Valley Nevada real estate",
+      "West Las Vegas Valley real estate",
+      "Las Vegas homes for sale",
       "Las Vegas real estate",
       "Henderson homes",
       "Summerlin properties",

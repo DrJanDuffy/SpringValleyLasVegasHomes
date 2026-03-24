@@ -20,7 +20,7 @@ const nextConfig = {
   // Performance optimizations
   swcMinify: true,
 
-  // Redirect non-www to www
+  // Canonical host: www (matches siteConfig.url / metadataBase)
   async redirects() {
     return [
       {
@@ -28,10 +28,10 @@ const nextConfig = {
         has: [
           {
             type: 'host',
-            value: 'heyberkshire.com',
+            value: 'springvalleylasvegashomes.com',
           },
         ],
-        destination: 'https://www.heyberkshire.com/:path*',
+        destination: 'https://www.springvalleylasvegashomes.com/:path*',
         permanent: true,
       },
     ]

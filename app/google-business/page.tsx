@@ -25,6 +25,7 @@ import {
   generateLocalBusinessSchema,
   generateFAQSchema,
 } from "@/lib/gbp-schema";
+import { googleBusinessReviewUrl, siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Dr. Jan Duffy, REALTOR® Las Vegas | Berkshire Hathaway HomeServices",
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Dr. Jan Duffy - Berkshire Hathaway HomeServices Nevada Properties",
     description: "Trusted Las Vegas REALTOR® serving since 2008. Summerlin, Henderson, luxury homes, 55+ communities.",
-    url: "https://heyberkshire.com/google-business",
+    url: `${siteConfig.url}/google-business`,
     type: "profile",
   },
 };
@@ -269,7 +270,7 @@ export default function GoogleBusinessPage() {
                 Mention your neighborhood, type of transaction, and what made the experience valuable.
               </p>
               <a
-                href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review"
+                href={googleBusinessReviewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"

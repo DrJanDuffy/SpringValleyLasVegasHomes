@@ -4,92 +4,31 @@ import RealScoutListings from "@/components/realscout/RealScoutListings";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import ReviewsSection from "@/components/sections/ReviewsSection";
 import FAQSection from "@/components/sections/FAQSection";
-import CTASection from "@/components/sections/CTASection";
 import Footer from "@/components/layouts/Footer";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Home as HomeIcon, TrendingUp, Shield, Users, Phone } from "lucide-react";
+import { siteConfig } from "@/lib/site-config";
+import { homePageFaqs } from "@/lib/home-faqs";
+import { generateFAQSchema } from "@/lib/schema";
+import { homePageTitleAbsolute } from "@/lib/seo";
+
+const faqSchemaLd = generateFAQSchema(homePageFaqs);
 
 export const metadata: Metadata = {
-  title: "Berkshire Hathaway HomeServices Las Vegas | Dr. Jan Duffy, REALTOR®",
-  description:
-    "Looking for a Berkshire Hathaway HomeServices agent in Las Vegas? Dr. Jan Duffy with BHHS Nevada Properties offers expert real estate services—backed by Warren Buffett's legacy of trust. Call (702) 500-1942.",
-  keywords: [
-    "Berkshire Hathaway HomeServices",
-    "Berkshire Hathaway HomeServices Nevada Properties",
-    "BHHS Las Vegas",
-    "Dr. Jan Duffy realtor",
-    "Las Vegas real estate agent",
-  ],
-};
-
-// Organization Schema
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "RealEstateAgent",
-  name: "Dr. Jan Duffy - Berkshire Hathaway HomeServices Nevada Properties",
-  url: "https://heyberkshire.com",
-  telephone: "+17025001942",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "9406 W Lake Mead Blvd, Suite 100",
-    addressLocality: "Las Vegas",
-    addressRegion: "NV",
-    postalCode: "89134",
+  title: {
+    absolute: homePageTitleAbsolute,
   },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "200",
+  description: siteConfig.description,
+  openGraph: {
+    title: homePageTitleAbsolute,
+    description: siteConfig.description,
+    url: siteConfig.url,
   },
-};
-
-// FAQ Schema for SEO
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Why should I choose a Berkshire Hathaway HomeServices agent in Las Vegas?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Berkshire Hathaway HomeServices is the only real estate brand backed by Warren Buffett's Berkshire Hathaway Inc. This means unmatched financial stability, ethical standards, and a global referral network of 50,000+ agents. When you're making the biggest purchase of your life, that trust matters.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What areas does Berkshire Hathaway HomeServices Nevada Properties serve?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "BHHS Nevada Properties serves all of Las Vegas, Henderson, North Las Vegas, and surrounding areas, with specialized expertise in Summerlin, The Ridges, Skye Canyon, Southern Highlands, Green Valley, and all Henderson communities.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How do I contact Dr. Jan Duffy at Berkshire Hathaway HomeServices?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "You can reach Dr. Jan Duffy at (702) 500-1942 or email homes@heyberkshire.com. Office located at 9406 W Lake Mead Blvd, Suite 100, Las Vegas, NV 89134.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Does Berkshire Hathaway HomeServices help with new construction homes?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes! BHHS agents provide free buyer representation for new construction purchases from builders like Toll Brothers, Lennar, and Century Communities—the builder pays the commission, not you.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What is the current Las Vegas real estate market like in 2026?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "As of January 2026, the Las Vegas median home price is $450,000 (+4.2% YoY), with homes selling in an average of 28 days. Henderson's median is slightly higher at $485,000. The market remains competitive but balanced.",
-      },
-    },
-  ],
+  twitter: {
+    title: homePageTitleAbsolute,
+    description: siteConfig.description,
+  },
 };
 
 export default function Home() {
@@ -97,11 +36,7 @@ export default function Home() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaLd) }}
       />
       <Navbar />
       <main>
@@ -112,12 +47,13 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-12">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
-                Why Choose Berkshire Hathaway HomeServices?
+                Why Choose Berkshire Hathaway HomeServices for Spring Valley Las Vegas Homes?
               </h2>
               <p className="text-lg text-slate-700 leading-relaxed">
-                When you work with a <strong>Berkshire Hathaway HomeServices</strong> agent, you're
-                backed by a name synonymous with trust, ethical standards, and financial
-                strength—the same principles that built Warren Buffett's empire.
+                When you work with a <strong>Berkshire Hathaway HomeServices</strong> agent, you
+                get local guidance for <strong>Spring Valley Las Vegas homes</strong> and the wider
+                valley—backed by a name synonymous with trust, ethical standards, and financial
+                strength—the same principles that built Warren Buffett&apos;s empire.
               </p>
             </div>
 
@@ -229,29 +165,40 @@ export default function Home() {
               </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
-              {[
-                { name: "Summerlin", price: "$625K", slug: "summerlin" },
-                { name: "Henderson", price: "$485K", slug: "henderson" },
-                { name: "Green Valley", price: "$520K", slug: "green-valley" },
-                { name: "The Ridges", price: "$2.5M", slug: "the-ridges" },
-                { name: "Southern Highlands", price: "$750K", slug: "southern-highlands" },
-                { name: "North Las Vegas", price: "$385K", slug: "north-las-vegas" },
-                { name: "Skye Canyon", price: "$550K", slug: "skye-canyon" },
-                { name: "Centennial Hills", price: "$495K", slug: "centennial-hills" },
-                { name: "Inspirada", price: "$525K", slug: "inspirada" },
-                { name: "Mountains Edge", price: "$475K", slug: "mountains-edge" },
-              ].map((area) => (
-                <Link
-                  key={area.slug}
-                  href={`/neighborhoods/${area.slug}`}
-                  className="bg-slate-50 hover:bg-blue-50 rounded-lg p-4 text-center transition-colors group"
-                >
-                  <h3 className="font-semibold text-slate-900 group-hover:text-blue-600">
-                    {area.name}
-                  </h3>
-                  <p className="text-sm text-slate-500">From {area.price}</p>
-                </Link>
-              ))}
+              {(
+                [
+                  {
+                    name: "Spring Valley",
+                    detail: "Spring Valley Las Vegas homes",
+                    href: "/listings",
+                  },
+                  { name: "Summerlin", detail: "From $625K", slug: "summerlin" },
+                  { name: "Henderson", detail: "From $485K", slug: "henderson" },
+                  { name: "Green Valley", detail: "From $520K", slug: "green-valley" },
+                  { name: "The Ridges", detail: "From $2.5M", slug: "the-ridges" },
+                  { name: "Southern Highlands", detail: "From $750K", slug: "southern-highlands" },
+                  { name: "North Las Vegas", detail: "From $385K", slug: "north-las-vegas" },
+                  { name: "Skye Canyon", detail: "From $550K", slug: "skye-canyon" },
+                  { name: "Centennial Hills", detail: "From $495K", slug: "centennial-hills" },
+                  { name: "Inspirada", detail: "From $525K", slug: "inspirada" },
+                  { name: "Mountains Edge", detail: "From $475K", slug: "mountains-edge" },
+                ] as const
+              ).map((area) => {
+                const href = "href" in area ? area.href : `/neighborhoods/${area.slug}`;
+                const key = "href" in area ? area.href : area.slug;
+                return (
+                  <Link
+                    key={key}
+                    href={href}
+                    className="bg-slate-50 hover:bg-blue-50 rounded-lg p-4 text-center transition-colors group"
+                  >
+                    <h3 className="font-semibold text-slate-900 group-hover:text-blue-600">
+                      {area.name}
+                    </h3>
+                    <p className="text-sm text-slate-500">{area.detail}</p>
+                  </Link>
+                );
+              })}
             </div>
             <div className="text-center mt-8">
               <Link
@@ -266,7 +213,11 @@ export default function Home() {
 
         <WhyChooseUs />
         <ReviewsSection />
-        <FAQSection />
+        <FAQSection
+          faqs={homePageFaqs}
+          title="Spring Valley Las Vegas Homes — FAQs"
+          subtitle="Straight answers about Spring Valley real estate, homes for sale, and working with Dr. Jan Duffy's team"
+        />
 
         {/* CTA Section */}
         <section className="py-16 md:py-20 bg-blue-600 text-white">
@@ -302,7 +253,7 @@ export default function Home() {
 
         {/* Last Updated */}
         <div className="bg-slate-100 py-4 text-center text-sm text-slate-500">
-          Last Updated: January 2026 | HeyBerkshire.com - Berkshire Hathaway HomeServices Nevada
+          Last Updated: January 2026 | {siteConfig.name} — Berkshire Hathaway HomeServices Nevada
           Properties
         </div>
       </main>

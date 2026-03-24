@@ -15,11 +15,13 @@ import {
   combineSchemas,
 } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
+import { seoKeywordVariations } from "@/lib/seo";
 
-const title = "Berkshire Hathaway HomeServices Las Vegas | Dr. Jan Duffy, REALTOR®";
-const description =
-  "Looking for a Berkshire Hathaway HomeServices agent in Las Vegas? Dr. Jan Duffy with BHHS Nevada Properties offers expert real estate services—backed by Warren Buffett's legacy of trust.";
+const title = siteConfig.name;
+const description = siteConfig.description;
 const url = siteConfig.url;
+
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   title: {
@@ -29,6 +31,7 @@ export const metadata: Metadata = {
   description,
   metadataBase: new URL(url),
   keywords: [
+    ...seoKeywordVariations,
     "Berkshire Hathaway HomeServices",
     "Berkshire Hathaway HomeServices Nevada Properties",
     "Berkshire Hathaway HomeServices Las Vegas",
@@ -42,11 +45,18 @@ export const metadata: Metadata = {
     "Summerlin real estate",
     "luxury homes Las Vegas",
   ],
+  ...(googleSiteVerification
+    ? {
+        verification: {
+          google: googleSiteVerification,
+        },
+      }
+    : {}),
   openGraph: {
     title,
     description,
     url,
-    siteName: `HeyBerkshire - ${siteConfig.brandLine}`,
+    siteName: siteConfig.name,
     type: "website",
     locale: "en_US",
   },
