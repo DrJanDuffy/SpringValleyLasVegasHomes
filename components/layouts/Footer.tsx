@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
-import { agentInfo, officeInfo, siteConfig, teamInfo } from "@/lib/site-config";
+import { agentInfo, officeInfo, siteConfig, teamInfo, siteSocialUrls } from "@/lib/site-config";
+import { seoPrimaryKeyword } from "@/lib/seo";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,34 +14,34 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-xl mb-4">Berkshire Hathaway HomeServices</h3>
             <p className="text-slate-300 mb-4 text-sm">
-              Nevada Properties - Your trusted real estate partner in Las Vegas, Henderson, and
-              Summerlin. Backed by Warren Buffett's legacy of trust.
+              Nevada Properties — {seoPrimaryKeyword}, Las Vegas, Henderson, and Summerlin. Backed
+              by Warren Buffett&apos;s legacy of trust.
             </p>
             <div className="flex space-x-4">
               <a
-                href="http://drjanduffy.realscout.com/"
+                href={siteSocialUrls.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-white transition-colors"
-                aria-label="Search Las Vegas Homes"
+                aria-label="Spring Valley Las Vegas Homes on Facebook"
               >
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href="http://drjanduffy.realscout.com/"
+                href={siteSocialUrls.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-white transition-colors"
-                aria-label="Search Las Vegas Homes"
+                aria-label="Dr. Jan Duffy on Instagram"
               >
                 <Instagram className="h-5 w-5" />
               </a>
               <a
-                href="http://drjanduffy.realscout.com/"
+                href={siteSocialUrls.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-white transition-colors"
-                aria-label="Search Las Vegas Homes"
+                aria-label="Dr. Jan Duffy on LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
@@ -60,6 +61,14 @@ export default function Footer() {
                 >
                   All Properties
                 </a>
+              </li>
+              <li>
+                <Link
+                  href="/neighborhoods/spring-valley"
+                  className="text-slate-300 hover:text-white transition-colors text-sm"
+                >
+                  {seoPrimaryKeyword}
+                </Link>
               </li>
               <li>
                 <Link
@@ -83,6 +92,14 @@ export default function Footer() {
                   className="text-slate-300 hover:text-white transition-colors text-sm"
                 >
                   Market Report
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/resources"
+                  className="text-slate-300 hover:text-white transition-colors text-sm"
+                >
+                  Resources &amp; Guides
                 </Link>
               </li>
               <li>

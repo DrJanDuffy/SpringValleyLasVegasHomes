@@ -19,9 +19,7 @@ const officeMapQuery = encodeURIComponent(
 );
 
 export const metadata: Metadata = {
-  title: {
-    absolute: `Contact Us | ${siteConfig.name}`,
-  },
+  title: "Contact Us",
   description:
     "Contact Dr. Jan Duffy's team at Berkshire Hathaway HomeServices Nevada Properties. Team Leader and Buyer Agent contacts, office map, and Calendly. Call (702) 500-1942 or reach our buyer specialist at (702) 664-8424.",
   keywords: [

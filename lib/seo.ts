@@ -33,3 +33,17 @@ export const heroSeo = {
  */
 export const homePageTitleAbsolute =
   "Spring Valley Las Vegas Homes | Dr. Jan Duffy, REALTOR® | Berkshire Hathaway";
+
+/**
+ * Use for `metadata.description` when you want the primary topic + CTA in one line.
+ * Keeps GEO (Las Vegas) + NAP-adjacent phone in high-traffic routes.
+ */
+export function metaDescriptionWithKeyword(
+  uniqueSentence: string,
+  includePhone = true,
+): string {
+  const tail = includePhone
+    ? ` Call (702) 500-1942. ${seoPrimaryKeyword}.`
+    : ` ${seoPrimaryKeyword}.`;
+  return `${uniqueSentence.trim()}${tail}`;
+}

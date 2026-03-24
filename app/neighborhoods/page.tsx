@@ -4,13 +4,17 @@ import RealScoutListings from "@/components/realscout/RealScoutListings";
 import Link from "next/link";
 import { MapPin, Phone, Home, Users, GraduationCap } from "lucide-react";
 import type { Metadata } from "next";
+import { metaDescriptionWithKeyword, seoPrimaryKeyword } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Las Vegas Neighborhoods | Berkshire Hathaway HomeServices",
-  description:
-    "Explore Las Vegas and Henderson neighborhoods with Dr. Jan Duffy at Berkshire Hathaway HomeServices Nevada Properties. Summerlin, Henderson, The Ridges, Southern Highlands & more.",
+  title: "Las Vegas Neighborhoods Guide",
+  description: metaDescriptionWithKeyword(
+    "Explore Las Vegas and Henderson neighborhoods—Summerlin, Green Valley, Spring Valley Las Vegas homes, and more with Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties.",
+    true,
+  ),
   keywords: [
     "Las Vegas neighborhoods",
+    "Spring Valley Las Vegas homes",
     "Henderson communities",
     "Summerlin real estate",
     "best neighborhoods Las Vegas",
@@ -19,6 +23,16 @@ export const metadata: Metadata = {
 };
 
 const neighborhoods = [
+  {
+    name: "Spring Valley",
+    slug: "spring-valley",
+    medianPrice: "Varies",
+    priceChange: "+4.2%",
+    description:
+      "Large west valley area—popular for Spring Valley Las Vegas homes with diverse housing and mature neighborhoods",
+    highlights: ["West Valley", "Diverse Housing", "Central Access", "Established Areas"],
+    bestFor: "Spring Valley Las Vegas homes buyers, move-up buyers, commuters",
+  },
   {
     name: "Summerlin",
     slug: "summerlin",
@@ -126,7 +140,11 @@ export default function NeighborhoodsPage() {
               Las Vegas & Henderson Neighborhoods
             </h1>
             <p className="text-xl text-slate-600">
-              Explore the best communities in Southern Nevada with Dr. Jan Duffy, your{" "}
+              Explore the best communities in Southern Nevada—including the{" "}
+              <Link href="/neighborhoods/spring-valley" className="text-blue-600 font-semibold hover:underline">
+                {seoPrimaryKeyword}
+              </Link>{" "}
+              guide, Summerlin, Henderson, and more—with Dr. Jan Duffy, your{" "}
               <strong>Berkshire Hathaway HomeServices</strong> neighborhood expert
             </p>
           </div>

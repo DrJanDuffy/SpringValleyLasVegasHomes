@@ -24,6 +24,15 @@ export const siteConfig = {
     "Spring Valley Las Vegas homes and west valley real estate with Dr. Jan Duffy, REALTOR® at Berkshire Hathaway HomeServices Nevada Properties. Homes for sale, buyer and seller representation, and local expertise for Spring Valley, Las Vegas, and Henderson—call (702) 500-1942.",
 };
 
+/** Official social URLs — align footer, JSON-LD sameAs, and GBP-style data */
+export const siteSocialUrls = {
+  facebook: "https://www.facebook.com/SpringValleyLasVegasHomes",
+  instagram: "https://www.instagram.com/drjanduffy",
+  linkedin: "https://www.linkedin.com/in/drjanduffy",
+  youtube: "https://www.youtube.com/@drjanduffy",
+  twitter: "https://twitter.com/drjanduffy",
+} as const;
+
 export const agentInfo = {
   name: "Dr. Jan Duffy",
   title: "REALTOR®",

@@ -6,7 +6,7 @@
  * @see https://developers.google.com/search/docs/appearance/structured-data
  */
 
-import { siteConfig, agentInfo, officeInfo, agentStats } from "./site-config";
+import { siteConfig, agentInfo, officeInfo, agentStats, siteSocialUrls } from "./site-config";
 
 // ============================================================================
 // Types
@@ -65,11 +65,11 @@ const BASE_URL = siteConfig.url;
 
 // Social media profiles — align with gbp-schema / GBP (sameAs)
 export const socialProfiles = {
-  facebook: "https://www.facebook.com/drjanduffy",
-  instagram: "https://www.instagram.com/drjanduffy",
-  linkedin: "https://www.linkedin.com/in/drjanduffy",
-  youtube: "https://www.youtube.com/@drjanduffy",
-  twitter: "https://twitter.com/drjanduffy",
+  facebook: siteSocialUrls.facebook,
+  instagram: siteSocialUrls.instagram,
+  linkedin: siteSocialUrls.linkedin,
+  youtube: siteSocialUrls.youtube,
+  twitter: siteSocialUrls.twitter,
 };
 
 // ============================================================================

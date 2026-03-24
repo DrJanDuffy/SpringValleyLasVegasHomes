@@ -15,7 +15,7 @@ import {
   combineSchemas,
 } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
-import { seoKeywordVariations } from "@/lib/seo";
+import { seoKeywordVariations, seoPrimaryKeyword } from "@/lib/seo";
 
 const title = siteConfig.name;
 const description = siteConfig.description;
@@ -26,7 +26,8 @@ const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 export const metadata: Metadata = {
   title: {
     default: title,
-    template: `%s | ${siteConfig.brandLine}`,
+    /** Every route `title` becomes: {segment} | Spring Valley Las Vegas homes | BHHS */
+    template: `%s | ${seoPrimaryKeyword} | ${siteConfig.brandName}`,
   },
   description,
   metadataBase: new URL(url),

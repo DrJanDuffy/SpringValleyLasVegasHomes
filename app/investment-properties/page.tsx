@@ -6,7 +6,7 @@ import { Phone, TrendingUp, DollarSign, Building, BarChart, CheckCircle, Calcula
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Las Vegas Investment Properties | Berkshire Hathaway HomeServices",
+  title: "Las Vegas Investment Properties",
   description:
     "Invest in Las Vegas real estate with Dr. Jan Duffy at Berkshire Hathaway HomeServices Nevada Properties. Rental properties, ROI analysis, 1031 exchanges. No state income tax. Call (702) 500-1942.",
   keywords: [

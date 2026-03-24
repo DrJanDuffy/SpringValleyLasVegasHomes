@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Property Details | Las Vegas & Henderson Real Estate",
-  description: "View detailed information about this property listing in Las Vegas or Henderson, NV.",
+  title: "Property Listing Details",
+  description:
+    "View this Las Vegas or Henderson property listing. Spring Valley Las Vegas homes and valley-wide MLS search with Dr. Jan Duffy, Berkshire Hathaway HomeServices. Call (702) 500-1942.",
 };
 
 // This would typically fetch from RealScout API

@@ -170,7 +170,7 @@ export default function Home() {
                   {
                     name: "Spring Valley",
                     detail: "Spring Valley Las Vegas homes",
-                    href: "/listings",
+                    href: "/neighborhoods/spring-valley",
                   },
                   { name: "Summerlin", detail: "From $625K", slug: "summerlin" },
                   { name: "Henderson", detail: "From $485K", slug: "henderson" },

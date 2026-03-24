@@ -28,6 +28,7 @@ export default function Navbar() {
   ];
 
   const serviceLinks = [
+    { href: "/neighborhoods/spring-valley", label: "Spring Valley Homes" },
     { href: "/buyers", label: "Home Buying" },
     { href: "/sellers", label: "Home Selling" },
     { href: "/luxury-homes", label: "Luxury Homes" },
@@ -35,6 +36,7 @@ export default function Navbar() {
     { href: "/new-construction", label: "New Construction" },
     { href: "/market-report", label: "Market Report" },
     { href: "/market-insights", label: "Market Insights" },
+    { href: "/resources", label: "Resources" },
   ];
 
   return (

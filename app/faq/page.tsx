@@ -14,7 +14,7 @@ import {
 import { agentInfo, officeInfo, teamInfo } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "FAQ | Berkshire Hathaway HomeServices Las Vegas Real Estate",
+  title: "Real Estate FAQ",
   description:
     "Frequently asked questions about Las Vegas real estate, Berkshire Hathaway HomeServices, buying, selling, and working with Dr. Jan Duffy at BHHS Nevada Properties.",
   keywords: [

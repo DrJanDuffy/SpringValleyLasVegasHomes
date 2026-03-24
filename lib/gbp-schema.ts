@@ -1,7 +1,7 @@
 // Google Business Profile Schema Data
 // Supports GBP ranking factors: Relevance, Distance, Prominence
 
-import { agentInfo, officeInfo, siteConfig } from "./site-config";
+import { agentInfo, officeInfo, siteConfig, siteSocialUrls } from "./site-config";
 
 const siteHostname = new URL(siteConfig.url).hostname;
 
@@ -129,11 +129,11 @@ export const businessInfo = {
 
   // Social profiles for sameAs schema
   socialProfiles: [
-    "https://www.facebook.com/drjanduffy",
-    "https://www.instagram.com/drjanduffy",
-    "https://www.linkedin.com/in/drjanduffy",
-    "https://www.youtube.com/@drjanduffy",
-    "https://twitter.com/drjanduffy",
+    siteSocialUrls.facebook,
+    siteSocialUrls.instagram,
+    siteSocialUrls.linkedin,
+    siteSocialUrls.youtube,
+    siteSocialUrls.twitter,
   ],
 
   // Languages spoken
@@ -264,9 +264,9 @@ export function generateLocalBusinessSchema() {
       bestRating: "5",
     },
     sameAs: [
-      "https://www.facebook.com/drjanduffy",
-      "https://www.instagram.com/drjanduffy",
-      "https://www.linkedin.com/in/drjanduffy",
+      siteSocialUrls.facebook,
+      siteSocialUrls.instagram,
+      siteSocialUrls.linkedin,
     ],
   };
 }

@@ -26,8 +26,7 @@ import type { Metadata } from "next";
 import { agentInfo, siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title:
-    "55+ Active Adult Communities Las Vegas | Sun City, Del Webb, Heritage | Dr. Jan Duffy",
+  title: "55+ Active Adult Communities Las Vegas",
   description:
     "Find your perfect 55+ community in Las Vegas. Sun City Summerlin, Sun City Aliante, Del Webb Lake Las Vegas, Heritage at Stonebridge, Solera, Trilogy. Dr. Jan Duffy specializes in active adult living. Call (702) 500-1942.",
   keywords: [
