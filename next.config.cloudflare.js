@@ -3,14 +3,18 @@ const nextConfig = {
   // Output configuration for Cloudflare Pages
   output: 'standalone',
 
-  // Image optimization for Cloudflare
+  // Image optimization — Cloudflare delivery URLs use next/image + unoptimized in components (see lib/cf-image-delivery.ts)
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Use Cloudflare Images loader
-    loader: 'custom',
-    loaderFile: './lib/cloudflare-image-loader.ts',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'imagedelivery.net',
+        pathname: '/**',
+      },
+    ],
   },
 
   // Compression (handled by Cloudflare)

@@ -160,7 +160,8 @@ export default function SecurityPolicyPage() {
                 <strong>Follow Up Boss:</strong> CRM and lead management
               </li>
               <li>
-                <strong>RealScout:</strong> MLS/IDX property data
+                <strong>MLS home search (RealScout):</strong> Live listings and search widgets on
+                this site; IDX-compliant property data
               </li>
               <li>
                 <strong>Calendly:</strong> Appointment scheduling

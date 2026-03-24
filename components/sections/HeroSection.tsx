@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { isCfDeliveryUrl } from "@/lib/cf-image-delivery";
 import { heroSeo } from "@/lib/seo";
+import { heroBackgroundSrcs } from "@/lib/site-media";
 import { realScoutConfig } from "@/lib/integrations";
 
 type HeroSectionProps = {
@@ -20,21 +22,17 @@ export default function HeroSection({
   const [currentImage, setCurrentImage] = useState(0);
   const prefersReducedMotion = useReducedMotion();
   
-  const images = [
-    "/Image/hero_bg_1.jpg",
-    "/Image/hero_bg_2.jpg",
-    "/Image/hero_bg_3.jpg",
-  ];
+  const images = heroBackgroundSrcs;
 
   useEffect(() => {
     // Don't animate if user prefers reduced motion
     if (prefersReducedMotion) return;
-    
+
     const intervalId = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
     }, 5000);
     return () => clearInterval(intervalId);
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, images.length]);
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
@@ -59,6 +57,7 @@ export default function HeroSection({
               className="object-cover"
               priority={index === 0}
               fetchPriority={index === 0 ? "high" : "low"}
+              unoptimized={isCfDeliveryUrl(src)}
             />
             <div className="absolute inset-0 bg-black/40" />
           </div>
@@ -73,8 +72,10 @@ export default function HeroSection({
         </h1>
         <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl">{intro}</p>
 
-        {/* RealScout Search Widget */}
-        <div className="realscout-wrapper mb-4">
+        <p className="mb-3 max-w-xl text-center text-sm font-medium text-white/95 md:text-base">
+          Search live MLS homes by city, zip, or neighborhood—results update as you type.
+        </p>
+        <div className="realscout-wrapper mb-4 w-full max-w-2xl">
           <div
             dangerouslySetInnerHTML={{
               __html: `<realscout-simple-search agent-encoded-id="${realScoutConfig.agentEncodedId}"></realscout-simple-search>`,

@@ -14,12 +14,13 @@ export default function RealScoutListings() {
               Homes for sale — Las Vegas & Henderson
             </h2>
             <p className="text-slate-600 text-lg">
-              Browse current listings, then explore the map below to see how neighborhoods fit your lifestyle.
+              Explore live MLS listings with photos, prices, and map—tap a property to dive deeper or
+              adjust filters to match how you want to live.
             </p>
           </div>
           <Button asChild variant="outline" className="mt-4 md:mt-0">
             <a href={`${realScoutConfig.portalUrl}/`} target="_blank" rel="noopener noreferrer">
-              View All Properties
+              Open full MLS search
             </a>
           </Button>
         </div>

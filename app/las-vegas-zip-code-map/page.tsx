@@ -168,7 +168,7 @@ const pageSchemas = combineSchemas(
         acceptedAnswer: {
           "@type": "Answer",
           text:
-            "Use the zip directory or interactive map on this page, open the search hub for your zip, then use the RealScout MLS search and type the zip or city in the search box. You can also call or email Dr. Jan Duffy for a curated list.",
+            "Use the zip directory or interactive map on this page, open the search hub for your zip, then use the live MLS home search and type the zip or city in the search box. You can also call or email Dr. Jan Duffy for a curated list.",
         },
       },
       {
@@ -313,7 +313,7 @@ export default function LasVegasZipCodeMapPage() {
               </dt>
               <dd className="mt-2 text-slate-700">
                 Use the directory or map above, open the search link for your zip, then use the
-                RealScout MLS search and enter that zip or city in the search box. You can also{" "}
+                live MLS home search and enter that zip or city in the search box. You can also{" "}
                 <Link href="/contact" className="font-medium text-blue-600 hover:underline">
                   contact
                 </Link>{" "}
@@ -345,7 +345,8 @@ export default function LasVegasZipCodeMapPage() {
         <section className="bg-gradient-to-br from-slate-900 to-slate-800 px-4 py-14 text-center text-white">
           <h2 className="text-2xl font-bold md:text-3xl">Find your neighborhood</h2>
           <p className="mx-auto mt-3 max-w-lg text-slate-200">
-            Ready to see homes? Open MLS search on RealScout or contact Dr. Jan Duffy&apos;s team.
+            Ready to see homes? Open the live MLS search or contact Dr. Jan Duffy&apos;s team—we&apos;ll
+            help you match zip, budget, and lifestyle.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a

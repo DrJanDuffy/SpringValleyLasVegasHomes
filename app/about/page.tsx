@@ -1,6 +1,7 @@
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 import RealScoutListings from "@/components/realscout/RealScoutListings";
+import AgentHeadshot from "@/components/shared/AgentHeadshot";
 import Link from "next/link";
 import { 
   Phone, 
@@ -18,6 +19,7 @@ import {
 } from "lucide-react";
 import type { Metadata } from "next";
 import { agentInfo, officeInfo, siteConfig, teamInfo } from "@/lib/site-config";
+import { absoluteMediaUrl, agentHeadshotSrc } from "@/lib/site-media";
 import { realScoutConfig } from "@/lib/integrations";
 
 export const metadata: Metadata = {
@@ -70,6 +72,7 @@ const personSchema = {
     "55+ communities",
     "California relocation",
   ],
+  image: absoluteMediaUrl(agentHeadshotSrc),
 };
 
 const specializations = [
@@ -226,14 +229,11 @@ export default function AboutPage() {
 
               {/* Stats & Credentials */}
               <div className="space-y-6">
-                {/* Agent Photo Placeholder */}
-                <div className="bg-gradient-to-br from-blue-100 to-slate-100 rounded-lg p-8 aspect-square flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">👩‍💼</div>
-                    <p className="text-slate-600 font-semibold">Dr. Jan Duffy</p>
-                    <p className="text-sm text-slate-500">BHHS Nevada Properties</p>
-                  </div>
-                </div>
+                <AgentHeadshot
+                  priority
+                  frameClassName="aspect-square max-w-md mx-auto md:mx-0"
+                  sizes="(max-width: 768px) 100vw, 400px"
+                />
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-2 gap-4">

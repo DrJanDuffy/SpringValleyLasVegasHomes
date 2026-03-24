@@ -2,6 +2,8 @@
 
 import { Star, Quote } from "lucide-react";
 import Image from "next/image";
+import { isCfDeliveryUrl } from "@/lib/cf-image-delivery";
+import { reviewAvatarSrcs } from "@/lib/site-media";
 import { googleBusinessReviewUrl } from "@/lib/site-config";
 
 export interface Review {
@@ -14,6 +16,8 @@ export interface Review {
   date?: string;
 }
 
+const [rev1, rev2, rev3] = reviewAvatarSrcs;
+
 // Default reviews
 export const defaultReviews: Review[] = [
   {
@@ -22,7 +26,7 @@ export const defaultReviews: Review[] = [
     location: "Las Vegas, NV",
     rating: 5,
     text: "Dr. Duffy made our home buying experience seamless. Her knowledge of the Las Vegas market is unmatched, and she guided us through every step with professionalism and care.",
-    image: "/Image/person1.jpeg",
+    image: rev1,
     date: "2025-11-15",
   },
   {
@@ -31,7 +35,7 @@ export const defaultReviews: Review[] = [
     location: "Henderson, NV",
     rating: 5,
     text: "We couldn't be happier with our new home! The entire process was smooth, and Dr. Duffy's attention to detail and negotiation skills saved us thousands. Highly recommend!",
-    image: "/Image/person_2-min.jpg",
+    image: rev2,
     date: "2025-10-22",
   },
   {
@@ -40,7 +44,7 @@ export const defaultReviews: Review[] = [
     location: "Summerlin, NV",
     rating: 5,
     text: "As first-time homebuyers, we were nervous about the process. Dr. Duffy patiently explained everything and helped us find the perfect home in our budget. Thank you!",
-    image: "/Image/person_4-min.jpg",
+    image: rev3,
     date: "2025-09-08",
   },
 ];
@@ -120,6 +124,7 @@ export default function ReviewsSection({
                       alt={review.name}
                       fill
                       className="object-cover"
+                      unoptimized={review.image ? isCfDeliveryUrl(review.image) : false}
                     />
                   ) : (
                     <div className="w-full h-full bg-slate-200 flex items-center justify-center">

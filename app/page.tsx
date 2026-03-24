@@ -1,4 +1,5 @@
 import Navbar from "@/components/layouts/Navbar";
+import AgentHeadshot from "@/components/shared/AgentHeadshot";
 import HeroSection from "@/components/sections/HeroSection";
 import BuyerEngagementStrip from "@/components/sections/BuyerEngagementStrip";
 import ServiceAreaMapSection from "@/components/sections/ServiceAreaMapSection";
@@ -106,14 +107,22 @@ export default function Home() {
 
             {/* Expert Quote */}
             <div className="max-w-3xl mx-auto mt-12 bg-slate-50 rounded-lg p-8">
-              <blockquote className="text-lg text-slate-700 italic mb-4">
-                "When clients ask why they should choose a Berkshire Hathaway HomeServices agent, I
-                tell them: you're not just getting me—you're getting a global network of 50,000
-                agents, world-class marketing, and a brand that's synonymous with trust."
-              </blockquote>
-              <cite className="text-slate-900 font-semibold">
-                — Dr. Jan Duffy, BHHS Nevada Properties
-              </cite>
+              <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
+                <AgentHeadshot
+                  frameClassName="w-36 shrink-0 aspect-square sm:w-40"
+                  sizes="160px"
+                />
+                <div>
+                  <blockquote className="text-lg text-slate-700 italic mb-4">
+                    "When clients ask why they should choose a Berkshire Hathaway HomeServices agent, I
+                    tell them: you're not just getting me—you're getting a global network of 50,000
+                    agents, world-class marketing, and a brand that's synonymous with trust."
+                  </blockquote>
+                  <cite className="text-slate-900 font-semibold not-italic">
+                    — Dr. Jan Duffy, BHHS Nevada Properties
+                  </cite>
+                </div>
+              </div>
             </div>
           </div>
         </section>

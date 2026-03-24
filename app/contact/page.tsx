@@ -1,5 +1,6 @@
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
+import AgentHeadshot from "@/components/shared/AgentHeadshot";
 import RealScoutListings from "@/components/realscout/RealScoutListings";
 import { Phone, Mail, MapPin, Clock, Calendar, CheckCircle, Star, Users, Shield } from "lucide-react";
 import CalendlyWidget from "@/components/calendly/CalendlyWidget";
@@ -109,6 +110,12 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
               Dr. Jan Duffy and {teamInfo.buyerAgent.role} {teamInfo.buyerAgent.name}. Schedule an
               appointment or get in touch below.
             </p>
+            <div className="mt-10 flex justify-center">
+              <AgentHeadshot
+                frameClassName="max-w-[200px] w-full aspect-square"
+                sizes="200px"
+              />
+            </div>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">

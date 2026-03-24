@@ -25,6 +25,7 @@ import {
   generateLocalBusinessSchema,
   generateFAQSchema,
 } from "@/lib/gbp-schema";
+import AgentHeadshot from "@/components/shared/AgentHeadshot";
 import { googleBusinessReviewUrl, siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -68,7 +69,7 @@ export default function GoogleBusinessPage() {
           {/* Hero - NAP Prominent */}
           <section className="max-w-5xl mx-auto mb-16">
             <div className="bg-gradient-to-br from-slate-900 to-blue-900 text-white rounded-2xl p-8 md:p-12">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="grid gap-8 md:grid-cols-3 md:items-center">
                 <div>
                   <div className="flex items-center gap-2 mb-4">
                     <Award className="h-6 w-6 text-yellow-400" />
@@ -102,6 +103,14 @@ export default function GoogleBusinessPage() {
                       </a>
                     </div>
                   </div>
+                </div>
+
+                <div className="flex justify-center md:order-none order-first">
+                  <AgentHeadshot
+                    priority
+                    frameClassName="w-full max-w-[260px] aspect-square shadow-2xl ring-white/20"
+                    sizes="260px"
+                  />
                 </div>
                 
                 {/* Rating & CTA */}

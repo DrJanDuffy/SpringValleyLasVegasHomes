@@ -1,9 +1,12 @@
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
+import AgentHeadshot from "@/components/shared/AgentHeadshot";
 import Image from "next/image";
 import { Bed, Bath, Square, MapPin, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
+import { isCfDeliveryUrl } from "@/lib/cf-image-delivery";
+import { listingPlaceholderSrc } from "@/lib/site-media";
 import { siteConfig } from "@/lib/site-config";
 import { realScoutConfig } from "@/lib/integrations";
 
@@ -33,7 +36,7 @@ async function getProperty(id: string) {
     name: "Modern Luxury Home",
     location: "Summerlin, Las Vegas, NV",
     price: "$850,000",
-    image: "/Image/hero_bg_1.jpg",
+    image: listingPlaceholderSrc,
     bedrooms: 4,
     bathrooms: 3,
     squareFeet: 3200,
@@ -100,6 +103,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
               fill
               className="object-cover"
               priority
+              unoptimized={isCfDeliveryUrl(property.image)}
             />
           </div>
 
@@ -149,6 +153,9 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
             {/* Sidebar */}
             <div className="md:col-span-1">
               <div className="bg-white border border-slate-200 rounded-lg p-6 sticky top-24">
+                <div className="mb-4 flex justify-center">
+                  <AgentHeadshot frameClassName="max-w-[140px] w-full aspect-square" sizes="140px" />
+                </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-4">Contact Agent</h3>
                 <p className="text-slate-600 mb-4">Dr. Jan Duffy</p>
                 <p className="text-sm text-slate-600 mb-6">

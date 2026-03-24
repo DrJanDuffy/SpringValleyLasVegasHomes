@@ -2,6 +2,7 @@
 // Supports GBP ranking factors: Relevance, Distance, Prominence
 
 import { agentInfo, officeInfo, siteConfig, siteSocialUrls } from "./site-config";
+import { absoluteMediaUrl, agentHeadshotSrc } from "./site-media";
 
 const siteHostname = new URL(siteConfig.url).hostname;
 
@@ -220,7 +221,7 @@ export function generateLocalBusinessSchema() {
     "@type": "RealEstateAgent",
     "@id": `${siteConfig.url}/#organization`,
     name: businessInfo.name,
-    image: `${siteConfig.url}/images/dr-jan-duffy.jpg`,
+    image: absoluteMediaUrl(agentHeadshotSrc),
     url: businessInfo.url,
     telephone: businessInfo.phone.tel,
     email: businessInfo.email,

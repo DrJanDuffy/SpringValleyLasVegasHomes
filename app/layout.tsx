@@ -14,7 +14,8 @@ import {
   generateWebSiteSchema,
   combineSchemas,
 } from "@/lib/schema";
-import { siteConfig } from "@/lib/site-config";
+import { agentInfo, siteConfig } from "@/lib/site-config";
+import { absoluteMediaUrl, agentHeadshotSrc } from "@/lib/site-media";
 import { seoKeywordVariations, seoPrimaryKeyword } from "@/lib/seo";
 import { realScoutConfig } from "@/lib/integrations";
 
@@ -61,11 +62,20 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: absoluteMediaUrl(agentHeadshotSrc),
+        width: 960,
+        height: 960,
+        alt: `${agentInfo.name} — ${agentInfo.brokerage}`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
+    images: [absoluteMediaUrl(agentHeadshotSrc)],
   },
   icons: {
     icon: "/favicon-32x32.png",

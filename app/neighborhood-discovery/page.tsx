@@ -151,7 +151,7 @@ const pageSchemas = combineSchemas(
         acceptedAnswer: {
           "@type": "Answer",
           text:
-            "No. It helps you explore area context and points of interest. For active listings, use the RealScout MLS search on this site or contact Dr. Jan Duffy for a curated list.",
+            "No. It helps you explore area context and points of interest. For active listings, use the live MLS search on this site or contact Dr. Jan Duffy for a curated list.",
         },
       },
     ],

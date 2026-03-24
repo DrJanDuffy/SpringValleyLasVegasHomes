@@ -7,6 +7,7 @@
  */
 
 import { siteConfig, agentInfo, officeInfo, agentStats, siteSocialUrls } from "./site-config";
+import { absoluteMediaUrl, agentHeadshotSrc } from "./site-media";
 
 // ============================================================================
 // Types
@@ -93,8 +94,8 @@ export function generateRealEstateAgentSchema() {
       "Berkshire Hathaway HomeServices",
     ],
     url: BASE_URL,
-    logo: `${BASE_URL}/images/dr-jan-duffy.jpg`,
-    image: `${BASE_URL}/images/dr-jan-duffy.jpg`,
+    logo: absoluteMediaUrl(agentHeadshotSrc),
+    image: absoluteMediaUrl(agentHeadshotSrc),
     description: siteConfig.description,
     telephone: agentInfo.phoneE164,
     email: agentInfo.email,

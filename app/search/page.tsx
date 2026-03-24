@@ -9,7 +9,7 @@ import { realScoutConfig } from "@/lib/integrations";
 export const metadata: Metadata = {
   title: "Search homes by zip code",
   description:
-    "Find Las Vegas Valley MLS listings by zip code. Open the live search on RealScout or contact Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties.",
+    "Find Las Vegas Valley MLS listings by zip code. Open the live home search to browse photos and map, or contact Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties.",
   robots: { index: true, follow: true },
   alternates: {
     canonical: `${siteConfig.url}/search`,
@@ -53,9 +53,9 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
             {validZip ? `Homes near zip ${validZip}` : "Search Las Vegas homes"}
           </h1>
           <p className="mb-8 text-lg text-slate-600">
-            Live MLS listings for the Las Vegas Valley are hosted on{" "}
-            <strong className="text-slate-800">RealScout</strong>. Use the button below to open the
-            search experience, then enter your city or zip in the search box if needed.
+            Browse <strong className="text-slate-800">live MLS homes</strong> across the Las Vegas
+            Valley—photos, prices, and map—in one place. Open search below, then type your city or
+            zip in the box to zero in on the area you care about.
           </p>
 
           {validZip && (
@@ -63,9 +63,8 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
               <p className="flex items-start gap-2 text-sm font-medium">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
                 <span>
-                  You opened this page for zip <strong>{validZip}</strong>. On RealScout, type{" "}
-                  <strong>{validZip}</strong> (or the city name) in the search field to focus results
-                  in that area.
+                  You opened this page for zip <strong>{validZip}</strong>. In the search field, enter{" "}
+                  <strong>{validZip}</strong> or the city name to focus results on that area.
                 </span>
               </p>
             </div>
@@ -77,8 +76,9 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700"
+              aria-label="Open live MLS home search in a new tab"
             >
-              Open MLS search (RealScout)
+              Browse live MLS homes
               <ExternalLink className="h-4 w-4" aria-hidden />
             </a>
             <Link
