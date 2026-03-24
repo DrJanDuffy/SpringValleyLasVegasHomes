@@ -37,11 +37,11 @@ export default function Footer() {
                 <Instagram className="h-5 w-5" />
               </a>
               <a
-                href={siteSocialUrls.linkedin}
+                href={siteSocialUrls.linkedinCompany}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-white transition-colors"
-                aria-label="Dr. Jan Duffy on LinkedIn"
+                aria-label="Spring Valley Las Vegas Homes on LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
               </a>

@@ -68,6 +68,7 @@ export const socialProfiles = {
   facebook: siteSocialUrls.facebook,
   instagram: siteSocialUrls.instagram,
   linkedin: siteSocialUrls.linkedin,
+  linkedinCompany: siteSocialUrls.linkedinCompany,
   youtube: siteSocialUrls.youtube,
   twitter: siteSocialUrls.twitter,
 };

@@ -28,7 +28,10 @@ export const siteConfig = {
 export const siteSocialUrls = {
   facebook: "https://www.facebook.com/SpringValleyLasVegasHomes",
   instagram: "https://www.instagram.com/drjanduffy",
+  /** Dr. Jan Duffy — personal profile (Person sameAs) */
   linkedin: "https://www.linkedin.com/in/drjanduffy",
+  /** Spring Valley Las Vegas Homes — LinkedIn Company Page */
+  linkedinCompany: "https://www.linkedin.com/company/springvalleylasvegas/",
   youtube: "https://www.youtube.com/@drjanduffy",
   twitter: "https://twitter.com/drjanduffy",
 } as const;

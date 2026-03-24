@@ -41,6 +41,7 @@ const sameAsProfiles = [
   siteSocialUrls.facebook,
   siteSocialUrls.instagram,
   siteSocialUrls.linkedin,
+  siteSocialUrls.linkedinCompany,
   siteSocialUrls.youtube,
 ];
 

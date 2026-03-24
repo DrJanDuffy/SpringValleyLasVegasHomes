@@ -132,6 +132,7 @@ export const businessInfo = {
     siteSocialUrls.facebook,
     siteSocialUrls.instagram,
     siteSocialUrls.linkedin,
+    siteSocialUrls.linkedinCompany,
     siteSocialUrls.youtube,
     siteSocialUrls.twitter,
   ],
@@ -267,6 +268,7 @@ export function generateLocalBusinessSchema() {
       siteSocialUrls.facebook,
       siteSocialUrls.instagram,
       siteSocialUrls.linkedin,
+      siteSocialUrls.linkedinCompany,
     ],
   };
 }
