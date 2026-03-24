@@ -15,7 +15,12 @@ import {
   combineSchemas,
 } from "@/lib/schema";
 import { agentInfo, siteConfig } from "@/lib/site-config";
-import { absoluteMediaUrl, agentHeadshotSrc } from "@/lib/site-media";
+import {
+  absoluteMediaUrl,
+  agentHeadshotSrc,
+  faviconAppleSrc,
+  faviconSrc,
+} from "@/lib/site-media";
 import { seoKeywordVariations, seoPrimaryKeyword } from "@/lib/seo";
 import { realScoutConfig } from "@/lib/integrations";
 
@@ -78,7 +83,8 @@ export const metadata: Metadata = {
     images: [absoluteMediaUrl(agentHeadshotSrc)],
   },
   icons: {
-    icon: "/favicon-32x32.png",
+    icon: faviconSrc,
+    apple: faviconAppleSrc,
   },
   robots: {
     index: true,

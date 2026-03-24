@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import SiteBylineDate from "@/components/shared/SiteBylineDate";
 import { agentInfo, officeInfo, siteConfig, teamInfo, siteSocialUrls } from "@/lib/site-config";
 import { realScoutConfig } from "@/lib/integrations";
+import { footerQuickLinks, footerServiceLinks } from "@/lib/site-navigation";
 import { seoPrimaryKeyword } from "@/lib/seo";
 
 export default function Footer() {
@@ -58,8 +60,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
+          {/* Quick Links — internal + MLS portal; anchors match lib/site-navigation for crawl consistency */}
+          <nav aria-label="Quick links" className="min-w-0">
             <h3 className="font-bold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
@@ -69,138 +71,37 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="text-slate-300 hover:text-white transition-colors text-sm"
                 >
-                  All Properties
+                  Search all MLS listings
                 </a>
               </li>
-              <li>
-                <Link
-                  href="/neighborhoods/spring-valley"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  {seoPrimaryKeyword}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/neighborhoods"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  Neighborhoods
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/las-vegas-zip-code-map"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  Las Vegas zip code map
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/why-berkshire-hathaway"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  Why BHHS
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/market-report"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  Market Report
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/resources"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  Resources &amp; Guides
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  About Dr. Jan
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  Contact
-                </Link>
-              </li>
+              {footerQuickLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-slate-300 hover:text-white transition-colors text-sm"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
-          </div>
+          </nav>
 
-          {/* Services */}
-          <div>
+          <nav aria-label="Real estate services" className="min-w-0">
             <h3 className="font-bold text-lg mb-4">Real Estate Services</h3>
             <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/buyers"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  Home Buying
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/buyers/california-relocator"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  California Relocators
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/sellers"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  Home Selling
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/luxury-homes"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  Luxury Homes
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/55-plus-communities"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  55+ Communities
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/new-construction"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  New Construction
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/market-insights"
-                  className="text-slate-300 hover:text-white transition-colors text-sm"
-                >
-                  Market Insights
-                </Link>
-              </li>
+              {footerServiceLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-slate-300 hover:text-white transition-colors text-sm"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Contact Info - NAP (Name, Address, Phone) */}
           <div>
@@ -264,6 +165,9 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-slate-800 mt-8 pt-8">
+          <div className="mb-6 flex justify-center md:justify-start">
+            <SiteBylineDate variant="compact" className="text-center md:text-left" />
+          </div>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-slate-400 text-sm text-center md:text-left">
               © {currentYear} Berkshire Hathaway HomeServices Nevada Properties. All Rights

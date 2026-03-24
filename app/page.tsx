@@ -11,10 +11,15 @@ import Footer from "@/components/layouts/Footer";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Home as HomeIcon, TrendingUp, Shield, Users, Phone } from "lucide-react";
-import { siteConfig } from "@/lib/site-config";
+import SiteBylineDate from "@/components/shared/SiteBylineDate";
+import { siteConfig, siteContentDates } from "@/lib/site-config";
 import { homePageFaqs } from "@/lib/home-faqs";
 import { defaultHomeReviews } from "@/lib/home-reviews";
-import { generateFAQSchema, generateHomepageReviewJsonLd } from "@/lib/schema";
+import {
+  generateFAQSchema,
+  generateHomepageReviewJsonLd,
+  generateWebPageSchema,
+} from "@/lib/schema";
 import { homePageTitleAbsolute } from "@/lib/seo";
 
 const faqSchemaLd = generateFAQSchema(homePageFaqs);
@@ -27,6 +32,14 @@ const homeReviewsSchemaLd = generateHomepageReviewJsonLd(
     datePublished: r.date,
   })),
 );
+
+const homeWebPageSchemaLd = generateWebPageSchema({
+  name: homePageTitleAbsolute,
+  description: siteConfig.description,
+  url: "/",
+  datePublished: siteContentDates.datePublished,
+  dateModified: siteContentDates.dateModified,
+});
 
 export const metadata: Metadata = {
   title: {
@@ -55,9 +68,22 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeReviewsSchemaLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeWebPageSchemaLd) }}
+      />
       <Navbar />
       <main>
         <HeroSection />
+
+        <div
+          className="border-b border-slate-200 bg-slate-50 py-2.5"
+          aria-label="Page last updated"
+        >
+          <div className="container mx-auto px-4">
+            <SiteBylineDate />
+          </div>
+        </div>
 
         <BuyerEngagementStrip />
 

@@ -68,3 +68,27 @@ export const listingPlaceholderSrc = resolveCfOrLocal(
   "/Image/hero_bg_1.jpg",
   V.public,
 );
+
+/** Default favicon image in Cloudflare Images (same account as other `cfImageUrl` assets). */
+const DEFAULT_CF_IMAGE_FAVICON_ID = "3a384fa1-af54-4286-100f-a1a995a15900";
+
+const faviconVariant =
+  process.env.NEXT_PUBLIC_CF_VARIANT_FAVICON?.trim() || "w=800";
+
+const faviconAppleVariant =
+  process.env.NEXT_PUBLIC_CF_VARIANT_FAVICON_APPLE?.trim() || faviconVariant;
+
+/**
+ * Favicon for `<link rel="icon">` and JSON-LD `logo` where a site icon is appropriate.
+ * Absolute `imagedelivery.net` URL — Google Search may show it in results; keep URL stable.
+ */
+export const faviconSrc = cfImageUrl(
+  process.env.NEXT_PUBLIC_CF_IMAGE_FAVICON_ID?.trim() || DEFAULT_CF_IMAGE_FAVICON_ID,
+  faviconVariant,
+);
+
+/** Optional larger touch icon; defaults to same variant as `faviconSrc` if unset. */
+export const faviconAppleSrc = cfImageUrl(
+  process.env.NEXT_PUBLIC_CF_IMAGE_FAVICON_ID?.trim() || DEFAULT_CF_IMAGE_FAVICON_ID,
+  faviconAppleVariant,
+);

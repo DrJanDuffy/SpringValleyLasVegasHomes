@@ -7,7 +7,8 @@
  */
 
 import { siteConfig, agentInfo, officeInfo, agentStats, siteSocialUrls } from "./site-config";
-import { absoluteMediaUrl, agentHeadshotSrc } from "./site-media";
+import { absoluteUrlForPath, sitelinkStructuredDataNav } from "./site-navigation";
+import { absoluteMediaUrl, agentHeadshotSrc, faviconSrc } from "./site-media";
 
 // ============================================================================
 // Types
@@ -217,7 +218,7 @@ export function generateOrganizationSchema() {
     "@id": `${BASE_URL}#parent-organization`,
     name: "Berkshire Hathaway HomeServices Nevada Properties",
     url: "https://www.bfrre.com",
-    logo: `${BASE_URL}/favicon-32x32.png`,
+    logo: absoluteMediaUrl(faviconSrc),
     parentOrganization: {
       "@type": "Organization",
       name: "Berkshire Hathaway HomeServices",
@@ -254,6 +255,13 @@ export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
  * Generate WebSite schema with search action
  */
 export function generateWebSiteSchema() {
+  /** Same-origin primary destinations — supports sitelink discovery (structure + consistent labeling). */
+  const hasPart = sitelinkStructuredDataNav.map((item) => ({
+    "@type": "SiteNavigationElement",
+    name: item.label,
+    url: absoluteUrlForPath(item.href),
+  }));
+
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -264,6 +272,7 @@ export function generateWebSiteSchema() {
     publisher: {
       "@id": REAL_ESTATE_AGENT_SCHEMA_ID,
     },
+    hasPart,
     potentialAction: {
       "@type": "SearchAction",
       target: {

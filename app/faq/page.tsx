@@ -11,6 +11,7 @@ import {
   generateWebPageSchema,
   combineSchemas,
 } from "@/lib/schema";
+import { formatPacificLongDate, timeDateTimeAttribute } from "@/lib/page-dates";
 import { agentInfo, officeInfo, teamInfo } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -31,6 +32,10 @@ const breadcrumbs = [
   { name: "Home", url: "/" },
   { name: "FAQ", url: "/faq" },
 ];
+
+/** FAQ page — ISO w/ Pacific; bump `faqDateModified` when FAQ content changes. */
+const faqDatePublished = "2026-01-01T12:00:00-08:00";
+const faqDateModified = "2026-01-25T12:00:00-08:00";
 
 const faqCategories = [
   {
@@ -239,8 +244,16 @@ export default function FAQPage() {
           </section>
         </div>
 
-        {/* Last Updated */}
-        <div className="text-center text-sm text-slate-500 mt-8">Last Updated: January 2026</div>
+        {/* Last updated — matches WebPage JSON-LD dateModified */}
+        <div className="text-center text-sm text-slate-500 mt-8">
+          Last updated:{" "}
+          <time
+            dateTime={timeDateTimeAttribute(faqDateModified)}
+            className="font-medium text-slate-600"
+          >
+            {formatPacificLongDate(faqDateModified)}
+          </time>
+        </div>
       </main>
       <RealScoutListings />
       <Footer />

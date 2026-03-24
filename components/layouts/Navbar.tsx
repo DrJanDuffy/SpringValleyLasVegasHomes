@@ -7,6 +7,7 @@ import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site-config";
 import { realScoutConfig } from "@/lib/integrations";
+import { buildMainNavLinks, navbarServiceLinks } from "@/lib/site-navigation";
 import RealScoutSimpleSearch from "@/components/realscout/RealScoutSimpleSearch";
 
 export default function Navbar() {
@@ -24,29 +25,12 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const mainNavLinks = [
-    { href: "/", label: "Home", external: false },
-    // Portal root keeps valley-wide search; Spring Valley map deep link lives on /neighborhoods/spring-valley
-    { href: `${realScoutConfig.portalUrl}/`, label: "Properties", external: true },
-    { href: "/neighborhoods", label: "Neighborhoods", external: false },
-    { href: "/about", label: "About", external: false },
-    { href: "/contact", label: "Contact", external: false },
-  ];
-
-  const serviceLinks = [
-    { href: "/neighborhoods/spring-valley", label: "Spring Valley Homes" },
-    { href: "/buyers", label: "Home Buying" },
-    { href: "/sellers", label: "Home Selling" },
-    { href: "/luxury-homes", label: "Luxury Homes" },
-    { href: "/55-plus-communities", label: "55+ Communities" },
-    { href: "/new-construction", label: "New Construction" },
-    { href: "/market-report", label: "Market Report" },
-    { href: "/market-insights", label: "Market Insights" },
-    { href: "/resources", label: "Resources" },
-  ];
+  const mainNavLinks = buildMainNavLinks(realScoutConfig.portalUrl);
+  const serviceLinks = navbarServiceLinks;
 
   return (
     <nav
+      aria-label="Primary"
       data-rs-nav-search={showNavSimpleSearch ? "1" : "0"}
       className={`fixed top-0 left-0 right-0 z-50 bg-white shadow-md transition-all duration-300 ${
         isScrolled ? "py-2" : "py-3"
@@ -67,7 +51,7 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-5">
             {mainNavLinks.map((link) =>
-              link.external ? (
+              link.external === true ? (
                 <a
                   key={link.href}
                   href={link.href}
@@ -164,7 +148,7 @@ export default function Navbar() {
           <div className="lg:hidden mt-4 pb-4 border-t border-slate-200">
             <div className="flex flex-col space-y-1 pt-4">
               {mainNavLinks.map((link) =>
-                link.external ? (
+                link.external === true ? (
                   <a
                     key={link.href}
                     href={link.href}
