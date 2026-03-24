@@ -1,10 +1,8 @@
+import type OpenAI from "openai";
 import { NextRequest, NextResponse } from "next/server";
-import OpenAI from "openai";
+import { getOpenRouterClient } from "@/lib/openrouter-client";
 
-const openrouter = new OpenAI({
-  apiKey: process.env.OPENROUTER_API_KEY,
-  baseURL: "https://openrouter.ai/api/v1",
-});
+export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,6 +18,8 @@ export async function POST(request: NextRequest) {
         { status: 500 },
       );
     }
+
+    const openrouter = getOpenRouterClient();
 
     // Build messages array with system prompt and conversation history
     const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
