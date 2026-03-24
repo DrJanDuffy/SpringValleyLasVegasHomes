@@ -1,11 +1,12 @@
 {
-  "buildCommand": "npm run build",
   "framework": "nextjs",
-  "devCommand": "npm run dev",
-  "outputDirectory": ".next",
+  "installCommand": "pnpm install",
   "regions": ["iad1"],
   "functions": {
-    "app/**/*.tsx": {
+    "app/api/**/*.ts": {
+      "maxDuration": 10
+    },
+    "app/**/route.ts": {
       "maxDuration": 10
     }
   },
@@ -50,6 +51,15 @@
     },
     {
       "source": "/_next/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

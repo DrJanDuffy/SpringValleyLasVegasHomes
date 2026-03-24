@@ -38,6 +38,17 @@ Use clear, imperative subjects (optional [Conventional Commits](https://www.conv
 - **Dependabot** — `.github/dependabot.yml`; auto-merge workflow where enabled.
 - **Pull requests** — use `.github/PULL_REQUEST_TEMPLATE.md`.
 
+## Vercel
+
+- Project should use **pnpm** (lockfile + `packageManager`); `vercel.json` sets `installCommand` for consistency.
+- **Do not** set a custom `outputDirectory` for Next.js on Vercel — the framework preset handles output.
+- Env vars: configure in the Vercel dashboard; reference in code via `process.env` / `NEXT_PUBLIC_*` only as needed.
+
+## Cloudflare
+
+- If the domain uses **Vercel for HTTPS**, keep Cloudflare proxy **off** for that hostname (DNS-only) unless you use a documented **Cloudflare + Vercel** SSL setup.
+- **GitHub Actions** (`cloudflare-deploy.yml`) uses **pnpm** and env **`CF_PAGES_PROJECT`** (default `springvalleylasvegashomes-com`). Change it to match your **Cloudflare Pages** project name in the dashboard.
+
 ## Line endings
 
 Repository uses **LF**. `.gitattributes` enforces normalization; on Windows, set `git config core.autocrlf input` (or rely on EditorConfig + Git attributes).

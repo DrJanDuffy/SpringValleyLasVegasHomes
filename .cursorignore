@@ -1,0 +1,13 @@
+# Cursor indexing — exclude generated trees (keep lockfiles & source)
+node_modules
+.next
+out
+dist
+.vercel
+.turbo
+.wrangler
+coverage
+playwright-report
+test-results
+blob-report
+.vitest
