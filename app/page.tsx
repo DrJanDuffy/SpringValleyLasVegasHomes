@@ -13,10 +13,20 @@ import type { Metadata } from "next";
 import { Home as HomeIcon, TrendingUp, Shield, Users, Phone } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { homePageFaqs } from "@/lib/home-faqs";
-import { generateFAQSchema } from "@/lib/schema";
+import { defaultHomeReviews } from "@/lib/home-reviews";
+import { generateFAQSchema, generateHomepageReviewJsonLd } from "@/lib/schema";
 import { homePageTitleAbsolute } from "@/lib/seo";
 
 const faqSchemaLd = generateFAQSchema(homePageFaqs);
+
+const homeReviewsSchemaLd = generateHomepageReviewJsonLd(
+  defaultHomeReviews.map((r) => ({
+    author: r.name,
+    rating: r.rating,
+    reviewBody: r.text,
+    datePublished: r.date,
+  })),
+);
 
 export const metadata: Metadata = {
   title: {
@@ -40,6 +50,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeReviewsSchemaLd) }}
       />
       <Navbar />
       <main>

@@ -64,6 +64,9 @@ export interface SeniorCommunityData {
 
 const BASE_URL = siteConfig.url;
 
+/** Matches `generateRealEstateAgentSchema` `@id` — use for `itemReviewed` on Review nodes. */
+export const REAL_ESTATE_AGENT_SCHEMA_ID = `${BASE_URL}#organization` as const;
+
 // Social media profiles — align with gbp-schema / GBP (sameAs)
 export const socialProfiles = {
   facebook: siteSocialUrls.facebook,
@@ -86,7 +89,7 @@ export function generateRealEstateAgentSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
-    "@id": `${BASE_URL}#organization`,
+    "@id": REAL_ESTATE_AGENT_SCHEMA_ID,
     name: "Dr. Jan Duffy - Berkshire Hathaway HomeServices Nevada Properties",
     alternateName: [
       siteConfig.name,
@@ -259,7 +262,7 @@ export function generateWebSiteSchema() {
     url: BASE_URL,
     description: siteConfig.description,
     publisher: {
-      "@id": `${BASE_URL}#organization`,
+      "@id": REAL_ESTATE_AGENT_SCHEMA_ID,
     },
     potentialAction: {
       "@type": "SearchAction",
@@ -313,13 +316,45 @@ export function generateAggregateRatingSchema(
 }
 
 /**
+ * Standalone Review JSON-LD for the homepage (references agent via `@id`; does not duplicate RealEstateAgent).
+ * Satisfies Google Rich Results: `itemReviewed` + `Person` author.
+ */
+export function generateHomepageReviewJsonLd(reviews: ReviewItem[]) {
+  const graph = reviews.map((review, index) => ({
+    "@type": "Review",
+    "@id": `${BASE_URL}#home-review-${index + 1}`,
+    name: `Client review: ${review.author}`,
+    author: {
+      "@type": "Person",
+      name: review.author,
+    },
+    itemReviewed: {
+      "@id": REAL_ESTATE_AGENT_SCHEMA_ID,
+    },
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: review.rating.toString(),
+      bestRating: "5",
+      worstRating: "1",
+    },
+    reviewBody: review.reviewBody,
+    datePublished: review.datePublished || new Date().toISOString().split("T")[0],
+  }));
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": graph,
+  };
+}
+
+/**
  * Generate Review schema for individual testimonials
  */
 export function generateReviewSchema(reviews: ReviewItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
-    "@id": `${BASE_URL}#organization`,
+    "@id": REAL_ESTATE_AGENT_SCHEMA_ID,
     name: "Dr. Jan Duffy - Berkshire Hathaway HomeServices Nevada Properties",
     aggregateRating: generateAggregateRatingSchema(
       agentStats.averageRating,
@@ -330,6 +365,9 @@ export function generateReviewSchema(reviews: ReviewItem[]) {
       author: {
         "@type": "Person",
         name: review.author,
+      },
+      itemReviewed: {
+        "@id": REAL_ESTATE_AGENT_SCHEMA_ID,
       },
       reviewRating: {
         "@type": "Rating",
@@ -529,7 +567,7 @@ export function generateServiceSchema(service: {
     description: service.description,
     url: service.url.startsWith("http") ? service.url : `${BASE_URL}${service.url}`,
     provider: {
-      "@id": `${BASE_URL}#organization`,
+      "@id": REAL_ESTATE_AGENT_SCHEMA_ID,
     },
     areaServed: service.areaServed || ["Las Vegas", "Henderson", "Summerlin", "North Las Vegas"],
     serviceType: "Real Estate Services",
@@ -557,7 +595,7 @@ export function generateWebPageSchema(page: {
       "@id": `${BASE_URL}#website`,
     },
     about: {
-      "@id": `${BASE_URL}#organization`,
+      "@id": REAL_ESTATE_AGENT_SCHEMA_ID,
     },
     ...(page.datePublished && { datePublished: page.datePublished }),
     ...(page.dateModified && { dateModified: page.dateModified }),

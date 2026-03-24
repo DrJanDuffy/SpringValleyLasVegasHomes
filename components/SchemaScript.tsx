@@ -7,7 +7,7 @@
  * <SchemaScript schemas={[schema1, schema2]} />
  */
 
-import { combineSchemas, schemaToJsonLd } from "@/lib/schema";
+import { combineSchemas, REAL_ESTATE_AGENT_SCHEMA_ID, schemaToJsonLd } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 
 const siteOrigin = siteConfig.url;
@@ -121,7 +121,7 @@ export function ReviewSchema({
   const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
-    "@id": `${siteOrigin}#organization`,
+    "@id": REAL_ESTATE_AGENT_SCHEMA_ID,
     name: "Dr. Jan Duffy - Berkshire Hathaway HomeServices Nevada Properties",
   };
 
@@ -141,6 +141,9 @@ export function ReviewSchema({
       author: {
         "@type": "Person",
         name: review.author,
+      },
+      itemReviewed: {
+        "@id": REAL_ESTATE_AGENT_SCHEMA_ID,
       },
       reviewRating: {
         "@type": "Rating",
