@@ -32,7 +32,7 @@ export const siteSocialUrls = {
   linkedin: "https://www.linkedin.com/in/drjanduffy",
   /** Spring Valley Las Vegas Homes — LinkedIn Company Page */
   linkedinCompany: "https://www.linkedin.com/company/springvalleylasvegas/",
-  youtube: "https://www.youtube.com/@drjanduffy",
+  youtube: "https://www.youtube.com/@DrDuffy",
   twitter: "https://twitter.com/drjanduffy",
 } as const;
 

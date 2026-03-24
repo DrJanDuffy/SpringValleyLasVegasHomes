@@ -1,6 +1,7 @@
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 import RealScoutListings from "@/components/realscout/RealScoutListings";
+import BuyerEngagementStrip from "@/components/sections/BuyerEngagementStrip";
 import Link from "next/link";
 import {
   Phone,
@@ -113,7 +114,13 @@ export default function FirstTimeBuyersPage() {
               Let's Make Homeownership Happen → (702) 664-8424
             </a>
           </div>
+        </div>
 
+        <BuyerEngagementStrip browseListingsHref="#featured-properties" />
+
+        <RealScoutListings />
+
+        <div className="container mx-auto px-4">
           {/* Financing Options */}
           <section className="mb-16 max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
@@ -535,7 +542,6 @@ export default function FirstTimeBuyersPage() {
         </div>
         <div className="text-center text-sm text-slate-500 mt-8">Last Updated: January 2026</div>
       </main>
-      <RealScoutListings />
       <Footer />
     </>
   );

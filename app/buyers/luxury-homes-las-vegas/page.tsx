@@ -1,6 +1,7 @@
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 import RealScoutListings from "@/components/realscout/RealScoutListings";
+import BuyerEngagementStrip from "@/components/sections/BuyerEngagementStrip";
 import Link from "next/link";
 import {
   Phone,
@@ -103,7 +104,13 @@ export default function LuxuryHomesPage() {
               Schedule a Private Preview → (702) 664-8424
             </a>
           </div>
+        </div>
 
+        <BuyerEngagementStrip browseListingsHref="#featured-properties" />
+
+        <RealScoutListings />
+
+        <div className="container mx-auto px-4">
           {/* Market Performance */}
           <section className="mb-16 bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-8 md:p-12 max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold mb-8 text-center">
@@ -411,7 +418,6 @@ export default function LuxuryHomesPage() {
         </div>
         <div className="text-center text-sm text-slate-500 mt-8">Last Updated: January 2026</div>
       </main>
-      <RealScoutListings />
       <Footer />
     </>
   );

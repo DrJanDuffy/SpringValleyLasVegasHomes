@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { agentInfo, officeInfo, siteConfig, teamInfo, siteSocialUrls } from "@/lib/site-config";
 import { realScoutConfig } from "@/lib/integrations";
 import { seoPrimaryKeyword } from "@/lib/seo";
@@ -45,6 +45,15 @@ export default function Footer() {
                 aria-label="Spring Valley Las Vegas Homes on LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
+              </a>
+              <a
+                href={siteSocialUrls.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-white transition-colors"
+                aria-label="Dr. Jan Duffy on YouTube"
+              >
+                <Youtube className="h-5 w-5" />
               </a>
             </div>
           </div>

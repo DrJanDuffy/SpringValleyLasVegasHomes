@@ -45,3 +45,22 @@ export const siteIntegration = {
   /** Default FUB tag for leads from this site (override with FUB_DEFAULT_LEAD_TAG). */
   defaultLeadTag: process.env.FUB_DEFAULT_LEAD_TAG ?? "spring-valley-site",
 } as const;
+
+/** Keeping Current Matters — personalized Spanish blog (iframe + optional RSS for email/CRM). */
+const DEFAULT_KCM_SPANISH_EMBED_URL =
+  "https://www.simplifyingthemarket.com/es/?a=956758-ef2edda2f940e018328655620ea05f18";
+
+export const kcmConfig = {
+  /**
+   * Full-page embed URL for “Simplifying the Market” (Spanish). Used on /market-insights/kcm-blog.
+   * Override if KCM rotates your affiliate token.
+   */
+  spanishBlogEmbedUrl:
+    process.env.NEXT_PUBLIC_KCM_SPANISH_BLOG_EMBED_URL?.trim() || DEFAULT_KCM_SPANISH_EMBED_URL,
+  /**
+   * RSS URL for Mailchimp, Follow Up Boss, Buffer, etc. — not used by the site UI; documented for ops.
+   */
+  spanishRssFeedUrl:
+    process.env.NEXT_PUBLIC_KCM_SPANISH_RSS_FEED_URL?.trim() ||
+    "https://www.simplifyingthemarket.com/es/feed?a=956758-ef2edda2f940e018328655620ea05f18",
+} as const;

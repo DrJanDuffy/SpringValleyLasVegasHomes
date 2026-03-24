@@ -1,6 +1,7 @@
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 import RealScoutListings from "@/components/realscout/RealScoutListings";
+import BuyerEngagementStrip from "@/components/sections/BuyerEngagementStrip";
 import Link from "next/link";
 import { Phone, MapPin, Home, School, Car, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
@@ -216,7 +217,13 @@ export default function SpringValleyPage() {
               </p>
             </div>
           </header>
+        </div>
 
+        <BuyerEngagementStrip browseListingsHref="#featured-properties" />
+
+        <RealScoutListings />
+
+        <div className="container mx-auto px-4">
           <section className="max-w-4xl mx-auto mb-14 prose prose-slate">
             <h2 className="text-2xl font-bold text-slate-900 mb-4">
               Where is Spring Valley in Las Vegas?
@@ -638,8 +645,6 @@ export default function SpringValleyPage() {
               .
             </p>
           </section>
-
-          <RealScoutListings />
         </div>
       </main>
       <Footer />

@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/market-report`, priority: 0.9, changeFrequency: "weekly" as const },
     { url: `${baseUrl}/market-update`, priority: 0.9, changeFrequency: "weekly" as const },
     { url: `${baseUrl}/market-insights`, priority: 0.9, changeFrequency: "monthly" as const },
+    { url: `${baseUrl}/market-insights/kcm-blog`, priority: 0.75, changeFrequency: "weekly" as const },
     { url: `${baseUrl}/google-business`, priority: 0.9, changeFrequency: "monthly" as const },
     { url: `${baseUrl}/faq`, priority: 0.8, changeFrequency: "monthly" as const },
     { url: `${baseUrl}/resources`, priority: 0.85, changeFrequency: "monthly" as const },

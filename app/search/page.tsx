@@ -5,6 +5,7 @@ import { MapPin, Search, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import { agentInfo, siteConfig } from "@/lib/site-config";
 import { realScoutConfig } from "@/lib/integrations";
+import BuyerEngagementStrip from "@/components/sections/BuyerEngagementStrip";
 
 export const metadata: Metadata = {
   title: "Search homes by zip code",
@@ -57,7 +58,11 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
             Valley—photos, prices, and map—in one place. Open search below, then type your city or
             zip in the box to zero in on the area you care about.
           </p>
+        </div>
 
+        <BuyerEngagementStrip browseListingsHref="/listings#featured-properties" />
+
+        <div className="container mx-auto max-w-3xl px-4">
           {validZip && (
             <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50 p-4 text-amber-950">
               <p className="flex items-start gap-2 text-sm font-medium">

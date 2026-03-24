@@ -1,13 +1,20 @@
 import Link from "next/link";
-import { MapPin, Search, Home, BookOpen } from "lucide-react";
+import { MapPin, Search, Home, BookOpen, Newspaper } from "lucide-react";
+
+export type BuyerEngagementStripProps = {
+  /** First tile: in-page anchor for listings (home uses `#featured-properties`). */
+  browseListingsHref?: string;
+};
 
 /**
- * Compact buyer-first links immediately below the hero — search, neighborhoods, zip map, buyer guide.
+ * Compact buyer-first links immediately below the hero — search, neighborhoods, zip map, buyer guide, KCM articles.
  */
-export default function BuyerEngagementStrip() {
+export default function BuyerEngagementStrip({
+  browseListingsHref = "#featured-properties",
+}: BuyerEngagementStripProps) {
   const items = [
     {
-      href: "#featured-properties",
+      href: browseListingsHref,
       label: "Browse listings",
       sub: "Jump to homes for sale",
       icon: Search,
@@ -30,6 +37,12 @@ export default function BuyerEngagementStrip() {
       sub: "Financing & process",
       icon: BookOpen,
     },
+    {
+      href: "/market-insights/kcm-blog",
+      label: "Market articles",
+      sub: "KCM feed (Spanish)",
+      icon: Newspaper,
+    },
   ] as const;
 
   return (
@@ -41,10 +54,10 @@ export default function BuyerEngagementStrip() {
         <p className="text-center text-sm font-semibold uppercase tracking-wide text-blue-700 mb-4 md:mb-6">
           Start your home search
         </p>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 max-w-6xl mx-auto">
           {items.map(({ href, label, sub, icon: Icon }) => (
             <Link
-              key={href}
+              key={`${href}-${label}`}
               href={href}
               className="group flex flex-col items-center text-center rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:border-blue-300 hover:shadow-md hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             >
