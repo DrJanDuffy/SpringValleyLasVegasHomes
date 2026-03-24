@@ -2,12 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site-config";
 import { realScoutConfig } from "@/lib/integrations";
+import RealScoutSimpleSearch from "@/components/realscout/RealScoutSimpleSearch";
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const showNavSimpleSearch = pathname !== "/";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -42,6 +46,7 @@ export default function Navbar() {
 
   return (
     <nav
+      data-rs-nav-search={showNavSimpleSearch ? "1" : "0"}
       className={`fixed top-0 left-0 right-0 z-50 bg-white shadow-md transition-all duration-300 ${
         isScrolled ? "py-2" : "py-3"
       }`}
@@ -213,6 +218,12 @@ export default function Navbar() {
           </div>
         )}
       </div>
+
+      {showNavSimpleSearch ? (
+        <div className="border-t border-slate-200 bg-white/95 backdrop-blur-sm">
+          <RealScoutSimpleSearch />
+        </div>
+      ) : null}
     </nav>
   );
 }

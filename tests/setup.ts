@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { cleanup } from '@testing-library/react'
+import { createElement } from 'react'
 import { afterEach } from 'vitest'
 
 // Cleanup after each test
@@ -22,12 +23,9 @@ vi.mock('next/navigation', () => ({
   useSearchParams: () => new URLSearchParams(),
 }))
 
-// Mock Next.js Image component
+// Mock Next.js Image component (createElement: setup file must stay .ts for some tooling)
 vi.mock('next/image', () => ({
-  default: (props: any) => {
-    // eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element
-    return <img {...props} />
-  },
+  default: (props: Record<string, unknown>) => createElement('img', props as any),
 }))
 
 // Mock environment variables

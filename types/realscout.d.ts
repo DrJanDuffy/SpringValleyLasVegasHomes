@@ -5,6 +5,7 @@ declare namespace JSX {
     "realscout-simple-search": React.DetailedHTMLProps<
       React.HTMLAttributes<HTMLElement> & {
         "agent-encoded-id": string;
+        "custom-placeholder"?: string;
       },
       HTMLElement
     >;

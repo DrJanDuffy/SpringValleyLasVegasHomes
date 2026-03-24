@@ -15,6 +15,12 @@ export const realScoutConfig = {
     process.env.NEXT_PUBLIC_REALSCOUT_AGENT_ID ?? DEFAULT_REALSCOUT_AGENT_ID,
   widgetScriptSrc:
     "https://em.realscout.com/widgets/realscout-web-components.umd.js",
+  /**
+   * Hint shown in the simple-search field (RealScout `custom-placeholder` on the web component).
+   * Not a committed MLS query—users still pick a place from omnisearch results.
+   */
+  simpleSearchPlaceholder:
+    process.env.NEXT_PUBLIC_REALSCOUT_SIMPLE_SEARCH_PLACEHOLDER ?? "Spring Valley",
 } as const;
 
 /** Homebot iframe URL from your Homebot dashboard (embed / widget URL). Optional. */

@@ -35,14 +35,19 @@
   }
 }
 
+/* Extra top offset when Navbar shows the RealScout simple-search strip (non-home routes) */
+body:has(nav[data-rs-nav-search="1"]) main.pt-24 {
+  padding-top: 9rem;
+}
+
 /* ===== RealScout Widget Styling ===== */
 
 /* RealScout Simple Search - Desktop */
 realscout-simple-search {
-  --rs-ss-font-primary-color: #1e293b;
-  --rs-ss-searchbar-border-color: #e2e8f0;
-  --rs-ss-box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
-  --rs-ss-widget-width: 600px !important;
+  --rs-ss-font-primary-color: #000000;
+  --rs-ss-searchbar-border-color: #8b572a;
+  --rs-ss-box-shadow: 0 10px 15px -3px #0000001a;
+  --rs-ss-widget-width: 500px !important;
   --rs-ss-border-radius: 9999px;
   --rs-ss-background-color: rgba(255, 255, 255, 0.95);
 }

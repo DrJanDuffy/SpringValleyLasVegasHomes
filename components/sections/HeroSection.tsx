@@ -6,7 +6,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { isCfDeliveryUrl } from "@/lib/cf-image-delivery";
 import { heroSeo } from "@/lib/seo";
 import { heroBackgroundSrcs } from "@/lib/site-media";
-import { realScoutConfig } from "@/lib/integrations";
+import { getRealScoutSimpleSearchMarkup } from "@/components/realscout/RealScoutSimpleSearch";
 
 type HeroSectionProps = {
   headlinePrimary?: string;
@@ -78,7 +78,7 @@ export default function HeroSection({
         <div className="realscout-wrapper mb-4 w-full max-w-2xl">
           <div
             dangerouslySetInnerHTML={{
-              __html: `<realscout-simple-search agent-encoded-id="${realScoutConfig.agentEncodedId}"></realscout-simple-search>`,
+              __html: getRealScoutSimpleSearchMarkup(),
             }}
           />
         </div>
