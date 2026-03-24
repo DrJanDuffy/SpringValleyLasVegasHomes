@@ -30,7 +30,7 @@ import { googleBusinessReviewUrl, siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Google Business Profile & Local SEO",
   description:
-    "Dr. Jan Duffy is a trusted Las Vegas REALTOR® with Berkshire Hathaway HomeServices Nevada Properties. Specializing in Summerlin, Henderson, 55+ communities, California relocation, and luxury homes. Call (702) 500-1942.",
+    "Dr. Jan Duffy is a trusted Las Vegas REALTOR® with Berkshire Hathaway HomeServices Nevada Properties. Specializing in Summerlin, Henderson, 55+ communities, California relocation, and luxury homes. Call (702) 664-8424.",
   keywords: [
     "Dr. Jan Duffy realtor",
     "Las Vegas real estate agent",

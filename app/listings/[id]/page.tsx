@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Property Listing Details",
   description:
-    "View this Las Vegas or Henderson property listing. Spring Valley Las Vegas homes and valley-wide MLS search with Dr. Jan Duffy, Berkshire Hathaway HomeServices. Call (702) 500-1942.",
+    "View this Las Vegas or Henderson property listing. Spring Valley Las Vegas homes and valley-wide MLS search with Dr. Jan Duffy, Berkshire Hathaway HomeServices. Call (702) 664-8424.",
 };
 
 // This would typically fetch from RealScout API
@@ -137,7 +137,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                 </p>
                 <div className="space-y-3">
                   <Button asChild className="w-full bg-blue-600 hover:bg-blue-700">
-                    <a href="tel:+17025001942">Call (702) 500-1942</a>
+                    <a href="tel:+17026648424">Call (702) 664-8424</a>
                   </Button>
                   <Button asChild variant="outline" className="w-full">
                     <a href="/contact">Send Message</a>

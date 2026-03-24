@@ -21,7 +21,7 @@ export const siteConfig = {
   /** Canonical production URL (www). Apex should 301 to this host. */
   url: "https://www.springvalleylasvegashomes.com",
   description:
-    "Spring Valley Las Vegas homes and west valley real estate with Dr. Jan Duffy, REALTOR® at Berkshire Hathaway HomeServices Nevada Properties. Homes for sale, buyer and seller representation, and local expertise for Spring Valley, Las Vegas, and Henderson—call (702) 500-1942.",
+    "Spring Valley Las Vegas homes and west valley real estate with Dr. Jan Duffy, REALTOR® at Berkshire Hathaway HomeServices Nevada Properties. Homes for sale, buyer and seller representation, and local expertise for Spring Valley, Las Vegas, and Henderson—call (702) 664-8424.",
 };
 
 /** Official social URLs — align footer, JSON-LD sameAs, and GBP-style data */
@@ -37,12 +37,12 @@ export const agentInfo = {
   name: "Dr. Jan Duffy",
   title: "REALTOR®",
   license: "S.0197614.LLC",
-  phone: "(702) 500-1942",
-  phoneFormatted: "(702) 500-1942",
+  phone: "(702) 664-8424",
+  phoneFormatted: "(702) 664-8424",
   /** tel: link */
-  phoneTel: "tel:+17025001942",
+  phoneTel: "tel:+17026648424",
   /** E.164 for JSON-LD / structured data (no dashes) */
-  phoneE164: "+17025001942",
+  phoneE164: "+17026648424",
   email: "DrDuffy@SpringValleyLasVegasHomes.com",
   brokerage: "Berkshire Hathaway HomeServices Nevada Properties",
 };
@@ -77,8 +77,8 @@ export const officeInfo = {
     lat: 36.0997,
     lng: -115.2474,
   },
-  phone: "(702) 500-1942",
-  phoneTel: "tel:+17025001942",
+  phone: "(702) 664-8424",
+  phoneTel: "tel:+17026648424",
 };
 
 /**

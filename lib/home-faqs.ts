@@ -23,7 +23,7 @@ export const homePageFaqs: FAQItem[] = [
   {
     question: "Do you help sellers list Spring Valley Las Vegas homes?",
     answer:
-      "Yes. We provide pricing strategy, professional marketing, negotiation, and contract coordination for Spring Valley Las Vegas homes and the broader Las Vegas Valley. Call (702) 500-1942 or email DrDuffy@SpringValleyLasVegasHomes.com for a confidential conversation about timing, prep, and net proceeds.",
+      "Yes. We provide pricing strategy, professional marketing, negotiation, and contract coordination for Spring Valley Las Vegas homes and the broader Las Vegas Valley. Call (702) 664-8424 or email DrDuffy@SpringValleyLasVegasHomes.com for a confidential conversation about timing, prep, and net proceeds.",
   },
   {
     question: "What is the difference between Spring Valley and Summerlin?",
@@ -33,6 +33,6 @@ export const homePageFaqs: FAQItem[] = [
   {
     question: "How do I contact Dr. Jan Duffy about Spring Valley real estate?",
     answer:
-      "Contact Team Leader Dr. Jan Duffy at (702) 500-1942 or DrDuffy@SpringValleyLasVegasHomes.com. Buyer specialist: Chance Fuller at (702) 664-8424 or Chance.Fuller@SpringValleyLasVegasHomes.com. Office: Berkshire Hathaway HomeServices Nevada Properties, 6787 W Tropicana Ave, 2nd Floor, Las Vegas, NV 89103.",
+      "Contact Team Leader Dr. Jan Duffy at DrDuffy@SpringValleyLasVegasHomes.com or buyer specialist Chance Fuller at Chance.Fuller@SpringValleyLasVegasHomes.com. Call or text (702) 664-8424. Office: Berkshire Hathaway HomeServices Nevada Properties, 6787 W Tropicana Ave, 2nd Floor, Las Vegas, NV 89103.",
   },
 ];

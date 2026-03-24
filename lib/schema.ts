@@ -182,6 +182,9 @@ export function generateRealEstateAgentSchema() {
     },
     knowsAbout: [
       "Spring Valley Las Vegas homes",
+      "Spring Valley Las Vegas map",
+      "Spring Valley Nevada homes",
+      "Spring Valley Nevada homes for sale",
       "Spring Valley Nevada real estate",
       "West Las Vegas Valley real estate",
       "Las Vegas homes for sale",

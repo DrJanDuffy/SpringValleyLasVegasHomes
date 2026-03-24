@@ -3,6 +3,8 @@
  * Used by metadata, layout, hero, and internal linking copy.
  */
 
+import { agentInfo } from "@/lib/site-config";
+
 /** Primary topic (natural phrasing for titles and H1) */
 export const seoPrimaryKeyword = "Spring Valley Las Vegas homes";
 
@@ -17,6 +19,10 @@ export const seoKeywordVariations = [
   "Spring Valley neighborhood Las Vegas",
   "Dr. Jan Duffy Spring Valley",
   "Berkshire Hathaway Spring Valley Las Vegas",
+  // Related searches (Google-style variants — use in copy/metadata, not stuffing)
+  "Spring Valley Las Vegas map",
+  "Spring Valley Nevada homes",
+  "Spring Valley Nevada homes for sale",
 ] as const;
 
 /** Homepage hero — one H1 topic cluster; visible copy matches metadata intent */
@@ -43,7 +49,7 @@ export function metaDescriptionWithKeyword(
   includePhone = true,
 ): string {
   const tail = includePhone
-    ? ` Call (702) 500-1942. ${seoPrimaryKeyword}.`
+    ? ` Call ${agentInfo.phone}. ${seoPrimaryKeyword}.`
     : ` ${seoPrimaryKeyword}.`;
   return `${uniqueSentence.trim()}${tail}`;
 }

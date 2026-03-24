@@ -147,7 +147,7 @@ const faqCategories = [
       },
       {
         q: "How do I contact Dr. Jan Duffy?",
-        a: `Call or text (702) 500-1942 or email ${agentInfo.email}. Buyer agent Chance Fuller: ${teamInfo.buyerAgent.phone} or ${teamInfo.buyerAgent.email}. Office: ${officeInfo.address.full}.`,
+        a: `Call or text (702) 664-8424 or email ${agentInfo.email}. Buyer agent Chance Fuller: ${teamInfo.buyerAgent.email}. Office: ${officeInfo.address.full}.`,
       },
       {
         q: "What areas does Dr. Jan cover?",
@@ -227,11 +227,11 @@ export default function FAQPage() {
               with Berkshire Hathaway HomeServices.
             </p>
             <a
-              href="tel:+17025001942"
+              href="tel:+17026648424"
               className="inline-flex items-center bg-white text-blue-600 px-8 py-4 rounded-md font-bold text-lg hover:bg-blue-50 transition-colors"
             >
               <Phone className="h-5 w-5 mr-2" />
-              Call (702) 500-1942
+              Call (702) 664-8424
             </a>
             <p className="mt-4 text-blue-200 text-sm">
               Berkshire Hathaway HomeServices Nevada Properties

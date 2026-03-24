@@ -1,5 +1,5 @@
 Contact: mailto:DrDuffy@SpringValleyLasVegasHomes.com
-Contact: tel:+17025001942
+Contact: tel:+17026648424
 Expires: 2027-02-13T00:00:00.000Z
 Preferred-Languages: en
 Canonical: https://www.springvalleylasvegashomes.com/.well-known/security.txt
@@ -11,7 +11,7 @@ Acknowledgments: We appreciate responsible disclosure of security vulnerabilitie
 # 
 # If you've discovered a security vulnerability in this website,
 # please report it to us at DrDuffy@SpringValleyLasVegasHomes.com or call
-# (702) 500-1942 during business hours.
+# (702) 664-8424 during business hours.
 #
 # We take security seriously and will respond within 48 hours.
 #

@@ -21,7 +21,7 @@ const officeMapQuery = encodeURIComponent(
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Contact Dr. Jan Duffy's team at Berkshire Hathaway HomeServices Nevada Properties. Team Leader and Buyer Agent contacts, office map, and Calendly. Call (702) 500-1942 or reach our buyer specialist at (702) 664-8424.",
+    "Contact Dr. Jan Duffy's team at Berkshire Hathaway HomeServices Nevada Properties. Team Leader and Buyer Agent contacts, office map, and Calendly. Call (702) 664-8424.",
   keywords: [
     "contact real estate agent Las Vegas",
     "Berkshire Hathaway contact",
@@ -37,7 +37,7 @@ const contactSchema = {
   mainEntity: {
     "@type": "RealEstateAgent",
     name: "Dr. Jan Duffy - Berkshire Hathaway HomeServices Nevada Properties",
-    telephone: "+17025001942",
+    telephone: "+17026648424",
     email: agentInfo.email,
     address: {
       "@type": "PostalAddress",
@@ -352,7 +352,7 @@ export default function ContactPage() {
                 },
                 {
                   q: "How quickly can you respond to inquiries?",
-                  a: "I typically respond to calls, texts, and emails within 2 hours during business hours (9am-6pm daily). For urgent matters, calling or texting (702) 500-1942 is the fastest way to reach me.",
+                  a: "I typically respond to calls, texts, and emails within 2 hours during business hours (9am-6pm daily). For urgent matters, calling or texting (702) 664-8424 is the fastest way to reach me.",
                 },
                 {
                   q: "Do you charge for consultations?",

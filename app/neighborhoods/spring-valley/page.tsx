@@ -11,17 +11,25 @@ import {
   generateNeighborhoodSchema,
   combineSchemas,
 } from "@/lib/schema";
-import { agentInfo, officeInfo } from "@/lib/site-config";
+import {
+  agentInfo,
+  googleMyMapEmbedUrl,
+  googleMyMapViewerUrl,
+  officeInfo,
+} from "@/lib/site-config";
 import { metaDescriptionWithKeyword, seoPrimaryKeyword } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "West Valley Neighborhood Guide",
   description: metaDescriptionWithKeyword(
-    "West Las Vegas neighborhood guide: home styles, commutes, and how to compare listings in Clark County with Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties.",
+    "Spring Valley Nevada homes and Spring Valley Las Vegas map context—home styles, MLS search for Spring Valley Nevada homes for sale, and local guidance with Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties.",
     true,
   ),
   keywords: [
     "Spring Valley Las Vegas homes",
+    "Spring Valley Las Vegas map",
+    "Spring Valley Nevada homes",
+    "Spring Valley Nevada homes for sale",
     "Spring Valley NV real estate",
     "west Las Vegas homes",
     "Spring Valley neighborhood",
@@ -36,6 +44,21 @@ const breadcrumbs = [
 ];
 
 const springValleyFaqs = [
+  {
+    question: "Where can I see a Spring Valley Las Vegas map?",
+    answer:
+      "A Spring Valley Las Vegas map helps you see how the community sits on the west side of the valley versus the Strip, Summerlin, and major roads. This guide includes an interactive map layer for orientation; for turn-by-turn directions to a specific Spring Valley Nevada homes address, we use MLS mapping and tour planning once you pick listings you want to see.",
+  },
+  {
+    question: "What are Spring Valley Nevada homes like?",
+    answer:
+      "Spring Valley Nevada homes span many subdivisions and price points—single-family homes, townhomes, and condos—within unincorporated Clark County. Because “Spring Valley” covers a wide area, Spring Valley Nevada homes can differ sharply by block, school zone, and HOA. We help you compare comps in the same pocket, not just the neighborhood name.",
+  },
+  {
+    question: "How do I search Spring Valley Nevada homes for sale?",
+    answer:
+      "Start with a live MLS search and filter by price, beds, baths, and map boundaries. Inventory for Spring Valley Nevada homes for sale changes daily, so save searches and act quickly on well-priced listings. Dr. Jan Duffy can coordinate showings and offer strategy for the specific Spring Valley pocket you prefer.",
+  },
   {
     question: "What are Spring Valley Las Vegas homes like?",
     answer:
@@ -63,7 +86,7 @@ const pageSchemas = combineSchemas(
     name: "Spring Valley",
     slug: "spring-valley",
     description:
-      "Large west Las Vegas Valley community in Clark County, Nevada—Spring Valley Las Vegas homes span diverse neighborhoods from mid-century to newer construction.",
+      "Large west Las Vegas Valley community in Clark County, Nevada—Spring Valley Las Vegas homes and Spring Valley Nevada homes span diverse neighborhoods; search Spring Valley Nevada homes for sale with local MLS guidance.",
     latitude: 36.107,
     longitude: -115.245,
     containedIn: "Las Vegas",
@@ -129,6 +152,79 @@ export default function SpringValleyPage() {
               you align property type with HOA rules, insurance considerations, and your long-term
               plans—whether you are upsizing, relocating, or buying your first home.
             </p>
+          </section>
+
+          {/* Related search: Spring Valley Las Vegas map */}
+          <section className="max-w-4xl mx-auto mb-14" aria-labelledby="spring-valley-map-heading">
+            <h2
+              id="spring-valley-map-heading"
+              className="text-2xl font-bold text-slate-900 mb-3 text-center"
+            >
+              Spring Valley Las Vegas map
+            </h2>
+            <p className="text-slate-600 text-center mb-6 max-w-2xl mx-auto">
+              Use this layer to orient <strong>Spring Valley Nevada homes</strong> within the west
+              valley—major roads and nearby communities. For a specific address or tour route, we pair
+              maps with MLS data when you are under contract to buy or sell.
+            </p>
+            <div className="rounded-xl overflow-hidden shadow-md border border-slate-200 bg-slate-100">
+              <iframe
+                src={googleMyMapEmbedUrl}
+                width={640}
+                height={480}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Spring Valley Las Vegas map — west valley orientation"
+                className="w-full border-0 aspect-[4/3] max-h-[min(480px,70vh)]"
+              />
+            </div>
+            <p className="text-center text-sm text-slate-500 mt-4">
+              <a
+                href={googleMyMapViewerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline font-medium"
+              >
+                Open the full map in Google Maps
+              </a>
+              {" · "}
+              <Link href="/contact" className="text-blue-600 hover:underline font-medium">
+                Office map &amp; directions
+              </Link>
+            </p>
+          </section>
+
+          {/* Related search: Spring Valley Nevada homes for sale */}
+          <section
+            className="max-w-4xl mx-auto mb-14 rounded-2xl border border-blue-100 bg-blue-50/80 px-6 py-8 md:px-10"
+            aria-labelledby="spring-valley-homes-sale-heading"
+          >
+            <h2
+              id="spring-valley-homes-sale-heading"
+              className="text-2xl font-bold text-slate-900 mb-3 text-center"
+            >
+              Spring Valley Nevada homes for sale
+            </h2>
+            <p className="text-slate-700 text-center mb-6 max-w-2xl mx-auto">
+              Browse active inventory and filter by price, beds, baths, and more. When you are
+              serious about <strong>Spring Valley Nevada homes for sale</strong>, we narrow by
+              subdivision, HOA, and recent comps—not just the zip code.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/listings"
+                className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+              >
+                Search MLS listings
+              </Link>
+              <a
+                href={agentInfo.phoneTel}
+                className="inline-flex items-center justify-center bg-white border border-slate-200 text-slate-800 px-8 py-3 rounded-lg font-semibold hover:bg-slate-50"
+              >
+                Call {agentInfo.phone}
+              </a>
+            </div>
           </section>
 
           <section className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6 mb-16">
