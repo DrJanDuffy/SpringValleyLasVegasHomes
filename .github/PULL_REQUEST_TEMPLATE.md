@@ -19,12 +19,12 @@
 - [ ] JSON-LD schema markup included (if applicable)
 - [ ] H1 tag present and keyword-optimized
 - [ ] Berkshire Hathaway HomeServices branding consistent
-- [ ] Phone number is correct: **(702) 222-1964** for CTAs
+- [ ] Phone number is correct for this site: **(702) 664-8424** for CTAs / NAP
 
 ## Quality Checklist
-- [ ] Code builds without errors (`npm run build`)
-- [ ] No TypeScript errors
-- [ ] ESLint passes (`npm run lint`)
+- [ ] TypeScript clean (`pnpm exec tsc --noEmit`)
+- [ ] ESLint passes (`pnpm lint`)
+- [ ] Production build OK (`vercel build` or `pnpm build` per project policy)
 - [ ] Tested on mobile viewport
 - [ ] Tested on desktop viewport
 - [ ] No console errors in browser

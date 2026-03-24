@@ -15,6 +15,10 @@
 # Testing
 # ===================
 /coverage
+.vitest
+playwright-report/
+test-results/
+blob-report/
 /api/test.py
 /api/temp.txt
 /api/.env
@@ -26,6 +30,7 @@
 /.next/
 /out/
 .next
+.turbo
 
 # ===================
 # Production Build
@@ -33,7 +38,6 @@
 /build
 /dist
 /.output
-/.vercel/output
 
 # ===================
 # Environment Files
@@ -44,6 +48,13 @@
 .env.test.local
 .env.production.local
 .env*.local
+
+# ===================
+# Tooling caches
+# ===================
+.eslintcache
+*.tsbuildinfo
+.parcel-cache
 
 # ===================
 # IDE & Editor
@@ -82,7 +93,6 @@ logs/
 # ===================
 # TypeScript
 # ===================
-*.tsbuildinfo
 next-env.d.ts
 tsconfig.tsbuildinfo
 
@@ -97,9 +107,11 @@ venv/
 ENV/
 
 # ===================
-# Vercel
+# Vercel / Cloudflare local
 # ===================
 .vercel
+.wrangler/
+.open-next/
 
 # ===================
 # Security
@@ -126,6 +138,7 @@ credentials.json
 *.bak
 *.tmp
 *.temp
+*.orig
 
 # ===================
 # Large Media (use Git LFS if needed)

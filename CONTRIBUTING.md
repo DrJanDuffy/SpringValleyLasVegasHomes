@@ -1,129 +1,43 @@
-# Contributing to HeyBerkshire.com
+# Contributing & Git workflow
 
-## Development Setup
+This repo uses **pnpm** (`packageManager` in `package.json`). Prefer `pnpm` over `npm`/`yarn` so the lockfile stays consistent.
 
-### Prerequisites
-- Node.js 18+
-- pnpm (recommended) or npm
+## Before opening a PR
 
-### Getting Started
+1. `pnpm exec tsc --noEmit`
+2. `pnpm lint`
+3. `pnpm format:check` (or `pnpm format` to write)
+4. Production checks: prefer `vercel build` when validating deploy parity (see project rules).
 
-```bash
-# Clone the repository
-git clone https://github.com/DrJanDuffy/heyberkshire.com.git
-cd heyberkshire.com
+## Branches
 
-# Install dependencies
-pnpm install
+- **`main`** — production-ready history; deploy from here.
+- **`feature/<short-topic>`** — new work (e.g. `feature/zip-map-seo`).
+- **`fix/<issue>`** — bugfixes.
 
-# Start development server
-pnpm dev
-```
+Rebase or merge from `main` regularly to avoid drift.
 
-## Project Structure
+## Commits
 
-```
-heyberkshire.com/
-├── app/                    # Next.js App Router pages
-├── components/             # React components
-│   ├── calendly/          # Calendly widget integration
-│   ├── chat/              # AI chat widget
-│   ├── layouts/           # Navbar, Footer
-│   ├── realscout/         # RealScout MLS widgets
-│   ├── sections/          # Page sections (Hero, CTA, etc.)
-│   └── ui/                # UI primitives (Button, Input)
-├── lib/                   # Utilities and constants
-├── public/                # Static assets
-│   ├── images/            # Image assets (organized by type)
-│   └── videos/            # Video assets
-└── .cursor/rules/         # Cursor AI rules
-```
+Use clear, imperative subjects (optional [Conventional Commits](https://www.conventionalcommits.org/) style):
 
-## Code Standards
+- `feat: add Enterprise neighborhood page`
+- `fix: correct listing canonical URL`
+- `chore: update gitignore for turbo cache`
+- `deps: bump next` (often via Dependabot)
 
-### TypeScript
-- Use strict mode
-- Define types for all props
-- Prefer interfaces over types for objects
+## Do not commit
 
-### Components
-- Functional components only
-- Use `"use client"` only when needed
-- Keep components under 200 lines
+- Secrets, `.env*`, API keys — use `.env.example` and platform env (see `security-env` rules).
+- Local tool folders: `.vercel`, `.next`, `.turbo`, `.wrangler` (see `.gitignore`).
+- Large binaries: use CDN/static hosting or Git LFS if you must version them.
 
-### Styling
-- Tailwind CSS utility classes
-- Use `cn()` helper for conditional classes
-- Mobile-first responsive design
+## GitHub
 
-## Git Workflow
+- **CODEOWNERS** — default reviewer paths (`.github/CODEOWNERS`).
+- **Dependabot** — `.github/dependabot.yml`; auto-merge workflow where enabled.
+- **Pull requests** — use `.github/PULL_REQUEST_TEMPLATE.md`.
 
-### Branch Naming
-- `feature/description` - New features
-- `fix/description` - Bug fixes
-- `content/description` - Content updates
+## Line endings
 
-### Commit Messages
-Use clear, descriptive messages:
-```
-feat: Add neighborhood page for Summerlin
-fix: Resolve Calendly widget not loading
-content: Update FAQ section
-```
-
-### Pull Requests
-1. Create feature branch from `main`
-2. Make changes and test locally
-3. Push and create PR
-4. Fill out PR template
-5. Request review
-
-## Adding Media Assets
-
-### Images
-- Place in appropriate `/public/images/` subfolder
-- Use WebP format when possible
-- Optimize before committing (<200KB)
-- See `/public/images/README.md` for specs
-
-### Videos
-- Place in `/public/videos/`
-- Use MP4 (H.264) format
-- Keep hero videos under 5MB
-- See `/public/videos/README.md` for specs
-
-## Widget Integration
-
-### RealScout
-Script loaded globally in layout. Use `dangerouslySetInnerHTML` for widgets.
-See `.cursor/rules/` for patterns.
-
-### Calendly
-Script loaded globally with `afterInteractive` strategy.
-Use `Calendly.initInlineWidget()` API.
-See `.cursor/rules/calendly-widget-integration.mdc`.
-
-## Testing Locally
-
-```bash
-# Type check
-pnpm type-check
-
-# Build for production
-pnpm build
-
-# Preview production build
-pnpm start
-```
-
-## Deployment
-
-Automatic deployments via Vercel:
-- Push to `main` → Production deploy
-- Push to feature branch → Preview deploy
-
-## Need Help?
-
-- Check existing `.cursor/rules/` for patterns
-- Review component examples in `/components/`
-- Contact project maintainer
+Repository uses **LF**. `.gitattributes` enforces normalization; on Windows, set `git config core.autocrlf input` (or rely on EditorConfig + Git attributes).
