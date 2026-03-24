@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import React from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { GeistSans } from "geist/font/sans";
 import { Analytics } from "@vercel/analytics/react";
@@ -78,6 +78,13 @@ export const metadata: Metadata = {
   },
 };
 
+/** Mobile-friendly viewport + theme (Google / Page Experience baseline) */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#ffffff",
+};
+
 // Combined site-wide schemas using the schema utility
 const siteWideSchemas = combineSchemas(
   generateRealEstateAgentSchema(),
@@ -93,14 +100,18 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth antialiased" style={{ colorScheme: 'light' }}>
       <head>
         <meta name="color-scheme" content="light" />
+        {/* Early connections for third-party origins (reduces LCP / script latency) */}
+        <link rel="preconnect" href="https://em.realscout.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://assets.calendly.com" />
         {/* Site-wide JSON-LD Schema: RealEstateAgent + WebSite */}
         <SchemaScript schema={siteWideSchemas} id="site-schema" />
-        {/* Google Analytics */}
+        {/* GA4: lazyOnload defers until the browser is idle — better Core Web Vitals than blocking the main thread */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-WB5DLLZ4C6"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -108,11 +119,11 @@ export default function RootLayout({
             gtag('config', 'G-WB5DLLZ4C6');
           `}
         </Script>
-        {/* RealScout Widget Script - loaded once globally */}
+        {/* RealScout: once globally; afterInteractive avoids blocking first paint (vs beforeInteractive) */}
         <Script
           src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
           type="module"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
         {/* Calendly Widget Script - loaded once globally */}
         <Script

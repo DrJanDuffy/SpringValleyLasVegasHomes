@@ -54,8 +54,10 @@ export default function HeroSection({
               src={src}
               alt={`Spring Valley Las Vegas homes and Las Vegas Valley real estate — hero ${index + 1}`}
               fill
+              sizes="100vw"
               className="object-cover"
               priority={index === 0}
+              fetchPriority={index === 0 ? "high" : "low"}
             />
             <div className="absolute inset-0 bg-black/40" />
           </div>

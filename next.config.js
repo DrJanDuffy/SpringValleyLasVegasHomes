@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Tree-shake icon/UI packages (smaller JS — better INP / main-thread time)
+  experimental: {
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-slot', '@radix-ui/react-toast'],
+  },
+
   // Standalone output for Docker/Vercel optimization
   output: 'standalone',
 
