@@ -354,6 +354,17 @@ export default function FirstTimeBuyersPage() {
                 </p>
               </div>
             </div>
+            <p className="text-center text-sm text-slate-600 mt-8 max-w-2xl mx-auto">
+              Your monthly budget should include property taxes and insurance, not only P&amp;I. For
+              west valley context, see the{" "}
+              <Link
+                href="/neighborhoods/spring-valley/property-taxes"
+                className="text-blue-600 font-semibold hover:underline"
+              >
+                Spring Valley property tax guide
+              </Link>{" "}
+              (illustrative calculator; confirm with Clark County).
+            </p>
           </section>
 
           {/* Timeline */}

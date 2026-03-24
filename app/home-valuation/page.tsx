@@ -1,6 +1,7 @@
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 import RealScoutListings from "@/components/realscout/RealScoutListings";
+import HomebotValuationEmbed from "@/components/homebot/HomebotValuationEmbed";
 import CalendlyWidget from "@/components/calendly/CalendlyWidget";
 import Link from "next/link";
 import { Phone, CheckCircle, Home, TrendingUp, MapPin, Calculator, Clock, DollarSign } from "lucide-react";
@@ -96,6 +97,8 @@ export default function HomeValuationPage() {
               of Las Vegas market expertise and $127M+ in closed transactions.
             </p>
           </div>
+
+          <HomebotValuationEmbed />
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto mb-16">
             {/* Calendly Widget */}

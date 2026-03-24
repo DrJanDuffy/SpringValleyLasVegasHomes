@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { heroSeo } from "@/lib/seo";
+import { realScoutConfig } from "@/lib/integrations";
 
 type HeroSectionProps = {
   headlinePrimary?: string;
@@ -76,7 +77,7 @@ export default function HeroSection({
         <div className="realscout-wrapper mb-4">
           <div
             dangerouslySetInnerHTML={{
-              __html: `<realscout-simple-search agent-encoded-id="QWdlbnQtMjI1MDUw"></realscout-simple-search>`,
+              __html: `<realscout-simple-search agent-encoded-id="${realScoutConfig.agentEncodedId}"></realscout-simple-search>`,
             }}
           />
         </div>

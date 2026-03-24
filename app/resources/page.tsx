@@ -2,7 +2,7 @@ import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { BookOpen, MapPin, LineChart, Home, Phone } from "lucide-react";
+import { BookOpen, MapPin, LineChart, Home, Phone, DollarSign } from "lucide-react";
 import { agentInfo } from "@/lib/site-config";
 import { metaDescriptionWithKeyword, seoPrimaryKeyword } from "@/lib/seo";
 
@@ -32,6 +32,12 @@ const cards = [
     title: "Market report",
     body: "Median price, days on market, and inventory trends to time your move with confidence.",
     icon: LineChart,
+  },
+  {
+    href: "/neighborhoods/spring-valley/property-taxes",
+    title: "Spring Valley property taxes",
+    body: "Effective rate context, illustrative calculator, and Clark County Assessor resources—not tax advice.",
+    icon: DollarSign,
   },
   {
     href: "/contact",

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
 import { agentInfo, officeInfo, siteConfig, teamInfo, siteSocialUrls } from "@/lib/site-config";
+import { realScoutConfig } from "@/lib/integrations";
 import { seoPrimaryKeyword } from "@/lib/seo";
 
 export default function Footer() {
@@ -54,7 +55,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="http://drjanduffy.realscout.com/"
+                  href={`${realScoutConfig.portalUrl}/`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-300 hover:text-white transition-colors text-sm"

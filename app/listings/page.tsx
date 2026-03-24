@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site-config";
+import { realScoutConfig } from "@/lib/integrations";
 
 export const metadata: Metadata = {
   title: "MLS Search & Listings",
@@ -149,7 +150,7 @@ export default function ListingsPage() {
               <div
                 dangerouslySetInnerHTML={{
                   __html: `<realscout-office-listings 
-                    agent-encoded-id="QWdlbnQtMjI1MDUw" 
+                    agent-encoded-id="${realScoutConfig.agentEncodedId}" 
                     sort-order="NEWEST" 
                     listing-status="For Sale" 
                     property-types=",SFR,MF,TC"

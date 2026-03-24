@@ -5,6 +5,7 @@ import { Bed, Bath, Square, MapPin, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site-config";
+import { realScoutConfig } from "@/lib/integrations";
 
 export async function generateMetadata({
   params,
@@ -65,7 +66,12 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
               </li>
               <li>/</li>
               <li>
-                <a href="http://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600">
+                <a
+                  href={`${realScoutConfig.portalUrl}/`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-blue-600"
+                >
                   Properties
                 </a>
               </li>

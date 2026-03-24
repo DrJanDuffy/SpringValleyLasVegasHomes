@@ -11,6 +11,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { FollowUpBossClient } from '@/lib/fub/client';
+import { siteIntegration } from '@/lib/integrations';
 import { leadFormLimiter, getClientId, checkRateLimit, getRateLimitHeaders } from '@/lib/rate-limit';
 
 export interface LeadCaptureRequest {
@@ -172,13 +173,15 @@ export async function POST(request: NextRequest) {
     // Create or update person
     const person = await fub.upsertPerson(personData);
 
-    // Add tags
-    const tags = [
+    // Add tags (site default + form tags; dedupe for FUB)
+    const tagList = [
       ...(data.tags || []),
+      siteIntegration.defaultLeadTag,
       'website-lead',
       getSourceTag(data.source),
       ...getPropertyTags(data),
     ].filter((t): t is string => Boolean(t));
+    const tags = Array.from(new Set(tagList));
 
     for (const tag of tags) {
       try {
@@ -270,6 +273,7 @@ function enrichSource(source: string | undefined, request: NextRequest): string 
       if (
         !refUrl.hostname.includes("heyberkshire.com") &&
         !refUrl.hostname.includes("springvalleylasvegashomes.com") &&
+        !refUrl.hostname.includes("realscout.com") &&
         !refUrl.hostname.includes("localhost")
       ) {
         return `referral/${refUrl.hostname}`;

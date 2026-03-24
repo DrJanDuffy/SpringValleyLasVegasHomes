@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { realScoutConfig } from "@/lib/integrations";
 
 export default function RealScoutListings() {
   return (
@@ -17,7 +18,9 @@ export default function RealScoutListings() {
             </p>
           </div>
           <Button asChild variant="outline" className="mt-4 md:mt-0">
-            <a href="http://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer">View All Properties</a>
+            <a href={`${realScoutConfig.portalUrl}/`} target="_blank" rel="noopener noreferrer">
+              View All Properties
+            </a>
           </Button>
         </div>
 
@@ -25,7 +28,7 @@ export default function RealScoutListings() {
         <div
           dangerouslySetInnerHTML={{
             __html: `<realscout-office-listings 
-              agent-encoded-id="QWdlbnQtMjI1MDUw" 
+              agent-encoded-id="${realScoutConfig.agentEncodedId}" 
               sort-order="NEWEST" 
               listing-status="For Sale" 
               property-types=",SFR,MF,TC" 

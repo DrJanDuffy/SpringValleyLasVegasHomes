@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import type { Metadata } from "next";
 import { agentInfo, siteConfig } from "@/lib/site-config";
+import { realScoutConfig } from "@/lib/integrations";
 
 export const metadata: Metadata = {
   title: "55+ Active Adult Communities Las Vegas",
@@ -374,7 +375,7 @@ export default function FiftyFiveCommunitiesPage() {
                 Call (702) 664-8424
               </a>
               <a
-                href="http://drjanduffy.realscout.com/"
+                href={`${realScoutConfig.portalUrl}/`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-slate-100 text-slate-900 px-8 py-4 rounded-md font-bold text-lg hover:bg-slate-200 transition-colors"

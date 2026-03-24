@@ -14,7 +14,7 @@ Stack: **Next.js 14+ App Router**, **TypeScript**, **Tailwind**, **pnpm** (`pack
 
 - Prefer **`pnpm`** over `npm`/`yarn` in commands and CI.
 - **Do not edit** `components/idx/**` without explicit approval (MLS compliance).
-- **RealScout**: load script once in root layout; CSP must include `em.realscout.com` and `www.realscout.com` for `script-src` and `connect-src`.
+- **Integrations** (`lib/integrations.ts`): **RealScout** portal URL + agent id + widget script; **Homebot** optional iframe URL; **FUB** default lead tag (`FUB_DEFAULT_LEAD_TAG`, default `spring-valley-site`). RealScout script loads once in root layout; CSP must include `em.realscout.com` and `www.realscout.com` for `script-src` and `connect-src`; Homebot uses `*.homebot.com` / `*.homebot.ai` in CSP + `frame-src`. See `.env.example` and `.env.fub.example`.
 - Scoped rules live under **`.cursor/rules/`** (and user global rules). When editing `app/**/page.tsx`, follow real-estate marketing + NAP rules.
 - Large folders are listed in **`.cursorignore`** to keep indexing fast; lockfiles remain tracked in git.
 

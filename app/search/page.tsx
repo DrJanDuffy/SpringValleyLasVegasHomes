@@ -4,8 +4,7 @@ import Footer from "@/components/layouts/Footer";
 import { MapPin, Search, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import { agentInfo, siteConfig } from "@/lib/site-config";
-
-const REALSCOUT_SEARCH = "http://drjanduffy.realscout.com/" as const;
+import { realScoutConfig } from "@/lib/integrations";
 
 export const metadata: Metadata = {
   title: "Search homes by zip code",
@@ -74,7 +73,7 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
 
           <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
             <a
-              href={REALSCOUT_SEARCH}
+              href={`${realScoutConfig.portalUrl}/`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700"

@@ -16,8 +16,11 @@ import {
   googleMyMapEmbedUrl,
   googleMyMapViewerUrl,
   officeInfo,
+  siteConfig,
 } from "@/lib/site-config";
 import { metaDescriptionWithKeyword, seoPrimaryKeyword } from "@/lib/seo";
+
+const propertyTaxGuideUrl = `${siteConfig.url}/neighborhoods/spring-valley/property-taxes`;
 
 export const metadata: Metadata = {
   title: "Spring Valley NV Homes & West Valley Guide",
@@ -96,6 +99,26 @@ const springValleyFaqs = [
     question: "What are popular pockets buyers compare to Spring Valley?",
     answer:
       "West-side buyers often compare Spring Valley with nearby corridors and communities—examples include west Sahara and Charleston corridors, The Lakes and Chinatown/Spring Mountain dining, Enterprise-area communities like Rhodes Ranch, and condo or townhome pockets such as Rancho Viejo. Inventory and pricing change weekly; we run live MLS comps for the pocket you care about.",
+  },
+  {
+    question: "What is the effective property tax rate in Spring Valley, NV?",
+    answer:
+      `Third-party sources often cite an effective rate near 0.48% for Spring Valley (total tax relative to value)—useful for comparison, not your official bill. See the Spring Valley property tax guide for an illustrative calculator, citations, and Clark County resources: ${propertyTaxGuideUrl}`,
+  },
+  {
+    question: "How are Clark County property taxes calculated for Spring Valley homes?",
+    answer:
+      `Nevada property taxes use taxable assessed value and district levies—not a simple market value times one percentage. Spring Valley sits in unincorporated Clark County; verify assessments and bills with the Clark County Assessor. Full overview: ${propertyTaxGuideUrl}`,
+  },
+  {
+    question: "Is market value the same as taxable value on my Nevada property tax bill?",
+    answer:
+      `Not necessarily. Your purchase price or online estimate is not the same as the county-assessed taxable value. Abatements and caps can apply to primary residences. Confirm on your assessment notice or the Assessor. More detail: ${propertyTaxGuideUrl}`,
+  },
+  {
+    question: "Where can I learn more about Spring Valley property taxes before I buy?",
+    answer:
+      `Read the dedicated guide for effective rates, an illustrative calculator, and official Clark County links—then call ${agentInfo.phone} to fold taxes into your overall budget.`,
   },
 ];
 
@@ -273,6 +296,31 @@ export default function SpringValleyPage() {
             </div>
           </section>
 
+          <section
+            className="max-w-4xl mx-auto mb-14 rounded-2xl border border-emerald-100 bg-emerald-50/70 px-6 py-8 md:px-10"
+            aria-labelledby="spring-valley-property-tax-heading"
+          >
+            <h2
+              id="spring-valley-property-tax-heading"
+              className="text-xl font-bold text-slate-900 mb-3 text-center md:text-2xl"
+            >
+              Spring Valley Property Taxes &amp; Clark County
+            </h2>
+            <p className="text-slate-700 text-center mb-6 max-w-2xl mx-auto text-sm md:text-base">
+              Third-party estimates often put the <strong>effective rate near 0.48%</strong>—useful
+              for budgeting, not your official bill. Use the guide for an illustrative calculator,
+              how Nevada assessments work, and Clark County Assessor links.
+            </p>
+            <div className="flex justify-center">
+              <Link
+                href="/neighborhoods/spring-valley/property-taxes"
+                className="inline-flex items-center justify-center bg-emerald-700 hover:bg-emerald-800 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+              >
+                Spring Valley property tax guide
+              </Link>
+            </div>
+          </section>
+
           {/* GEO: pockets & corridors buyers compare (entity + internal linking) */}
           <section
             className="max-w-6xl mx-auto mb-16"
@@ -361,6 +409,14 @@ export default function SpringValleyPage() {
                   <li>
                     <Link href="/market-report" className="text-blue-600 hover:underline">
                       Las Vegas market report
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/neighborhoods/spring-valley/property-taxes"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Spring Valley property taxes &amp; rate
                     </Link>
                   </li>
                 </ul>

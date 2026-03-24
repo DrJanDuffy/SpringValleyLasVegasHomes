@@ -16,6 +16,7 @@ import {
 } from "@/lib/schema";
 import { siteConfig } from "@/lib/site-config";
 import { seoKeywordVariations, seoPrimaryKeyword } from "@/lib/seo";
+import { realScoutConfig } from "@/lib/integrations";
 
 const title = siteConfig.name;
 const description = siteConfig.description;
@@ -96,6 +97,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const homebotPrefetchOrigin = (() => {
+    const raw = process.env.NEXT_PUBLIC_HOMEBOT_WIDGET_URL?.trim();
+    if (!raw) return null;
+    try {
+      return new URL(raw).origin;
+    } catch {
+      return null;
+    }
+  })();
+
   return (
     <html lang="en" className="scroll-smooth antialiased" style={{ colorScheme: 'light' }}>
       <head>
@@ -104,6 +115,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://em.realscout.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://assets.calendly.com" />
+        {homebotPrefetchOrigin ? (
+          <link rel="dns-prefetch" href={homebotPrefetchOrigin} />
+        ) : null}
         {/* Site-wide JSON-LD Schema: RealEstateAgent + WebSite */}
         <SchemaScript schema={siteWideSchemas} id="site-schema" />
         {/* GA4: lazyOnload defers until the browser is idle — better Core Web Vitals than blocking the main thread */}
@@ -121,7 +135,7 @@ export default function RootLayout({
         </Script>
         {/* RealScout: once globally; afterInteractive avoids blocking first paint (vs beforeInteractive) */}
         <Script
-          src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
+          src={realScoutConfig.widgetScriptSrc}
           type="module"
           strategy="afterInteractive"
         />

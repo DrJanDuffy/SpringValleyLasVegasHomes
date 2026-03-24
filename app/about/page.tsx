@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import type { Metadata } from "next";
 import { agentInfo, officeInfo, siteConfig, teamInfo } from "@/lib/site-config";
+import { realScoutConfig } from "@/lib/integrations";
 
 export const metadata: Metadata = {
   title: "About Dr. Jan Duffy",
@@ -270,7 +271,12 @@ export default function AboutPage() {
                       <ArrowRight className="h-4 w-4 mr-2 text-blue-600" />
                       Free Home Valuation
                     </Link>
-                    <a href="http://drjanduffy.realscout.com/" target="_blank" rel="noopener noreferrer" className="flex items-center text-slate-700 hover:text-blue-600">
+                    <a
+                      href={`${realScoutConfig.portalUrl}/`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-slate-700 hover:text-blue-600"
+                    >
                       <ArrowRight className="h-4 w-4 mr-2 text-blue-600" />
                       Browse Listings
                     </a>

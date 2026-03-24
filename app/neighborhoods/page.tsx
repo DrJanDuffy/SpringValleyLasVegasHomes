@@ -173,6 +173,13 @@ export default function NeighborhoodsPage() {
               </Link>{" "}
               to explore the valley, then search MLS or contact the team.
             </p>
+            <p className="mt-4 text-lg text-slate-600">
+              Want 3D context for schools, parks, and dining? Try{" "}
+              <Link href="/neighborhood-discovery" className="text-blue-600 font-semibold hover:underline">
+                neighborhood discovery
+              </Link>{" "}
+              (Google Maps 3D Area Explorer)—then pair it with a showing when you are ready.
+            </p>
           </div>
 
           {/* Neighborhood Grid */}

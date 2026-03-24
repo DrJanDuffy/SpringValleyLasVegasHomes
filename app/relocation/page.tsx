@@ -164,6 +164,16 @@ export default function RelocationPage() {
                 <p className="text-slate-400 text-sm">Sports, tech, healthcare, and entertainment job growth</p>
               </div>
             </div>
+            <p className="text-center text-slate-300 text-sm mt-10 max-w-2xl mx-auto">
+              Comparing total cost of ownership in Clark County? Review our{" "}
+              <Link
+                href="/neighborhoods/spring-valley/property-taxes"
+                className="text-sky-300 hover:underline font-medium"
+              >
+                Spring Valley property tax guide
+              </Link>{" "}
+              for illustrative effective rates and official county links.
+            </p>
           </section>
 
           {/* Expert Quote */}
