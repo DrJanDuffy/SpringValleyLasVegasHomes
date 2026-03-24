@@ -1,28 +1,21 @@
-# Dependabot configuration
+# Dependabot configuration (max automation: all semver levels; use auto-merge workflow + CI).
 # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates
-#
-# Major-version bumps are skipped here so PRs are less likely to break the build; upgrade majors
-# manually (with tests) when you are ready.
 
 version: 2
 updates:
-  # NPM dependencies
+  # NPM dependencies (pnpm lockfile)
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: "daily"
       time: "09:00"
       timezone: "America/Los_Angeles"
-    open-pull-requests-limit: 3
+    open-pull-requests-limit: 10
     labels:
       - "dependencies"
       - "automated"
     commit-message:
       prefix: "deps"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
     groups:
       # Group minor and patch updates together
       minor-and-patch:
@@ -43,6 +36,3 @@ updates:
       - "automated"
     commit-message:
       prefix: "ci"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-major"]

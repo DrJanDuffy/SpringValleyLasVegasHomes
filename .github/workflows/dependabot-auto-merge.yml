@@ -1,0 +1,45 @@
+# Enables GitHub "auto-merge" on Dependabot PRs so they merge when required checks pass.
+# Repo settings: Settings → General → Pull Requests → enable "Allow auto-merge".
+# Branch protection: require status checks (e.g. Vercel) before merge.
+#
+# https://docs.github.com/en/code-security/dependabot/working-with-dependabot/automating-dependabot-with-github-actions
+
+name: Dependabot auto-merge
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  enable-auto-merge:
+    name: Enable auto-merge
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]' && github.repository == github.event.pull_request.head.repo.full_name
+    steps:
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Optional: only auto-merge patch/minor (majors often need code changes). Remove this step’s
+      # `if` to auto-merge majors too once CI is green.
+      - name: Enable auto-merge (patch & minor only)
+        if: |
+          steps.metadata.outputs.update-type != 'version-update:semver-major'
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr merge --auto --squash "$PR_URL"
+
+      # Uncomment to auto-merge major bumps when CI passes (maximum automation; higher risk):
+      # - name: Enable auto-merge (including majors)
+      #   if: steps.metadata.outputs.update-type == 'version-update:semver-major'
+      #   env:
+      #     PR_URL: ${{ github.event.pull_request.html_url }}
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: gh pr merge --auto --squash "$PR_URL"
