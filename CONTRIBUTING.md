@@ -44,6 +44,16 @@ Use clear, imperative subjects (optional [Conventional Commits](https://www.conv
 - **Do not** set a custom `outputDirectory` for Next.js on Vercel — the framework preset handles output.
 - Env vars: configure in the Vercel dashboard; reference in code via `process.env` / `NEXT_PUBLIC_*` only as needed.
 
+### Interactive Las Vegas zip map (`NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`)
+
+The [`/las-vegas-zip-code-map`](app/las-vegas-zip-code-map/page.tsx) page shows a searchable zip directory without a key; the **embedded Google Map** loads only when this variable is set at **build** time.
+
+1. **Google Cloud Console** — Select or create a project; enable **Maps JavaScript API**. Create an **API key**; under **Application restrictions**, choose **HTTP referrers** and add your site (e.g. `https://www.springvalleylasvegashomes.com/*`) and local dev (`http://localhost:3000/*`) if needed.
+2. **Vercel** — Project **Settings → Environment Variables**: add `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` with the key value; enable for **Production** and **Preview** if previews should show the map (add matching preview hostnames to the key’s referrer list).
+3. **Redeploy** — Trigger a new deployment so Next.js inlines the public env var.
+
+Do not commit API keys; use Vercel (or `.env.local` for local dev only, gitignored).
+
 ## Cloudflare
 
 - If the domain uses **Vercel for HTTPS**, keep Cloudflare proxy **off** for that hostname (DNS-only) unless you use a documented **Cloudflare + Vercel** SSL setup.

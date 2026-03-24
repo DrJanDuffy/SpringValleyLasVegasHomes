@@ -6,7 +6,7 @@ Stack: **Next.js 14+ App Router**, **TypeScript**, **Tailwind**, **pnpm** (`pack
 
 | Layer | Role |
 |--------|------|
-| **Vercel** | Primary production for `www.springvalleylasvegashomes.com` — use `vercel build` / `vercel deploy --prebuilt` for parity checks. |
+| **Vercel** | Primary production for `www.springvalleylasvegashomes.com` — use `vercel build` / `vercel deploy --prebuilt` for parity checks. Set `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` in the Vercel project to enable the interactive map on `/las-vegas-zip-code-map` (zip directory works without it). |
 | **Cloudflare** | Optional: **DNS-only (gray cloud)** when pointing at Vercel to avoid double-proxy SSL issues. Cloudflare Pages / Workers workflows exist for alternate deploys — align project names in GitHub env vars. |
 | **Git** | `main` is deploy branch. See `CONTRIBUTING.md` for pnpm, branches, and PR checklist. |
 
