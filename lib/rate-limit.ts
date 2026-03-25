@@ -32,19 +32,21 @@ export const leadFormLimiter = redis
   : null;
 
 /**
- * Claude AI Rate Limiter
- * 
- * Limits: 10 requests per minute per user
- * Use case: Control AI API costs, prevent abuse
+ * AI chat rate limiter (Claude direct, OpenRouter, etc.)
+ *
+ * Limits: 10 requests per minute per IP — controls API cost and abuse.
  */
-export const claudeAiLimiter = redis
+export const aiChatLimiter = redis
   ? new Ratelimit({
       redis,
       limiter: Ratelimit.slidingWindow(10, '1 m'),
       analytics: true,
-      prefix: '@springvalley/claude-ai',
+      prefix: '@springvalley/ai-chat',
     })
   : null;
+
+/** @deprecated Use `aiChatLimiter` */
+export const claudeAiLimiter = aiChatLimiter;
 
 /**
  * General API Rate Limiter

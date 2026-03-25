@@ -1,15 +1,18 @@
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 import AgentHeadshot from "@/components/shared/AgentHeadshot";
+import SchemaScript from "@/components/SchemaScript";
 import Image from "next/image";
 import Link from "next/link";
 import { Bed, Bath, Square, MapPin, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
 import { isCfDeliveryUrl } from "@/lib/cf-image-delivery";
-import { listingPlaceholderSrc } from "@/lib/site-media";
+import { absoluteMediaUrl, listingPlaceholderSrc } from "@/lib/site-media";
 import { siteConfig } from "@/lib/site-config";
 import { realScoutConfig } from "@/lib/integrations";
+import { generateRealEstateListingSchema, generateWebPageSchema, combineSchemas } from "@/lib/schema";
+import { ogTwitterImageFields } from "@/lib/og-image";
 
 export async function generateMetadata({
   params,
@@ -18,25 +21,67 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const property = await getProperty(id);
+  const canonical = `${siteConfig.url}/listings/${encodeURIComponent(id)}`;
+  const imageAbs = absoluteMediaUrl(property.image);
+  const og = ogTwitterImageFields(imageAbs, {
+    alt: `${property.name} — ${property.location}`,
+  });
+  const desc =
+    property.description.length > 155
+      ? `${property.description.slice(0, 152).trim()}…`
+      : property.description;
   return {
     title: `${property.name} | Las Vegas Listing`,
-    description:
-      "View this Las Vegas or Henderson property listing. Spring Valley Las Vegas homes and valley-wide MLS search with Dr. Jan Duffy, Berkshire Hathaway HomeServices. Call (702) 664-8424.",
+    description: desc,
     alternates: {
-      canonical: `${siteConfig.url}/listings/${encodeURIComponent(id)}`,
+      canonical,
     },
     robots: { index: true, follow: true },
+    openGraph: {
+      title: `${property.name} | Las Vegas Listing`,
+      description: desc,
+      url: canonical,
+      type: "website",
+      ...og.openGraph,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${property.name} | Las Vegas Listing`,
+      description: desc,
+      ...og.twitter,
+    },
   };
 }
 
+type PropertyData = {
+  id: string;
+  name: string;
+  location: string;
+  price: number;
+  priceDisplay: string;
+  image: string;
+  bedrooms: number;
+  bathrooms: number;
+  squareFeet: number;
+  yearBuilt: number;
+  description: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+  };
+};
+
 // This would typically fetch from RealScout API
-async function getProperty(id: string) {
+async function getProperty(id: string): Promise<PropertyData> {
   // Placeholder - replace with RealScout API call
   return {
     id,
     name: "Modern Luxury Home",
     location: "Summerlin, Las Vegas, NV",
-    price: "$850,000",
+    price: 850_000,
+    priceDisplay: "$850,000",
     image: listingPlaceholderSrc,
     bedrooms: 4,
     bathrooms: 3,
@@ -44,6 +89,12 @@ async function getProperty(id: string) {
     yearBuilt: 2018,
     description:
       "Stunning modern home in desirable Summerlin community. Features open floor plan, updated kitchen, and beautiful backyard. Close to schools, shopping, and entertainment.",
+    address: {
+      street: "123 Example Estates Lane",
+      city: "Las Vegas",
+      state: "NV",
+      zip: "89144",
+    },
   };
 }
 
@@ -54,11 +105,34 @@ type PropertyPageProps = {
 export default async function PropertyPage({ params }: PropertyPageProps) {
   const { id } = await params;
   const property = await getProperty(id);
+  const listingPath = `/listings/${encodeURIComponent(id)}`;
+  const imageAbs = absoluteMediaUrl(property.image);
+  const listingJsonLd = combineSchemas(
+    generateWebPageSchema({
+      name: property.name,
+      description: property.description,
+      url: listingPath,
+      primaryImageOfPage: imageAbs,
+    }),
+    generateRealEstateListingSchema({
+      name: property.name,
+      description: property.description,
+      price: property.price,
+      address: property.address,
+      bedrooms: property.bedrooms,
+      bathrooms: property.bathrooms,
+      sqft: property.squareFeet,
+      images: [property.image],
+      url: listingPath,
+    }),
+  );
+  const mainPhotoAlt = `${property.name} — main exterior or interior photo in ${property.location}`;
 
   return (
     <>
+      <SchemaScript schema={listingJsonLd} id="listing-property-schema" />
       <Navbar />
-      <main className="pt-24 pb-16">
+      <main id="main-content" tabIndex={-1} className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           {/* Breadcrumb */}
           <nav className="mb-6 text-sm">
@@ -93,14 +167,14 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
               <MapPin className="h-5 w-5 mr-2" />
               {property.location}
             </div>
-            <div className="text-3xl font-bold text-blue-600">{property.price}</div>
+            <div className="text-3xl font-bold text-blue-600">{property.priceDisplay}</div>
           </div>
 
           {/* Main Image */}
           <div className="relative h-64 md:h-96 rounded-lg overflow-hidden mb-8">
             <Image
               src={property.image}
-              alt={property.name}
+              alt={mainPhotoAlt}
               fill
               className="object-cover"
               priority

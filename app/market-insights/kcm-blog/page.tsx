@@ -7,16 +7,45 @@ import type { Metadata } from "next";
 import { agentInfo, officeInfo, siteConfig } from "@/lib/site-config";
 import { kcmConfig } from "@/lib/integrations";
 import { generateLocalBusinessSchema } from "@/lib/gbp-schema";
-import { buildKcmFeedJsonLdGraph, getKcmFeedItems } from "@/lib/kcm-rss";
+import {
+  buildKcmFeedJsonLdGraph,
+  getKcmFeedItems,
+  kcmHubPreferredImage,
+} from "@/lib/kcm-rss";
+import { ogTwitterImageFields } from "@/lib/og-image";
 
-export const metadata: Metadata = {
-  title: "Market articles (KCM) | Spring Valley Las Vegas — Dr. Jan Duffy",
-  description:
-    "Keeping Current Matters (Simplifying the Market) articles for home buyers and sellers—national context for Las Vegas and Spring Valley. Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties. Call (702) 664-8424.",
-  alternates: {
-    canonical: `${siteConfig.url}/market-insights/kcm-blog`,
-  },
-};
+const kcmBlogTitle = "Market articles (KCM) | Spring Valley Las Vegas — Dr. Jan Duffy";
+const kcmBlogDescription =
+  "Keeping Current Matters (Simplifying the Market) articles for home buyers and sellers—national context for Las Vegas and Spring Valley. Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties. Call (702) 664-8424.";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const items = await getKcmFeedItems(1);
+  const pageUrl = `${siteConfig.url}/market-insights/kcm-blog`;
+  const ogImage = kcmHubPreferredImage(items);
+  const og = ogTwitterImageFields(ogImage, {
+    alt: items[0]?.title ? `${items[0].title} — market article preview` : "Market articles and Las Vegas housing context",
+  });
+  return {
+    title: kcmBlogTitle,
+    description: kcmBlogDescription,
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: kcmBlogTitle,
+      description: kcmBlogDescription,
+      url: pageUrl,
+      type: "website",
+      ...og.openGraph,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: kcmBlogTitle,
+      description: kcmBlogDescription,
+      ...og.twitter,
+    },
+  };
+}
 
 export const revalidate = 3600;
 
@@ -48,7 +77,9 @@ export default async function KcmBlogPage() {
   const localBusinessSchema = generateLocalBusinessSchema();
   const items = await getKcmFeedItems(9);
   const pageUrl = `${siteConfig.url}/market-insights/kcm-blog`;
-  const feedGraph = items.length > 0 ? buildKcmFeedJsonLdGraph(items, pageUrl) : null;
+  const kcmPrimaryImage = kcmHubPreferredImage(items);
+  const feedGraph =
+    items.length > 0 ? buildKcmFeedJsonLdGraph(items, pageUrl, kcmPrimaryImage) : null;
 
   return (
     <>
@@ -67,7 +98,7 @@ export default async function KcmBlogPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Navbar />
-      <main className="pt-24 pb-16">
+      <main id="main-content" tabIndex={-1} className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto mb-8">
             <nav className="text-sm text-slate-500" aria-label="Breadcrumb">

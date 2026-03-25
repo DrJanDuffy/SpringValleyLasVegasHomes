@@ -1,11 +1,29 @@
 import type OpenAI from "openai";
 import { NextRequest, NextResponse } from "next/server";
 import { getOpenRouterClient } from "@/lib/openrouter-client";
+import {
+  aiChatLimiter,
+  checkRateLimit,
+  getClientId,
+  getRateLimitHeaders,
+} from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   try {
+    const clientId = getClientId(request);
+    const rateLimit = await checkRateLimit(aiChatLimiter, clientId);
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        { error: "Too many requests. Please wait a moment and try again." },
+        {
+          status: 429,
+          headers: getRateLimitHeaders(rateLimit),
+        },
+      );
+    }
+
     const { prompt, conversation = [] } = await request.json();
 
     if (!prompt) {

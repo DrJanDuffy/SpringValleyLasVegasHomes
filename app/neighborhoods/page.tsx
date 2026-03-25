@@ -1,17 +1,29 @@
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 import RealScoutListings from "@/components/realscout/RealScoutListings";
+import SchemaScript from "@/components/SchemaScript";
 import Link from "next/link";
 import { MapPin, Phone, Home, Users, GraduationCap } from "lucide-react";
 import type { Metadata } from "next";
 import { metaDescriptionWithKeyword, seoPrimaryKeyword } from "@/lib/seo";
+import { generateWebPageSchema } from "@/lib/schema";
+import { siteConfig } from "@/lib/site-config";
+import { absoluteMediaUrl, springValleyMarketingOgSrc } from "@/lib/site-media";
+import { ogTwitterImageFields } from "@/lib/og-image";
+
+const neighborhoodsDescription = metaDescriptionWithKeyword(
+  "Explore Las Vegas and Henderson neighborhoods—Summerlin, Green Valley, Spring Valley Las Vegas homes, and more with Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties.",
+  true,
+);
+
+const neighborhoodsGuideOgUrl = absoluteMediaUrl(springValleyMarketingOgSrc);
+const neighborhoodsOgTwitter = ogTwitterImageFields(neighborhoodsGuideOgUrl, {
+  alt: "Las Vegas and Henderson neighborhoods — homes and community guide",
+});
 
 export const metadata: Metadata = {
   title: "Las Vegas Neighborhoods Guide",
-  description: metaDescriptionWithKeyword(
-    "Explore Las Vegas and Henderson neighborhoods—Summerlin, Green Valley, Spring Valley Las Vegas homes, and more with Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties.",
-    true,
-  ),
+  description: neighborhoodsDescription,
   keywords: [
     "Las Vegas neighborhoods",
     "Spring Valley Las Vegas homes",
@@ -20,7 +32,27 @@ export const metadata: Metadata = {
     "best neighborhoods Las Vegas",
     "where to live Las Vegas",
   ],
+  openGraph: {
+    title: "Las Vegas Neighborhoods Guide | Dr. Jan Duffy",
+    description: neighborhoodsDescription,
+    url: `${siteConfig.url}/neighborhoods`,
+    type: "website",
+    ...neighborhoodsOgTwitter.openGraph,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Las Vegas Neighborhoods Guide | Dr. Jan Duffy",
+    description: neighborhoodsDescription,
+    ...neighborhoodsOgTwitter.twitter,
+  },
 };
+
+const neighborhoodsWebPageLd = generateWebPageSchema({
+  name: "Las Vegas & Henderson Neighborhoods",
+  description: neighborhoodsDescription,
+  url: "/neighborhoods",
+  primaryImageOfPage: neighborhoodsGuideOgUrl,
+});
 
 const neighborhoods = [
   {
@@ -147,8 +179,9 @@ const neighborhoods = [
 export default function NeighborhoodsPage() {
   return (
     <>
+      <SchemaScript schema={neighborhoodsWebPageLd} id="neighborhoods-guide-schema" />
       <Navbar />
-      <main className="pt-24 pb-16">
+      <main id="main-content" tabIndex={-1} className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           {/* Hero */}
           <div className="max-w-4xl mx-auto text-center mb-16">

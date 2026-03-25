@@ -77,7 +77,7 @@ export default function ParadisePage() {
     <>
       <SchemaScript schema={pageSchemas} id="paradise-schema" />
       <Navbar />
-      <main className="pt-24 pb-16">
+      <main id="main-content" tabIndex={-1} className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto mb-6">
             <nav className="text-sm text-slate-500" aria-label="Breadcrumb">

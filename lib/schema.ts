@@ -325,11 +325,11 @@ export function generateAggregateRatingSchema(
 }
 
 /**
- * Standalone Review JSON-LD for the homepage (references agent via `@id`; does not duplicate RealEstateAgent).
- * Satisfies Google Rich Results: `itemReviewed` + `Person` author.
+ * Review entities for merging into a combined `@graph` via `combineSchemas` (each item includes `@context`).
  */
-export function generateHomepageReviewJsonLd(reviews: ReviewItem[]) {
-  const graph = reviews.map((review, index) => ({
+export function homepageReviewSchemasForCombine(reviews: ReviewItem[]): Record<string, unknown>[] {
+  return reviews.map((review, index) => ({
+    "@context": "https://schema.org",
     "@type": "Review",
     "@id": `${BASE_URL}#home-review-${index + 1}`,
     name: `Client review: ${review.author}`,
@@ -349,11 +349,44 @@ export function generateHomepageReviewJsonLd(reviews: ReviewItem[]) {
     reviewBody: review.reviewBody,
     datePublished: review.datePublished || new Date().toISOString().split("T")[0],
   }));
+}
+
+/**
+ * Standalone Review JSON-LD for the homepage (references agent via `@id`; does not duplicate RealEstateAgent).
+ * Satisfies Google Rich Results: `itemReviewed` + `Person` author.
+ */
+export function generateHomepageReviewJsonLd(reviews: ReviewItem[]) {
+  const graph = homepageReviewSchemasForCombine(reviews).map((node) => {
+    const { "@context": _omitContext, ...rest } = node;
+    return rest;
+  });
 
   return {
     "@context": "https://schema.org",
     "@graph": graph,
   };
+}
+
+/**
+ * Single JSON-LD payload for the homepage: FAQPage + WebPage + Review nodes (for `SchemaScript`).
+ */
+export function combineHomepageStructuredData(args: {
+  faqs: FAQItem[];
+  webPage: {
+    name: string;
+    description: string;
+    url: string;
+    datePublished?: string;
+    dateModified?: string;
+    primaryImageOfPage?: string;
+  };
+  reviews: ReviewItem[];
+}) {
+  return combineSchemas(
+    generateFAQSchema(args.faqs),
+    generateWebPageSchema(args.webPage),
+    ...homepageReviewSchemasForCombine(args.reviews),
+  );
 }
 
 /**
@@ -584,6 +617,16 @@ export function generateServiceSchema(service: {
 }
 
 /**
+ * Preferred preview image for Google (WebPage.primaryImageOfPage). Pass an absolute URL.
+ */
+function primaryImageObjectFromAbsoluteUrl(absoluteUrl: string) {
+  return {
+    "@type": "ImageObject",
+    url: absoluteUrl,
+  };
+}
+
+/**
  * Generate WebPage schema
  */
 export function generateWebPageSchema(page: {
@@ -592,14 +635,17 @@ export function generateWebPageSchema(page: {
   url: string;
   datePublished?: string;
   dateModified?: string;
+  /** Absolute image URL (same as og:image when set). */
+  primaryImageOfPage?: string;
 }) {
+  const pageUrl = page.url.startsWith("http") ? page.url : `${BASE_URL}${page.url}`;
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": `${page.url.startsWith("http") ? page.url : `${BASE_URL}${page.url}`}#webpage`,
+    "@id": `${pageUrl}#webpage`,
     name: page.name,
     description: page.description,
-    url: page.url.startsWith("http") ? page.url : `${BASE_URL}${page.url}`,
+    url: pageUrl,
     isPartOf: {
       "@id": `${BASE_URL}#website`,
     },
@@ -608,6 +654,9 @@ export function generateWebPageSchema(page: {
     },
     ...(page.datePublished && { datePublished: page.datePublished }),
     ...(page.dateModified && { dateModified: page.dateModified }),
+    ...(page.primaryImageOfPage && {
+      primaryImageOfPage: primaryImageObjectFromAbsoluteUrl(page.primaryImageOfPage),
+    }),
   };
 }
 

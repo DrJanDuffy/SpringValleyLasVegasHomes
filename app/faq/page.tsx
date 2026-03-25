@@ -12,7 +12,14 @@ import {
   combineSchemas,
 } from "@/lib/schema";
 import { formatPacificLongDate, timeDateTimeAttribute } from "@/lib/page-dates";
-import { agentInfo, officeInfo, teamInfo } from "@/lib/site-config";
+import { agentInfo, officeInfo, siteConfig, teamInfo } from "@/lib/site-config";
+import { absoluteMediaUrl, agentHeadshotSrc } from "@/lib/site-media";
+import { ogTwitterImageFields } from "@/lib/og-image";
+
+const faqPreferredImageUrl = absoluteMediaUrl(agentHeadshotSrc);
+const faqOgTwitter = ogTwitterImageFields(faqPreferredImageUrl, {
+  alt: `${agentInfo.name}, ${agentInfo.title} — ${agentInfo.brokerage}`,
+});
 
 export const metadata: Metadata = {
   title: "Real Estate FAQ",
@@ -25,6 +32,20 @@ export const metadata: Metadata = {
     "selling a home Henderson",
     "BHHS agent questions",
   ],
+  openGraph: {
+    title: "Real Estate FAQ | Berkshire Hathaway HomeServices Las Vegas",
+    description:
+      "Frequently asked questions about Las Vegas real estate, buying, selling, and working with Dr. Jan Duffy at BHHS Nevada Properties.",
+    url: `${siteConfig.url}/faq`,
+    ...faqOgTwitter.openGraph,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Real Estate FAQ | Berkshire Hathaway HomeServices Las Vegas",
+    description:
+      "Frequently asked questions about Las Vegas real estate, buying, selling, and working with Dr. Jan Duffy at BHHS Nevada Properties.",
+    ...faqOgTwitter.twitter,
+  },
 };
 
 // Breadcrumb items
@@ -179,6 +200,7 @@ const pageSchemas = combineSchemas(
       "Comprehensive FAQ about Las Vegas real estate, buying, selling, investing, and working with Dr. Jan Duffy at Berkshire Hathaway HomeServices Nevada Properties.",
     url: "/faq",
     dateModified: "2026-01-25",
+    primaryImageOfPage: faqPreferredImageUrl,
   }),
   generateFAQSchema(allFaqs)
 );
@@ -189,7 +211,7 @@ export default function FAQPage() {
       {/* Combined JSON-LD Schema: Breadcrumb + WebPage + FAQPage (all categories) */}
       <SchemaScript schema={pageSchemas} id="faq-page-schema" />
       <Navbar />
-      <main className="pt-24 pb-16">
+      <main id="main-content" tabIndex={-1} className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           {/* Hero */}
           <div className="max-w-4xl mx-auto text-center mb-16">

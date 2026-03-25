@@ -6,6 +6,8 @@ import type { Metadata } from "next";
 import { agentInfo, officeInfo, siteConfig, siteSocialUrls } from "@/lib/site-config";
 import { seoPrimaryKeyword } from "@/lib/seo";
 import { combineSchemas } from "@/lib/schema";
+import { absoluteMediaUrl, mapHubOgImageSrc } from "@/lib/site-media";
+import { ogTwitterImageFields } from "@/lib/og-image";
 import {
   buildNeighborhoodDiscoveryDemoUrl,
   getNeighborhoodDiscoveryIframeUrl,
@@ -15,6 +17,10 @@ import {
 import { Phone, MapPin, ExternalLink } from "lucide-react";
 
 const pageUrl = `${siteConfig.url}/neighborhood-discovery`;
+const neighborhoodDiscoveryOgUrl = absoluteMediaUrl(mapHubOgImageSrc);
+const neighborhoodDiscoveryOgTwitter = ogTwitterImageFields(neighborhoodDiscoveryOgUrl, {
+  alt: "Spring Valley and Las Vegas Valley neighborhoods — preview for Neighborhood Discovery",
+});
 const neighborhoodMapUrl = getNeighborhoodDiscoveryIframeUrl();
 const threeDdemoUrl = buildNeighborhoodDiscoveryDemoUrl();
 
@@ -38,6 +44,14 @@ export const metadata: Metadata = {
       "Interactive 3D neighborhood highlights with local context—pair with MLS search and a Berkshire Hathaway HomeServices tour.",
     url: pageUrl,
     type: "website",
+    ...neighborhoodDiscoveryOgTwitter.openGraph,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Neighborhood Discovery | Spring Valley & Las Vegas 3D Map",
+    description:
+      "Interactive 3D neighborhood highlights with local context—pair with MLS search and a Berkshire Hathaway HomeServices tour.",
+    ...neighborhoodDiscoveryOgTwitter.twitter,
   },
 };
 
@@ -58,6 +72,10 @@ const pageSchemas = combineSchemas(
     description:
       "Google Maps Neighborhood Discovery for Spring Valley with restaurants, parks, schools, and more; not a substitute for MLS listings or a showing.",
     url: pageUrl,
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: neighborhoodDiscoveryOgUrl,
+    },
     inLanguage: "en-US",
     isPartOf: {
       "@type": "WebSite",
@@ -166,7 +184,7 @@ export default function NeighborhoodDiscoveryPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchemas) }}
       />
       <Navbar />
-      <main className="pt-24 pb-16">
+      <main id="main-content" tabIndex={-1} className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <nav className="mb-6 max-w-4xl text-sm text-slate-500" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-blue-600">

@@ -10,8 +10,11 @@ import {
   generateBreadcrumbSchema,
   generateFAQSchema,
   generateNeighborhoodSchema,
+  generateWebPageSchema,
   combineSchemas,
 } from "@/lib/schema";
+import { absoluteMediaUrl, springValleyMarketingOgSrc } from "@/lib/site-media";
+import { ogTwitterImageFields } from "@/lib/og-image";
 import {
   agentInfo,
   googleMyMapEmbedUrl,
@@ -25,6 +28,11 @@ import { realScoutConfig } from "@/lib/integrations";
 const propertyTaxGuideUrl = `${siteConfig.url}/neighborhoods/spring-valley/property-taxes`;
 
 const springValleyCityMapUrl = realScoutConfig.springValleyCityMapUrl;
+
+const springValleyOgUrl = absoluteMediaUrl(springValleyMarketingOgSrc);
+const springValleyOgTwitter = ogTwitterImageFields(springValleyOgUrl, {
+  alt: "Spring Valley Las Vegas homes and west valley real estate — neighborhood guide preview",
+});
 
 export const metadata: Metadata = {
   title: "Spring Valley NV Homes & West Valley Guide",
@@ -46,6 +54,25 @@ export const metadata: Metadata = {
     "West Sahara Las Vegas",
     "Rhodes Ranch Las Vegas",
   ],
+  openGraph: {
+    title: "Spring Valley NV Homes & West Valley Guide | Dr. Jan Duffy",
+    description: metaDescriptionWithKeyword(
+      "Spring Valley NV real estate guide—map, popular west valley pockets, MLS search for Spring Valley Nevada homes for sale, and buyer-seller guidance with Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties.",
+      true,
+    ),
+    url: `${siteConfig.url}/neighborhoods/spring-valley`,
+    type: "website",
+    ...springValleyOgTwitter.openGraph,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Spring Valley NV Homes & West Valley Guide | Dr. Jan Duffy",
+    description: metaDescriptionWithKeyword(
+      "Spring Valley NV real estate guide—map, popular west valley pockets, MLS search for Spring Valley Nevada homes for sale, and buyer-seller guidance with Dr. Jan Duffy, Berkshire Hathaway HomeServices Nevada Properties.",
+      true,
+    ),
+    ...springValleyOgTwitter.twitter,
+  },
 };
 
 const breadcrumbs = [
@@ -127,6 +154,13 @@ const springValleyFaqs = [
 
 const pageSchemas = combineSchemas(
   generateBreadcrumbSchema(breadcrumbs),
+  generateWebPageSchema({
+    name: "Spring Valley Las Vegas Homes & West Valley Real Estate",
+    description:
+      "Spring Valley, NV—large west Las Vegas Valley area in Clark County. Spring Valley Las Vegas homes span diverse ZIP codes and pockets. Search Spring Valley Nevada homes for sale with MLS-backed guidance.",
+    url: "/neighborhoods/spring-valley",
+    primaryImageOfPage: springValleyOgUrl,
+  }),
   generateNeighborhoodSchema({
     name: "Spring Valley",
     slug: "spring-valley",
@@ -172,7 +206,7 @@ export default function SpringValleyPage() {
     <>
       <SchemaScript schema={pageSchemas} id="spring-valley-schema" />
       <Navbar />
-      <main className="pt-24 pb-16">
+      <main id="main-content" tabIndex={-1} className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto mb-6">
             <nav className="text-sm text-slate-500" aria-label="Breadcrumb">

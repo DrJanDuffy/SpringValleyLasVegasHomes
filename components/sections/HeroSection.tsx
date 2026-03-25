@@ -1,6 +1,7 @@
 "use client";
 
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { agentStats } from "@/lib/site-config";
 import { heroSeo } from "@/lib/seo";
 import RealScoutSimpleSearch from "@/components/realscout/RealScoutSimpleSearch";
 import HeroBackgroundCarousel from "@/components/sections/HeroBackgroundCarousel";
@@ -38,15 +39,15 @@ export default function HeroSection({
         {/* Trust Indicators */}
         <div className="mt-8 flex flex-wrap justify-center gap-6 text-white/90 text-sm">
           <div className="flex items-center gap-2">
-            <span className="font-semibold">500+</span>
+            <span className="font-semibold">{agentStats.transactionsClosed}+</span>
             <span>Properties Sold</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-semibold">Since 2008</span>
+            <span className="font-semibold">Since {agentStats.servingSince}</span>
             <span>Serving Las Vegas</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-semibold">4.9★</span>
+            <span className="font-semibold">{agentStats.averageRating}★</span>
             <span>Average Rating</span>
           </div>
         </div>

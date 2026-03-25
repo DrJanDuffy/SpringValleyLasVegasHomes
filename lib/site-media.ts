@@ -48,6 +48,21 @@ export const heroBackgroundSrcs: [string, string, string] = [
   resolveCfOrLocal(process.env.NEXT_PUBLIC_CF_IMAGE_HERO_3_ID, "/Image/hero_bg_3.jpg", V.hero),
 ];
 
+/**
+ * Same canonical asset as the first homepage hero — use for OG / WebPage on Spring Valley and
+ * map-tool hubs so previews stay consistent with valley real-estate imagery (override via HERO_1 env).
+ */
+export const springValleyMarketingOgSrc = heroBackgroundSrcs[0];
+
+/**
+ * Preview image for zip-map and neighborhood-discovery tools (defaults to first hero; optional dedicated CF ID).
+ */
+export const mapHubOgImageSrc = resolveCfOrLocal(
+  process.env.NEXT_PUBLIC_CF_IMAGE_OG_MAP_HUB_ID,
+  "/Image/hero_bg_1.jpg",
+  V.hero,
+);
+
 /** Featured properties cards (same imagery as hero in current site). */
 export const featuredPropertyImageSrcs: [string, string, string] = [
   resolveCfOrLocal(process.env.NEXT_PUBLIC_CF_IMAGE_FEATURED_1_ID, "/Image/hero_bg_1.jpg", V.hero),

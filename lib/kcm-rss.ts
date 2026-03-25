@@ -5,6 +5,7 @@
 
 import Parser from "rss-parser";
 import { kcmConfig } from "@/lib/integrations";
+import { absoluteMediaUrl, heroBackgroundSrcs } from "@/lib/site-media";
 
 /** Align with Next.js fetch cache for RSS (ISR-style refresh). */
 export const KCM_FEED_REVALIDATE_SECONDS = 3600;
@@ -82,6 +83,16 @@ function excerptFromItem(item: KcmParserItem): string {
  * Fetches and parses the configured KCM RSS feed (English by default — see `kcmConfig.rssFeedUrl`).
  * Returns an empty array on network/parse failure so pages still render.
  */
+/**
+ * Preferred og:image / WebPage.primaryImageOfPage for the KCM hub — first RSS image when valid HTTPS, else first homepage hero.
+ */
+export function kcmHubPreferredImage(items: KcmFeedItem[]): string {
+  const first = items[0];
+  const raw = first?.image?.trim();
+  if (raw && /^https?:\/\//i.test(raw)) return raw;
+  return absoluteMediaUrl(heroBackgroundSrcs[0]);
+}
+
 export async function getKcmFeedItems(limit = 9): Promise<KcmFeedItem[]> {
   const url = kcmConfig.rssFeedUrl;
   try {
@@ -136,7 +147,7 @@ export function buildKcmItemListJsonLd(items: KcmFeedItem[], pageUrl: string) {
 }
 
 /** WebPage node referencing the ItemList as mainEntity (paired in @graph on the hub page). */
-export function buildKcmWebPageJsonLd(pageUrl: string) {
+export function buildKcmWebPageJsonLd(pageUrl: string, primaryImageAbsoluteUrl?: string) {
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -144,12 +155,24 @@ export function buildKcmWebPageJsonLd(pageUrl: string) {
     url: pageUrl,
     name: "Market articles | Keeping Current Matters",
     mainEntity: { "@id": `${pageUrl}#kcm-itemlist` },
+    ...(primaryImageAbsoluteUrl
+      ? {
+          primaryImageOfPage: {
+            "@type": "ImageObject",
+            url: primaryImageAbsoluteUrl,
+          },
+        }
+      : {}),
   };
 }
 
-export function buildKcmFeedJsonLdGraph(items: KcmFeedItem[], pageUrl: string) {
+export function buildKcmFeedJsonLdGraph(
+  items: KcmFeedItem[],
+  pageUrl: string,
+  primaryImageAbsoluteUrl?: string,
+) {
   return {
     "@context": "https://schema.org",
-    "@graph": [buildKcmWebPageJsonLd(pageUrl), buildKcmItemListJsonLd(items, pageUrl)],
+    "@graph": [buildKcmWebPageJsonLd(pageUrl, primaryImageAbsoluteUrl), buildKcmItemListJsonLd(items, pageUrl)],
   };
 }

@@ -1,4 +1,5 @@
 import { Shield, TrendingUp, Users, Award, Clock, Home } from "lucide-react";
+import { agentStats } from "@/lib/site-config";
 
 const features = [
   {
@@ -19,7 +20,7 @@ const features = [
   {
     icon: Award,
     title: "Proven Results",
-    description: "500+ successful transactions and satisfied clients.",
+    description: `${agentStats.transactionsClosed}+ successful transactions and satisfied clients.`,
   },
   {
     icon: Clock,

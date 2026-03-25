@@ -1,16 +1,22 @@
 /**
  * Claude API Route - Optimized Chat Endpoint
- * 
+ *
  * Features:
  * - Prompt caching (90% cost savings)
  * - Response caching (reduce duplicate queries)
- * - Rate limiting
+ * - Rate limiting (Upstash `aiChatLimiter` when Redis env is set)
  * - Cost tracking
  * - Streaming support
  * - Error handling
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import {
+  aiChatLimiter,
+  checkRateLimit,
+  getClientId,
+  getRateLimitHeaders,
+} from '@/lib/rate-limit';
 import { ClaudeClient } from '@/lib/claude/client';
 import { defaultCache } from '@/lib/claude/cache';
 import {
@@ -30,6 +36,18 @@ const claude = new ClaudeClient({
 
 export async function POST(request: NextRequest) {
   try {
+    const clientId = getClientId(request);
+    const rateLimit = await checkRateLimit(aiChatLimiter, clientId);
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please wait a moment and try again.' },
+        {
+          status: 429,
+          headers: getRateLimitHeaders(rateLimit),
+        },
+      );
+    }
+
     const body = await request.json();
     const { messages, templateType, stream = false } = body;
 
@@ -155,6 +173,18 @@ export async function POST(request: NextRequest) {
  */
 export async function GET(request: NextRequest) {
   try {
+    const clientId = getClientId(request);
+    const rateLimit = await checkRateLimit(aiChatLimiter, clientId);
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please wait a moment and try again.' },
+        {
+          status: 429,
+          headers: getRateLimitHeaders(rateLimit),
+        },
+      );
+    }
+
     const stats = claude.getCostStats();
     const cacheStats = defaultCache.getStats();
 

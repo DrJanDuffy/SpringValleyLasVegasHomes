@@ -11,35 +11,48 @@ import Footer from "@/components/layouts/Footer";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Home as HomeIcon, TrendingUp, Shield, Users, Phone } from "lucide-react";
+import SchemaScript from "@/components/SchemaScript";
 import SiteBylineDate from "@/components/shared/SiteBylineDate";
-import { siteConfig, siteContentDates } from "@/lib/site-config";
+import {
+  agentStats,
+  marketStats,
+  siteConfig,
+  siteContentDates,
+  valuePropositions,
+} from "@/lib/site-config";
 import { homePageFaqs } from "@/lib/home-faqs";
 import { defaultHomeReviews } from "@/lib/home-reviews";
-import {
-  generateFAQSchema,
-  generateHomepageReviewJsonLd,
-  generateWebPageSchema,
-} from "@/lib/schema";
+import { combineHomepageStructuredData } from "@/lib/schema";
+import { absoluteMediaUrl, heroBackgroundSrcs } from "@/lib/site-media";
+import { ogTwitterImageFields } from "@/lib/og-image";
 import { homePageTitleAbsolute } from "@/lib/seo";
 
-const faqSchemaLd = generateFAQSchema(homePageFaqs);
+const homePreferredImageUrl = absoluteMediaUrl(heroBackgroundSrcs[0]);
+const homeOgTwitter = ogTwitterImageFields(homePreferredImageUrl, {
+  alt: "Spring Valley Las Vegas homes and Las Vegas Valley real estate — hero image",
+});
 
-const homeReviewsSchemaLd = generateHomepageReviewJsonLd(
-  defaultHomeReviews.map((r) => ({
+const homeStructuredData = combineHomepageStructuredData({
+  faqs: homePageFaqs,
+  webPage: {
+    name: homePageTitleAbsolute,
+    description: siteConfig.description,
+    url: "/",
+    datePublished: siteContentDates.datePublished,
+    dateModified: siteContentDates.dateModified,
+    primaryImageOfPage: homePreferredImageUrl,
+  },
+  reviews: defaultHomeReviews.map((r) => ({
     author: r.name,
     rating: r.rating,
     reviewBody: r.text,
     datePublished: r.date,
   })),
-);
-
-const homeWebPageSchemaLd = generateWebPageSchema({
-  name: homePageTitleAbsolute,
-  description: siteConfig.description,
-  url: "/",
-  datePublished: siteContentDates.datePublished,
-  dateModified: siteContentDates.dateModified,
 });
+
+const lv = marketStats.lasVegas;
+const medianDisplay = `$${Math.round(lv.medianPrice / 1000)}K`;
+const listingsDisplay = lv.activeListings.toLocaleString("en-US");
 
 export const metadata: Metadata = {
   title: {
@@ -50,30 +63,21 @@ export const metadata: Metadata = {
     title: homePageTitleAbsolute,
     description: siteConfig.description,
     url: siteConfig.url,
+    ...homeOgTwitter.openGraph,
   },
   twitter: {
     title: homePageTitleAbsolute,
     description: siteConfig.description,
+    ...homeOgTwitter.twitter,
   },
 };
 
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeReviewsSchemaLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeWebPageSchemaLd) }}
-      />
+      <SchemaScript schema={homeStructuredData} id="home-structured-data" />
       <Navbar />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <HeroSection />
 
         <div
@@ -91,18 +95,24 @@ export default function Home() {
 
         <ServiceAreaMapSection />
 
-        {/* Berkshire Hathaway Value Proposition Section */}
-        <section className="py-16 md:py-20 bg-white">
+        {/* Berkshire Hathaway — copy aligned with site-config value props; details on /why-berkshire-hathaway */}
+        <section className="py-16 md:py-20 bg-white" aria-labelledby="bhhs-heading">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center mb-12">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
-                Why Choose Berkshire Hathaway HomeServices for Spring Valley Las Vegas Homes?
+              <h2
+                id="bhhs-heading"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6"
+              >
+                The Berkshire Hathaway HomeServices difference
               </h2>
-              <p className="text-lg text-slate-700 leading-relaxed">
-                When you work with a <strong>Berkshire Hathaway HomeServices</strong> agent, you
-                get local guidance for <strong>Spring Valley Las Vegas homes</strong> and the wider
-                valley—backed by a name synonymous with trust, ethical standards, and financial
-                strength—the same principles that built Warren Buffett&apos;s empire.
+              <p className="text-lg text-slate-700 leading-relaxed">{valuePropositions.main}</p>
+              <p className="mt-4">
+                <Link
+                  href="/why-berkshire-hathaway"
+                  className="text-blue-600 hover:text-blue-700 font-semibold"
+                >
+                  Why Berkshire Hathaway HomeServices →
+                </Link>
               </p>
             </div>
 
@@ -113,7 +123,8 @@ export default function Home() {
                 </div>
                 <h3 className="font-bold text-lg mb-2">Trusted Brand</h3>
                 <p className="text-slate-600 text-sm">
-                  Backed by Warren Buffett's Berkshire Hathaway Inc.—unmatched financial stability
+                  Berkshire Hathaway HomeServices is the only major real estate brand backed by Warren
+                  Buffett&apos;s Berkshire Hathaway Inc.
                 </p>
               </div>
               <div className="text-center p-6">
@@ -122,7 +133,7 @@ export default function Home() {
                 </div>
                 <h3 className="font-bold text-lg mb-2">Global Network</h3>
                 <p className="text-slate-600 text-sm">
-                  50,000+ agents worldwide for seamless referrals and relocations
+                  50,000+ agents worldwide for referrals and relocations.
                 </p>
               </div>
               <div className="text-center p-6">
@@ -131,7 +142,8 @@ export default function Home() {
                 </div>
                 <h3 className="font-bold text-lg mb-2">Market Expertise</h3>
                 <p className="text-slate-600 text-sm">
-                  Serving Las Vegas since 2008, $127M+ in closed transactions
+                  Serving Las Vegas since {agentStats.servingSince} with {agentStats.volumeClosed} in
+                  closed transactions.
                 </p>
               </div>
               <div className="text-center p-6">
@@ -145,7 +157,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Expert Quote */}
             <div className="max-w-3xl mx-auto mt-12 bg-slate-50 rounded-lg p-8">
               <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
                 <AgentHeadshot
@@ -154,9 +165,9 @@ export default function Home() {
                 />
                 <div>
                   <blockquote className="text-lg text-slate-700 italic mb-4">
-                    "When clients ask why they should choose a Berkshire Hathaway HomeServices agent, I
-                    tell them: you're not just getting me—you're getting a global network of 50,000
-                    agents, world-class marketing, and a brand that's synonymous with trust."
+                    &ldquo;When clients ask why they should choose a Berkshire Hathaway HomeServices
+                    agent, I tell them: you&apos;re not just getting me—you&apos;re getting a global
+                    network and a brand that&apos;s synonymous with trust.&rdquo;
                   </blockquote>
                   <cite className="text-slate-900 font-semibold not-italic">
                     — Dr. Jan Duffy, BHHS Nevada Properties
@@ -167,36 +178,47 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Market Stats Section */}
-        <section className="py-16 bg-slate-900 text-white">
+        {/* Market snapshot — figures from site-config `marketStats` (update with source of truth) */}
+        <section className="py-16 bg-slate-900 text-white" aria-labelledby="market-snapshot-heading">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Las Vegas Real Estate Market | January 2026
+              <h2 id="market-snapshot-heading" className="text-3xl md:text-4xl font-bold mb-4">
+                Las Vegas Real Estate Market | {marketStats.lastUpdated}
               </h2>
               <p className="text-slate-300">
-                Current market data from Berkshire Hathaway HomeServices Nevada Properties
+                Snapshot for general Las Vegas market context—see the full report for methodology and
+                the latest detail.
               </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
               <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">$450K</div>
+                <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">{medianDisplay}</div>
                 <div className="text-slate-300 text-sm">Median Home Price</div>
-                <div className="text-green-400 text-sm">+4.2% YoY</div>
+                <div className="text-green-400 text-sm">{lv.yearOverYearChange} YoY</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">28</div>
+                <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">
+                  {lv.daysOnMarket}
+                </div>
                 <div className="text-slate-300 text-sm">Avg Days on Market</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">4,850</div>
+                <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">
+                  {listingsDisplay}
+                </div>
                 <div className="text-slate-300 text-sm">Active Listings</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">2.1</div>
+                <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">
+                  {lv.inventoryMonths}
+                </div>
                 <div className="text-slate-300 text-sm">Months Inventory</div>
               </div>
             </div>
+            <p className="text-center text-slate-400 text-sm max-w-2xl mx-auto mt-6">
+              Not financial advice; figures are for general market context. For methodology and
+              detail, see the full report.
+            </p>
             <div className="text-center mt-8">
               <Link
                 href="/market-report"

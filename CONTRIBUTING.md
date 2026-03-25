@@ -62,3 +62,13 @@ Do not commit API keys; use Vercel (or `.env.local` for local dev only, gitignor
 ## Line endings
 
 Repository uses **LF**. `.gitattributes` enforces normalization; on Windows, set `git config core.autocrlf input` (or rely on EditorConfig + Git attributes).
+
+## Next.js 15 + React 19 upgrade (scheduled)
+
+Upgrade is **not** required for day-to-day work on this repo. When you choose to migrate:
+
+1. Read the [Next.js 15 upgrade guide](https://nextjs.org/docs/app/building-your-application/upgrading/version-15) (async `params` / `searchParams`, caching defaults, etc.).
+2. Bump `next`, `react`, `react-dom`, `eslint-config-next`, and `@types/react*` together in one branch.
+3. Run `pnpm exec tsc --noEmit`, `pnpm lint`, `pnpm format:check`, then `vercel build` before merging.
+
+Track breaking changes for App Router, `next/image`, and any experimental flags in `next.config.js`.

@@ -6,9 +6,15 @@ import type { Metadata } from "next";
 import { agentInfo, officeInfo, siteConfig, siteSocialUrls } from "@/lib/site-config";
 import { lasVegasZipStats } from "@/lib/las-vegas-zip-data";
 import { combineSchemas } from "@/lib/schema";
+import { absoluteMediaUrl, mapHubOgImageSrc } from "@/lib/site-media";
+import { ogTwitterImageFields } from "@/lib/og-image";
 import { Phone, Mail } from "lucide-react";
 
 const zipMapPageUrl = `${siteConfig.url}/las-vegas-zip-code-map`;
+const zipMapOgUrl = absoluteMediaUrl(mapHubOgImageSrc);
+const zipMapOgTwitter = ogTwitterImageFields(zipMapOgUrl, {
+  alt: "Las Vegas Valley homes and neighborhoods — preview image for zip code map",
+});
 
 export const metadata: Metadata = {
   title: "Las Vegas Zip Code Map",
@@ -34,6 +40,14 @@ export const metadata: Metadata = {
       "Interactive map and full zip directory for the Las Vegas Valley—narrow Spring Valley and west valley homes, then search MLS or contact our team.",
     url: zipMapPageUrl,
     type: "website",
+    ...zipMapOgTwitter.openGraph,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Las Vegas Zip Code Map | Dr. Jan Duffy, REALTOR®",
+    description:
+      "Interactive map and full zip directory for the Las Vegas Valley—narrow Spring Valley and west valley homes, then search MLS or contact our team.",
+    ...zipMapOgTwitter.twitter,
   },
 };
 
@@ -54,6 +68,10 @@ const pageSchemas = combineSchemas(
     description:
       "Interactive Las Vegas Valley zip code map and directory covering Spring Valley, Summerlin, Henderson, North Las Vegas, and Boulder City—with links to search homes by zip and contact Dr. Jan Duffy.",
     url: zipMapPageUrl,
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: zipMapOgUrl,
+    },
     inLanguage: "en-US",
     isPartOf: {
       "@type": "WebSite",
@@ -201,7 +219,7 @@ export default function LasVegasZipCodeMapPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchemas) }}
       />
       <Navbar />
-      <main className="pt-24 pb-16">
+      <main id="main-content" tabIndex={-1} className="pt-24 pb-16">
         <nav className="border-b border-slate-200 bg-white" aria-label="Breadcrumb">
           <div className="container mx-auto max-w-7xl px-4 py-3 text-sm text-slate-500">
             <Link href="/" className="text-blue-600 hover:underline">

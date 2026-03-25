@@ -25,7 +25,14 @@ import {
   springValleyTaxExampleMarketValue,
   springValleyEffectiveRatePercentDisplay,
 } from "@/lib/spring-valley-property-tax";
+import { absoluteMediaUrl, springValleyMarketingOgSrc } from "@/lib/site-media";
+import { ogTwitterImageFields } from "@/lib/og-image";
 import { Phone, ExternalLink, MapPin } from "lucide-react";
+
+const propertyTaxOgUrl = absoluteMediaUrl(springValleyMarketingOgSrc);
+const propertyTaxOgTwitter = ogTwitterImageFields(propertyTaxOgUrl, {
+  alt: "Spring Valley Las Vegas homes and west valley real estate — representative preview",
+});
 
 const pagePath = "/neighborhoods/spring-valley/property-taxes";
 const pageUrl = `${siteConfig.url}${pagePath}`;
@@ -52,6 +59,14 @@ export const metadata: Metadata = {
       "Illustrative calculator and local context for Spring Valley property taxes in Clark County, Nevada.",
     url: pageUrl,
     type: "article",
+    ...propertyTaxOgTwitter.openGraph,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Spring Valley, NV Property Taxes & Rate | Dr. Jan Duffy",
+    description:
+      "Illustrative calculator and local context for Spring Valley property taxes in Clark County, Nevada.",
+    ...propertyTaxOgTwitter.twitter,
   },
 };
 
@@ -97,6 +112,7 @@ const pageSchemas = combineSchemas(
     description:
       "Illustrative calculator and educational overview of Spring Valley property taxes in Clark County, Nevada—not tax or legal advice.",
     url: pagePath,
+    primaryImageOfPage: propertyTaxOgUrl,
   }),
   generateFAQSchema(propertyTaxFaqs),
 );
@@ -106,7 +122,7 @@ export default function SpringValleyPropertyTaxesPage() {
     <>
       <SchemaScript schema={pageSchemas} id="spring-valley-property-tax-schema" />
       <Navbar />
-      <main className="pt-24 pb-16">
+      <main id="main-content" tabIndex={-1} className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <nav className="mb-6 max-w-4xl text-sm text-slate-500" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-blue-600">

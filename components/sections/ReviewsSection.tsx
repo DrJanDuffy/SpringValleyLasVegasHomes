@@ -3,7 +3,7 @@
 import { Star, Quote } from "lucide-react";
 import Image from "next/image";
 import { isCfDeliveryUrl } from "@/lib/cf-image-delivery";
-import { googleBusinessReviewUrl } from "@/lib/site-config";
+import { agentStats, googleBusinessReviewUrl } from "@/lib/site-config";
 import { defaultHomeReviews, type HomeReview } from "@/lib/home-reviews";
 
 export type Review = HomeReview;
@@ -11,10 +11,10 @@ export type Review = HomeReview;
 /** @deprecated import `defaultHomeReviews` from `@/lib/home-reviews` — alias for UI compatibility */
 export const defaultReviews = defaultHomeReviews;
 
-// Aggregate rating stats
+/** Align with `agentStats` / GBP — single source for stars + count in UI and JSON-LD helpers */
 export const aggregateRating = {
-  ratingValue: 4.9,
-  reviewCount: 500,
+  ratingValue: agentStats.averageRating,
+  reviewCount: agentStats.reviewCount,
   bestRating: 5,
   worstRating: 1,
 };
@@ -65,7 +65,7 @@ export default function ReviewsSection({
               {aggregateRating.ratingValue}
             </span>
             <span className="text-slate-600">
-              ({aggregateRating.reviewCount}+ reviews)
+              ({aggregateRating.reviewCount} Google reviews)
             </span>
           </div>
         </div>

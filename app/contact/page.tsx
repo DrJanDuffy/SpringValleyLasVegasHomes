@@ -75,7 +75,7 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
       />
       <Navbar />
-      <main className="pt-24 pb-16">
+      <main id="main-content" tabIndex={-1} className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           {zipFromQuery && (
             <div

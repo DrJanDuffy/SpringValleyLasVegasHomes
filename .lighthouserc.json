@@ -1,7 +1,12 @@
 {
   "ci": {
     "collect": {
-      "url": ["http://localhost:3000"],
+      "url": [
+        "http://localhost:3000",
+        "http://localhost:3000/contact",
+        "http://localhost:3000/neighborhoods/spring-valley",
+        "http://localhost:3000/listings"
+      ],
       "numberOfRuns": 3,
       "settings": {
         "preset": "desktop"

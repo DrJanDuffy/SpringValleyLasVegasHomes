@@ -112,7 +112,10 @@ export const googleMyMapViewerUrl =
 export const googleBusinessReviewUrl =
   "https://www.google.com/maps/search/?api=1&query=6787+W+Tropicana+Ave+2nd+Floor+Las+Vegas+NV+89103+Berkshire+Hathaway+HomeServices";
 
-// Market Statistics (Updated January 2026)
+/**
+ * Las Vegas market snapshot — consumed by the homepage market section and related copy.
+ * Update `lastUpdated` and `lasVegas` when refreshing figures from your approved MLS/MLS summary or broker stats.
+ */
 export const marketStats = {
   lastUpdated: "January 2026",
   lasVegas: {
@@ -148,7 +151,7 @@ export const marketStats = {
   },
 };
 
-// Agent Stats
+/** Single source for hero + reviews aggregate — keep in sync with Google Business Profile when using counts/ratings in UI or JSON-LD */
 export const agentStats = {
   servingSince: 2008,
   transactionsClosed: 500,
