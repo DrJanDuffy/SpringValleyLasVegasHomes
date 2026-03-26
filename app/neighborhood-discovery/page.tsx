@@ -98,7 +98,7 @@ const pageSchemas = combineSchemas(
       },
     },
     author: {
-      "@type": "RealEstateAgent",
+      "@type": "Person",
       "@id": `${siteConfig.url}/#agent`,
       name: agentInfo.name,
       jobTitle: agentInfo.title,

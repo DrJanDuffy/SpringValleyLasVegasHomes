@@ -368,7 +368,12 @@ export function generateHomepageReviewJsonLd(reviews: ReviewItem[]) {
 }
 
 /**
- * Single JSON-LD payload for the homepage: FAQPage + WebPage + Review nodes (for `SchemaScript`).
+ * Single JSON-LD payload for the homepage: FAQPage + WebPage (for `SchemaScript`).
+ *
+ * Does **not** emit standalone `Review` nodes here: Google Search Console often flags
+ * first-party `Review` markup on the same URL as `RealEstateAgent` + `aggregateRating`
+ * (root layout `site-schema`). Stars remain eligible via site-wide `aggregateRating` on
+ * the agent entity; visible testimonials stay on-page without duplicate review JSON-LD.
  */
 export function combineHomepageStructuredData(args: {
   faqs: FAQItem[];
@@ -380,13 +385,8 @@ export function combineHomepageStructuredData(args: {
     dateModified?: string;
     primaryImageOfPage?: string;
   };
-  reviews: ReviewItem[];
 }) {
-  return combineSchemas(
-    generateFAQSchema(args.faqs),
-    generateWebPageSchema(args.webPage),
-    ...homepageReviewSchemasForCombine(args.reviews),
-  );
+  return combineSchemas(generateFAQSchema(args.faqs), generateWebPageSchema(args.webPage));
 }
 
 /**

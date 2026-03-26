@@ -21,7 +21,6 @@ import {
   valuePropositions,
 } from "@/lib/site-config";
 import { homePageFaqs } from "@/lib/home-faqs";
-import { defaultHomeReviews } from "@/lib/home-reviews";
 import { combineHomepageStructuredData } from "@/lib/schema";
 import { absoluteMediaUrl, heroBackgroundSrcs } from "@/lib/site-media";
 import { ogTwitterImageFields } from "@/lib/og-image";
@@ -42,12 +41,6 @@ const homeStructuredData = combineHomepageStructuredData({
     dateModified: siteContentDates.dateModified,
     primaryImageOfPage: homePreferredImageUrl,
   },
-  reviews: defaultHomeReviews.map((r) => ({
-    author: r.name,
-    rating: r.rating,
-    reviewBody: r.text,
-    datePublished: r.date,
-  })),
 });
 
 const lv = marketStats.lasVegas;

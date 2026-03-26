@@ -42,8 +42,9 @@ const articleSchema = {
     name: "Dr. Jan Duffy",
     jobTitle: "REALTOR®",
     worksFor: {
-      "@type": "RealEstateAgent",
+      "@type": "Organization",
       name: "Berkshire Hathaway HomeServices Nevada Properties",
+      url: siteConfig.url,
     },
   },
   publisher: {
